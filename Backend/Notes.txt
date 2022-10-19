@@ -16,3 +16,8 @@ Setting up the backend I ran these commands:
 
 Packages installed:
 -npm i express dotenv brcypt cors uuid
+-npm i -g http
+
+How to find your IP
+-ipconfig in command line  (look for en0)
+Mines: 192.168.1.215
