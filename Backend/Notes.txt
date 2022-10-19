@@ -1,0 +1,2 @@
+This File Can be used creating notes on set up other team members will need to run to set up back end.
+Once notes are clear and accurte move it to a README file
