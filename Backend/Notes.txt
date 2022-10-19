@@ -13,4 +13,4 @@ Setting up the backend I ran these commands:
 -In the backend directory open terminal and run: npm i nodemon
 
 Packages installed:
--
+-npm i express dotenv brcypt cors uuid
