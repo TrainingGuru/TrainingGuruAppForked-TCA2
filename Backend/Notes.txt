@@ -1,2 +1,18 @@
 This File Can be used creating notes on set up other team members will need to run to set up back end.
 Once notes are clear and accurte move it to a README file
+
+To run the backend:
+-Be in the backend Directory open terminal use command
+- npm run start:backend
+
+
+
+
+
+Setting up the backend I ran these commands:
+-npm init
+-"start:backend": "nodemon index.js" added to package.json
+-In the backend directory open terminal and run: npm i nodemon
+
+Packages installed:
+-npm i express dotenv brcypt cors uuid
