@@ -3,3 +3,4 @@ Once notes are clear and accurte move it to a README file
 
 Setting up the backend I ran these commands:
 -npm init
+- "start:backend": "nodemon index.js" added to package.json
