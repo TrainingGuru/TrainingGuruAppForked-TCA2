@@ -7,6 +7,8 @@ To run the backend:
 
 
 
+
+
 Setting up the backend I ran these commands:
 -npm init
 -"start:backend": "nodemon index.js" added to package.json
