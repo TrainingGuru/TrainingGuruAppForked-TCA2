@@ -10,3 +10,6 @@ app.get('/hello', (req, res) => {
 
 app.listen(PORT,HOSTNAME)
 console.log(`Server running at http://${HOSTNAME}:${PORT}`)
+
+//if in college use this one - but mobile work with
+//app.listen(PORT,() => console.log('Server listening on localhost: '+PORT))
