@@ -1,2 +1,7 @@
 This File Can be used creating notes on set up other team members will need to run to set up front end.
 Once notes are clear and accurte move it to a README file
+
+
+1. NPM Install
+2. nvm install 16.13.0
+2. npm start
