@@ -1,7 +1,22 @@
 This File Can be used creating notes on set up other team members will need to run to set up front end.
-Once notes are clear and accurte move it to a README file
+Once notes are clear and accurate move it to a README file
 
 
 1. NPM Install
 2. nvm install 16.13.0
 2. npm start
+
+
+Components, Pages: PascalCase
+Functions: camelCase
+Assets:  kebab-case
+
+Class names: use the BEM naming convention
+
+
+assets - global static assets such as images, svgs, company logo, etc.
+components - global shared/reusable components, such as layout (wrappers, navigation), form components, buttons
+services - JavaScript modules
+store - Global Redux store
+utils - Utilities, helpers, constants, and the like
+pages -  the majority of the app would be contained here
