@@ -5,10 +5,6 @@ To run the backend:
 -Be in the backend Directory open terminal use command
 - npm run start:backend
 
-
-
-
-
 Setting up the backend I ran these commands:
 -npm init
 -"start:backend": "nodemon index.js" added to package.json
@@ -21,3 +17,7 @@ Packages installed:
 How to find your IP
 -ipconfig in command line  (look for en0)
 Mines: 192.168.1.215
+
+
+
+
