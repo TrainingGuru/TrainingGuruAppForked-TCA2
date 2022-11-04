@@ -28,7 +28,9 @@ pages -  the majority of the app would be contained here
 
 # Backend Rules
 PascalCase - Filenames
+
 UPPERCASE for Constants
+
 lowerCamelCase for variables, properties and function names
 
 Files
