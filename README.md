@@ -25,3 +25,17 @@ store - Global Redux store
 utils - Utilities, helpers, constants, and the like
 
 pages -  the majority of the app would be contained here
+
+# Backend Rules
+PascalCase - Filenames
+UPPERCASE for Constants
+lowerCamelCase for variables, properties and function names
+
+Files
+.env file - sensitive data (API keys etc) 
+
+src file - Contains the project code
+- index.js: Sever Starting point
+- Config: Code for connection to database etc
+- Routes: Endpoints code - different files for each endpoint e.g User.js = /User endpoint
+- Models: Database data schema for sending data to Database

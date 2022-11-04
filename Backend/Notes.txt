@@ -2,12 +2,8 @@ This File Can be used creating notes on set up other team members will need to r
 Once notes are clear and accurte move it to a README file
 
 To run the backend:
--Be in the backend Directory open terminal use command
+-Be in the backend/src Directory open terminal use command
 - npm run start:backend
-
-
-
-
 
 Setting up the backend I ran these commands:
 -npm init
@@ -21,3 +17,7 @@ Packages installed:
 How to find your IP
 -ipconfig in command line  (look for en0)
 Mines: 192.168.1.215
+
+
+
+
