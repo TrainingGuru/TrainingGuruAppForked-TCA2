@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Messages from "./pages/Messages";
+import {Container} from "native-base";
+import Layout from "./components/structure/Layout";
 
 function HomeScreen() {
   return (
@@ -26,25 +28,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{ tabBarIcon: makeIconRender("home") }}
-        />
-        <Tab.Screen
-          name="Messages"
-          component={Messages}
-          options={{ tabBarIcon: makeIconRender("cog") }}
-        />
-          <Tab.Screen
-              name="Profile"
-              component={Profile}
-              options={{ tabBarIcon: makeIconRender("cog") }}
-          />
-      </Tab.Navigator>
-    </NavigationContainer>
+      <Layout/>
   );
 }
 
