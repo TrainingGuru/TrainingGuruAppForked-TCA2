@@ -1,0 +1,1 @@
+Models – every model is an object matching the fields in the table by name and type.
