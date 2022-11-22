@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Messages from "./pages/Messages";
 import {Container} from "native-base";
 import Layout from "./components/structure/Layout";
+import Login from "./pages/registration-login/Login";
 
 function HomeScreen() {
   return (
@@ -28,7 +29,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-      <Layout/>
+      <Login/>
   );
 }
 
