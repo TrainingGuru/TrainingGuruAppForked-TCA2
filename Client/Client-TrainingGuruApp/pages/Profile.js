@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     }
 })
 
-export const Profile = () => {
+export const Profile = ({navigation, route}) => {
     return <div style={styles["profile-content"]}>
        Profile
     </div>
