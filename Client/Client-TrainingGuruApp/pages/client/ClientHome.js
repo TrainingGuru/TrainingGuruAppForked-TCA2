@@ -47,7 +47,10 @@ export const clientHome = () => {
                 Home
             </div>
             <CardLayout title={"calories"}>
-             <CalorieGauge/>
+                <div>
+                    Fat
+                    <CalorieGauge startColor={"#18f000"} endColor={"#eac60c"}/>
+                </div>
             </CardLayout>
 
         </div>
