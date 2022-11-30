@@ -5,7 +5,8 @@ import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
-
+import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
+import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 
 export const clientHome = () => {
     let layout = {
@@ -41,13 +42,13 @@ export const clientHome = () => {
             first: {
                 width: "100%",
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-around",
+                gap: "2%",
                 steps: {
                     padding: 15,
                     icon1: {
-                        width: "6rem",
-                        height: "100%"
+                        width: "3rem",
+                        height: "100%",
+                        textAlign: "center"
                     },
                     title: {
                         fontSize: "17px",
@@ -78,7 +79,14 @@ export const clientHome = () => {
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon
                         style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faShoePrints}/>
+                        icon={faHeartPulse} color={"red"} />
+                    <h2 style={styles.clientHome.first.steps.title}>50 BPM</h2>
+                </CardLayout>
+                <CardLayout style={styles.clientHome.first.steps}>
+                    <FontAwesomeIcon
+                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                        icon={faHeartPulse}  />
+                    <h2 style={styles.clientHome.first.steps.title}>Good</h2>
                 </CardLayout>
             </div>
 

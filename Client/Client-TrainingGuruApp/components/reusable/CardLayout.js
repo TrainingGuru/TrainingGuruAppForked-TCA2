@@ -13,9 +13,9 @@ function CardLayout({title, children, style}) {
         cardLayout: {}
     }, {
         cardLayout: {
-            width:  "100%,
+            width: "100%",
+            textAlign: "center",
             backgroundColor: "#fcf8f8",
-            height: "100%",
             marginTop: "4%",
             padding: 5,
             boxShadow: "4px 4px 10px 2px rgba(0,0,0,.8)",
