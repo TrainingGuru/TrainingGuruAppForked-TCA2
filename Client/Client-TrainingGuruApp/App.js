@@ -32,7 +32,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-      <View >
+      <View>
           <Router>
               <Switch>
                   <Route exact path="/" render={props => <Home {...props} />} />
