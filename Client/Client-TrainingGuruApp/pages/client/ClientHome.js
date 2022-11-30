@@ -1,11 +1,9 @@
-import View from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedView";
 import Layout from "../../components/structure/Layout";
 import {Dimensions, StyleSheet} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
-import CalorieGauge from "../../components/reusable/CalorieGauge";
+import CalorieBrokenDown from "../../components/CalorieBrokenDown";
 
-const styles = StyleSheet.create({})
 
 export const clientHome = () => {
     let layout = {
@@ -29,7 +27,7 @@ export const clientHome = () => {
             alignItems: "center",
             textTransform: "uppercase",
             fontFamily: "Play",
-            marginTop: "10%",
+            marginTop: "2%",
             title:{
                 textTransform: "uppercase",
                 textAlign: "center",
@@ -43,14 +41,11 @@ export const clientHome = () => {
 
     return <Layout>
         <div style={styles.clientHome}>
-            <div style={styles.clientHome.title}>
-                Home
-            </div>
-            <CardLayout title={"calories"}>
-                <div>
-                    Fat
-                    <CalorieGauge startColor={"#18f000"} endColor={"#eac60c"}/>
-                </div>
+            {/*<div style={styles.clientHome.title}>*/}
+            {/*    Home*/}
+            {/*</div>*/}
+            <CardLayout title={"Nutrition"}>
+            <CalorieBrokenDown/>
             </CardLayout>
 
         </div>

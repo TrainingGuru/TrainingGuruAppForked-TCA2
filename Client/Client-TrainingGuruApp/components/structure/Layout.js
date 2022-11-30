@@ -81,7 +81,6 @@ function Layout({children}) {
                 display: "flex",
                 flexDirection: "row",
                 height: "100%",
-                backgroundColor: "blue",
                 width: "100%",
                 content: {
                     width: "100%"

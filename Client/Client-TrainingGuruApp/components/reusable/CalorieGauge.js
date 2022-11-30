@@ -2,7 +2,7 @@ import {interpolateRgb} from "d3-interpolate";
 import LiquidFillGauge from "react-liquid-gauge";
 
 function CalorieGauge({startColor, endColor}){
-    const radius = 40;
+    const radius = 30;
     let state = {
         value: 50
     };

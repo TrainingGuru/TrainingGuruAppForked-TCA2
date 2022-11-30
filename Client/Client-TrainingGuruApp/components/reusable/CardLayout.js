@@ -14,12 +14,10 @@ function CardLayout({title, children}) {
     }, {
         cardLayout: {
             width: "fit-content",
-            backgroundColor: "grey",
+            backgroundColor: "#fcf8f8",
             height: "fit-content",
             marginTop: "4%",
             padding: 5,
-            paddingLeft: 20,
-            paddingRight: 20,
             boxShadow: "4px 4px 10px 2px rgba(0,0,0,.8)",
             borderRadius: "20px",
             header: {
