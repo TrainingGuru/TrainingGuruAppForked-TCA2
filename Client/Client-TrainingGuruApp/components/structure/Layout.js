@@ -40,6 +40,7 @@ function Layout({children}) {
                 display: "flex",
                 flexDirection: "row",
                 marginLeft: "25%",
+
             },
         }
     }, {
@@ -81,6 +82,10 @@ function Layout({children}) {
                 flexDirection: "row",
                 height: "100%",
                 backgroundColor: "blue",
+                width: "100%",
+                content: {
+                    width: "100%"
+                }
             },
         }
     }, layout)

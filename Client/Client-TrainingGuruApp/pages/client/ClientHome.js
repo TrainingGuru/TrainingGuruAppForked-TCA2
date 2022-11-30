@@ -1,15 +1,57 @@
 import View from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedView";
 import Layout from "../../components/structure/Layout";
-import {StyleSheet} from "react-native";
+import {Dimensions, StyleSheet} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
+import CreateResponsiveStyle from "../../utils/responsiveStyle";
+import CalorieGauge from "../../components/reusable/CalorieGauge";
+
 const styles = StyleSheet.create({})
 
 export const clientHome = () => {
-    return <Layout>
-              <CardLayout title={"calories"}>
+    let layout = {
+        width: Dimensions.get('window').width
+    }
+    const styles = CreateResponsiveStyle({
+        clientHome: {
+            display: "flex",
+            title:{
+                textTransform: "uppercase",
+                textAlign: "center",
+                padding: 4,
+            }
+        }
+    }, {
+        clientHome: {
+            display: "flex",
+            width: "100%",
+            height: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            textTransform: "uppercase",
+            fontFamily: "Play",
+            marginTop: "10%",
+            title:{
+                textTransform: "uppercase",
+                textAlign: "center",
+                padding: 4,
+                fontSize: "2rem",
+                fontWeight: "bold"
+            }
+        }
+    }, layout)
 
-              </CardLayout>
-            </Layout>
+
+    return <Layout>
+        <div style={styles.clientHome}>
+            <div style={styles.clientHome.title}>
+                Home
+            </div>
+            <CardLayout title={"calories"}>
+             <CalorieGauge/>
+            </CardLayout>
+
+        </div>
+    </Layout>
 
 
 }
