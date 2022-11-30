@@ -3,7 +3,7 @@ import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import LiquidFillGauge from 'react-liquid-gauge';
 import { interpolateRgb } from 'd3-interpolate';
 
-function CardLayout({title, children}) {
+function CardLayout({title, children, style}) {
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -13,9 +13,9 @@ function CardLayout({title, children}) {
         cardLayout: {}
     }, {
         cardLayout: {
-            width: "fit-content",
+            width:  "100%,
             backgroundColor: "#fcf8f8",
-            height: "fit-content",
+            height: "100%",
             marginTop: "4%",
             padding: 5,
             boxShadow: "4px 4px 10px 2px rgba(0,0,0,.8)",
@@ -31,7 +31,7 @@ function CardLayout({title, children}) {
     }, layout)
 
 
-    return <div style={styles.cardLayout}>
+    return <div style={{...styles.cardLayout, ...style}} >
         {title && <h2 style={styles.cardLayout.header}>
             {title}
         </h2>}

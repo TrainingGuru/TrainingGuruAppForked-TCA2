@@ -81,9 +81,11 @@ function Layout({children}) {
                 display: "flex",
                 flexDirection: "row",
                 height: "100%",
-                width: "100%",
+                width: "100vw",
                 content: {
-                    width: "100%"
+                    width: "100%",
+                    background: "red",
+                    margin: 20
                 }
             },
         }
