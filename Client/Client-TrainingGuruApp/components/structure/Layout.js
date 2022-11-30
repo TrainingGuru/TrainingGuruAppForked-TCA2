@@ -7,16 +7,16 @@ import {Dimensions} from "react-native";
 
 function Layout({children}) {
 
-     let layout = {
-         width: Dimensions.get('window').width
-     }
+    let layout = {
+        width: Dimensions.get('window').width
+    }
     const styles = CreateResponsiveStyle({
         layout: {
             height: "100%",
             margin: "2%",
             display: "flex",
             flexDirection: "column",
-            base : {
+            base: {
                 display: "flex",
                 flexDirection: "row-reverse",
                 justifyContent: "flex-end",
@@ -45,20 +45,18 @@ function Layout({children}) {
     }, {
         layout: {
             height: "100%",
-            margin: "2%",
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "red",
-            base : {
+            base: {
                 display: "flex",
                 flexDirection: "row-reverse",
-                justifyContent: "flex-end",
+                justifyContent: "center",
+                height: "10%",
                 header: {
-                    height: "45%",
+                    height: "100%",
                     display: "flex",
                     alignContent: "center",
                     justifyContent: "center",
-                    width: "100%",
                     img: {
                         height: "100%"
                     }
@@ -66,18 +64,26 @@ function Layout({children}) {
                 navigation: {
                     display: "flex",
                     justifyContent: "space-around",
-                    flexDirection: "column"
+                    flexDirection: "row",
+                    alignSelf: "flex-end",
+                    margin: "0 auto",
+                    position: "fixed",
+                    bottom: "0%",
+                    width: "100%",
+                    textIndent: "100%",
+                    whitespace: "nowrap",
+                    overflow: "hidden",
+                    backgroundColor: "grey"
                 },
             },
             body: {
                 display: "flex",
                 flexDirection: "row",
-                marginLeft: "25%",
+                height: "100%",
+                backgroundColor: "blue",
             },
         }
     }, layout)
-
-
 
 
     return <div style={styles.layout}>
