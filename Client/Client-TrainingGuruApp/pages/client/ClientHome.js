@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
+import {ToggleButton, ToggleButtonGroup} from "@mui/material";
 
 export const clientHome = () => {
     let layout = {
@@ -89,6 +90,17 @@ export const clientHome = () => {
                     <h2 style={styles.clientHome.first.steps.title}>Good</h2>
                 </CardLayout>
             </div>
+            <ToggleButtonGroup
+                color="primary"
+                value={10}
+                exclusive
+                onChange={undefined}
+                aria-label="Platform"
+            >
+                <ToggleButton value="web">Web</ToggleButton>
+                <ToggleButton value="android">Android</ToggleButton>
+                <ToggleButton value="ios">iOS</ToggleButton>
+            </ToggleButtonGroup>
 
         </div>
     </Layout>
