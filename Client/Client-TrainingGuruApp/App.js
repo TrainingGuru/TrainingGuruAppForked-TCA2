@@ -10,6 +10,7 @@ import Layout from "./components/structure/Layout";
 import Login from "./pages/registration-login/Login";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Router, Route, Switch} from "./routing";
+import ClientHome from "./pages/client/ClientHome";
 
 function HomeScreen() {
   return (
@@ -31,12 +32,18 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+    const styles = StyleSheet.create({
+        container: {
+           height: "100%"
+        },
+    })
   return (
-      <View>
+      <View style={styles.container}>
           <Router>
               <Switch>
                   <Route exact path="/" render={props => <Home {...props} />} />
                   <Route path="/profile" render={props => <Profile {...props} />} />
+                  <Route exact path="/homeclient" render={props => <ClientHome {...props} />} />
               </Switch>
           </Router>
       </View>
