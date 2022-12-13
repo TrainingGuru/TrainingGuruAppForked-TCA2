@@ -84,8 +84,8 @@ function Layout({children}) {
                 width: "100vw",
                 content: {
                     width: "100%",
-                    background: "red",
-                    margin: 20
+                    margin: 20,
+                    marginTop: -10
                 }
             },
         }
