@@ -2,12 +2,12 @@ import {Dimensions} from "react-native";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import LiquidFillGauge from 'react-liquid-gauge';
 import { interpolateRgb } from 'd3-interpolate';
+import {Divider} from "@mui/material";
 
 function CardLayout({title, children, style}) {
     let layout = {
         width: Dimensions.get('window').width
     }
-
 
     const styles = CreateResponsiveStyle({
         cardLayout: {}
@@ -25,7 +25,9 @@ function CardLayout({title, children, style}) {
                 fontWeight: "bold",
                 fontFamily: "play"
             },
-            content: {}
+            content: {
+                width: "100%"
+            }
 
         }
     }, layout)
