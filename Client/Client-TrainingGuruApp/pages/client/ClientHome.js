@@ -10,10 +10,15 @@ import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
+import {NinjaAPI} from "../../services/nutrition-service";
 
 export const clientHome = () => {
 
-    const [text, setText] = useState();
+
+    const [unit, setUnit] = useState('grams');
+    const [value, setValue] = useState('');
+    const [foodName, setFoodName] = useState('');
+    const [shoppingList, setShoppingList] = useState([]);
 
     let layout = {
         width: Dimensions.get('window').width
@@ -68,13 +73,19 @@ export const clientHome = () => {
                         width: "100%",
                         display: "flex",
                         justifyContent: "space-between",
-                        margin: "1%"
+                        margin: "1%",
+                        toggleValueButton: {
+                            background: "red!important",
+                            width: "1200px",
+                            height: "500px"
+                        }
                     },
                     body: {
                         display: "flex",
                         justifyContent: "space-evenly",
                         alignItems: "stretch",
-                        width: "100%"
+                        width: "100%",
+
                     },
 
                     },
@@ -94,6 +105,18 @@ export const clientHome = () => {
 
     const add = (e) => {
 
+    }
+
+    const handleSubmit = async () => {
+        const api = new NinjaAPI();
+        const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
+        const item = {
+            name: foodName,
+            unit,
+            value,
+            ...nutritionInfo
+        };
+        setShoppingList([...shoppingList, item]);
     }
 
     return <Layout>
@@ -127,35 +150,59 @@ export const clientHome = () => {
             </div>
 
 
-            <CardLayout style={styles.clientHome.first.nutrition}>
-                <div style={styles.clientHome.first.nutrition.header}>
-                    <h2>
-                        Nutrition
-                    </h2>
-                    <ToggleButtonGroup
-                        color="primary"
-                        value={10}
-                        exclusive
-                        onChange={undefined}
-                        aria-label="Platform">
-                        <ToggleButton value="web">(g)</ToggleButton>
-                        <ToggleButton value="android">(l)</ToggleButton>
-                        <ToggleButton value="ios">(KG)</ToggleButton>
-                        <ToggleButton value="ios">(LB)</ToggleButton>
-                    </ToggleButtonGroup>
-                </div>
-                <div style={styles.clientHome.first.nutrition.body}>
-                    <TextField onChange={(e) => setText(e.currentTarget.value)}  id="outlined-basic" label="Search" variant="outlined"/>
-                    <Button onSubmit={() => add()} variant="contained">Add</Button>
-                </div>
-            </CardLayout>
+            {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
+            {/*    <div style={styles.clientHome.first.nutrition.header}>*/}
+            {/*        <h2>*/}
+            {/*            Nutrition*/}
+            {/*        </h2>*/}
+            {/*        <ToggleButtonGroup id={"togglebuttongroup"} style={styles.clientHome.first.nutrition.header.toggleValueButton}*/}
+            {/*            value={1}*/}
+            {/*            exclusive*/}
+            {/*            onChange={undefined}*/}
+            {/*            aria-label="Platform">*/}
+            {/*            <ToggleButton value="web">(g)</ToggleButton>*/}
+            {/*            <ToggleButton value="android">(l)</ToggleButton>*/}
+            {/*            <ToggleButton value="ios">(KG)</ToggleButton>*/}
+            {/*            <ToggleButton value="ios">(LB)</ToggleButton>*/}
+            {/*        </ToggleButtonGroup>*/}
+            {/*    </div>*/}
+            {/*    <div style={styles.clientHome.first.nutrition.body}>*/}
+            {/*        <TextField onChange={(e) => setText(e.currentTarget.value)}  id="outlined-basic" label="Search" variant="outlined"/>*/}
+            {/*        <Button  onSubmit={() => add()} variant="contained">Add</Button>*/}
+            {/*    </div>*/}
+            {/*</CardLayout>*/}
+
+            <div style={styles.clientHome.first.nutrition.body}>
+                <ToggleButtonGroup
+                    value={unit}
+                    onChange={(event, newValue) => setUnit(newValue)}
+                >
+                    <ToggleButton value="grams">grams</ToggleButton>
+                    <ToggleButton value="kg">kg</ToggleButton>
+                    <ToggleButton value="litres">litres</ToggleButton>
+                </ToggleButtonGroup>
+                <TextField
+                    label="Value"
+                    value={value}
+                    onChange={event => setValue(event.target.value)}
+                />
+                <TextField
+                    label="Food Name"
+                    value={foodName}
+                    onChange={event => setFoodName(event.target.value)}
+                />
+                <Button variant="contained" onClick={handleSubmit}>
+                    Add to shopping list
+                </Button>
+            </div>
+
+
 
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
                 <div style={styles.clientHome.first.nutritionList.listOfFood}>
-              <MealWidget name={"porridge"}/>
+              {/*<MealWidget name={"porridge"}/>*/}
                 </div>
             </CardLayout>
-
 
         </div>
     </Layout>
