@@ -2,10 +2,12 @@ import {Dimensions} from "react-native";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import {Divider} from "@mui/material";
 
-export default function MealWidget({name, weight, time, nutritionalValue }) {
+export default function MealWidget({name, weight, time, unit, value, calories, fat, protein, carbs, item}) {
     let layout = {
         width: Dimensions.get('window').width
     }
+    console.log(protein)
+    console.log(item)
 
     let timeNow = new Date(time);
     let timeNowString = timeNow.toLocaleTimeString();
@@ -55,31 +57,30 @@ export default function MealWidget({name, weight, time, nutritionalValue }) {
         }
 
     }, layout)
-    return <div style={styles.mealWidget}>
+    return  <div style={styles.mealWidget}>
         <div style={styles.mealWidget.gen}>
             <div>
                 {name}
             </div>
             <div style={styles.mealWidget.gen.weight}>
-                {weight}
+                {value}g
             </div>
             <div style={styles.mealWidget.gen.record}>
-                {timeNowString}
+                {time}
             </div>
         </div>
         <div style={styles.mealWidget.mealInfo}>
             <div style={styles.mealWidget.mealInfo.sugar}>
-                Sugar {nutritionalValue.sugar}g
-                Copy code
+                carbs {carbs}g
             </div>
             <div style={styles.mealWidget.mealInfo.calories}>
-                Calories {nutritionalValue.calories}
+                Calories {calories}
             </div>
             <div style={styles.mealWidget.mealInfo.protein}>
-                Protein {nutritionalValue.protein}g
+                Protein {protein}g
             </div>
             <div style={styles.mealWidget.mealInfo.fat}>
-                Fat {nutritionalValue.fat}g
+                Fat {fat}g
             </div>
         </div>
         <Divider/>

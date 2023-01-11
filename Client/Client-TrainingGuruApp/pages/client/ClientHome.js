@@ -110,13 +110,12 @@ export const clientHome = () => {
     const handleSubmit = async () => {
         const api = new NinjaAPI();
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
-        const item = {
-            name: foodName,
-            unit,
-            value,
-            ...nutritionInfo
-        };
-        setShoppingList([...shoppingList, item]);
+
+
+
+        let temp = shoppingList.concat(nutritionInfo)
+
+        setShoppingList(temp);
     }
 
     return <Layout>
@@ -200,7 +199,20 @@ export const clientHome = () => {
 
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
                 <div style={styles.clientHome.first.nutritionList.listOfFood}>
-              {/*<MealWidget name={"porridge"}/>*/}
+                    ddfsdfdf
+                    {shoppingList.length > 0 && shoppingList.map((item) => {
+                       return <><p>fsdsdf</p>
+                            <MealWidget
+                                item={item}
+                                name={item.name}
+                                value={item.value}
+                                calories={item["calories"]}
+                                fat={item["fat_total_g"]}
+                                protein={item["protein_g"]}
+                                carbs={item["carbohydrates_total_g"]}
+                            /></>
+                    })
+                    })
                 </div>
             </CardLayout>
 
