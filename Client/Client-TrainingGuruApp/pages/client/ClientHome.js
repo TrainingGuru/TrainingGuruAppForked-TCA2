@@ -74,11 +74,11 @@ export const clientHome = () => {
                         display: "flex",
                         justifyContent: "space-between",
                         margin: "1%",
-                        toggleValueButton: {
-                            background: "red!important",
-                            width: "1200px",
-                            height: "500px"
-                        }
+                    },
+                    weightButton: {
+                        fontSize: "2rem",
+                        padding: 0
+
                     },
                     body: {
                         display: "flex",
@@ -170,15 +170,15 @@ export const clientHome = () => {
             {/*        <Button  onSubmit={() => add()} variant="contained">Add</Button>*/}
             {/*    </div>*/}
             {/*</CardLayout>*/}
+            <CardLayout style={styles.clientHome.first.nutrition}>
 
-            <div style={styles.clientHome.first.nutrition.body}>
                 <ToggleButtonGroup
                     value={unit}
                     onChange={(event, newValue) => setUnit(newValue)}
                 >
-                    <ToggleButton value="grams">grams</ToggleButton>
-                    <ToggleButton value="kg">kg</ToggleButton>
-                    <ToggleButton value="litres">litres</ToggleButton>
+                    <ToggleButton  style={styles.clientHome.first.nutrition.weightButton} value="grams">grams</ToggleButton>
+                    <ToggleButton  style={styles.clientHome.first.nutrition.weightButton} value="kg">kg</ToggleButton>
+                    <ToggleButton   style={styles.clientHome.first.nutrition.weightButton} value="litres">litres</ToggleButton>
                 </ToggleButtonGroup>
                 <TextField
                     label="Value"
@@ -191,9 +191,9 @@ export const clientHome = () => {
                     onChange={event => setFoodName(event.target.value)}
                 />
                 <Button variant="contained" onClick={handleSubmit}>
-                    Add to shopping list
+                    Add Meal
                 </Button>
-            </div>
+            </CardLayout>
 
 
 
