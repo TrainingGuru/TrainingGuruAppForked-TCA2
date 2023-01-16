@@ -76,8 +76,8 @@ export const clientHome = () => {
                         margin: "1%",
                     },
                     weightButton: {
-                        fontSize: "2rem",
-                        padding: 0
+                        fontSize: "0.8rem",
+                        padding: "1%"
 
                     },
                     body: {
@@ -172,13 +172,10 @@ export const clientHome = () => {
             {/*</CardLayout>*/}
             <CardLayout style={styles.clientHome.first.nutrition}>
 
-                <ToggleButtonGroup
-                    value={unit}
-                    onChange={(event, newValue) => setUnit(newValue)}
-                >
-                    <ToggleButton  style={styles.clientHome.first.nutrition.weightButton} value="grams">grams</ToggleButton>
-                    <ToggleButton  style={styles.clientHome.first.nutrition.weightButton} value="kg">kg</ToggleButton>
-                    <ToggleButton   style={styles.clientHome.first.nutrition.weightButton} value="litres">litres</ToggleButton>
+                <ToggleButtonGroup>
+                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="grams" selected={unit === "grams"} onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>
+                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="kg" selected={unit === "kg"} onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>
+                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="litres" selected={unit === "litres"} onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>
                 </ToggleButtonGroup>
                 <TextField
                     label="Value"
