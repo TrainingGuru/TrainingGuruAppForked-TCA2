@@ -135,17 +135,11 @@ const Workouts = () => {
                 <View style={styles.workoutCardsContainer}>
                     {sortedWorkouts.map(workout => {
                         return (
-                            <View key={workout.id} style={styles.workoutCard}>
-                                <Image source={{ uri: workout.image }} style={styles.workoutCardImage} />
-                                <View style={styles.workoutCardHeader}>
-                                    <Text style={styles.workoutCardHeaderText}>{workout.date}</Text>
-                                    {workout.completed && <Text>✔️</Text>}
-                                </View>
-                                <View style={styles.workoutCardBody}>
-                                    <Text>{workout.name}</Text>
-                                    <Text>Expected Time: {workout.expectedTime}</Text>
-                                </View>
-                            </View>
+                            <WorkoutCard
+                                key={workout.id}
+                                workout={workout}
+                                onPress={() => { /* function to be called when the card is pressed */ }}
+                            />
                         );
                     })}
                 </View>
