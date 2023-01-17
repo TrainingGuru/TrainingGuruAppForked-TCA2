@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Text, TouchableOpacity, View,  StyleSheet, ScrollView} from "react-native";
 import WorkoutCard from "../../components/workout/WorkoutCard";
+import Layout from "../../components/structure/Layout";
 
 
 const Workouts = () => {
@@ -9,7 +10,7 @@ const Workouts = () => {
         container: {
             flex: 1,
             alignItems: 'center',
-            padding: 20,
+            backgroundColor: "red"
         },
         workoutCardsContainer: {
             width: '100%',
@@ -109,7 +110,8 @@ const Workouts = () => {
 
     // function to get the week number from a date
     const isInWeekRange = (date, week) => {
-        return date >= week.startDate && date <= week.endDate;
+        let startDate = getWeekStartDate(date);
+        return startDate >= week && startDate <= week;
     }
 
 // function to handle when a week is clicked
@@ -119,33 +121,34 @@ const Workouts = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-                <View style={styles.workoutCardsContainer}>
-                    {workouts.map(workout => {
-                        // only display workouts for the currently open week
-                        if (isInWeekRange(new Date(workout.date), currentWeek)) {
-                            return (
-                                <WorkoutCard
-                                    key={workout.id}
-                                    workout={workout}
-                                />
-                            );
-                        }
-                    })}
-                </View>
-            </ScrollView>
-
-            <View>
+            <Layout>
                 {/* display the weeks at the bottom of the screen */}
                 {weeks.length > 0 && <div>{weeks[0].toLocaleString()}</div>}
                 <div>{weeks.length.toString()}</div>
-                {weeks.map((week,index) => {
+                {weeks.map((week, index) => {
                     console.log(weeks)
-                return  <TouchableOpacity key={index} onPress={() => handleWeekClick(week)}>
-                        <Text>Week {week.toDateString()}</Text>
+                    return <TouchableOpacity key={index} onPress={() => handleWeekClick(week)}>
+                        {week !== currentWeek ? <Text>Week {week.toDateString()}</Text> :
+                            <><Text>Week {week.toDateString()}</Text>
+                                <ScrollView>
+                                    <View style={styles.workoutCardsContainer}>
+                                        {workouts.map(workout => {
+                                            // only display workouts for the currently open week
+                                            if (isInWeekRange(new Date(workout.date), currentWeek)) {
+                                                return (
+                                                    <WorkoutCard
+                                                        key={workout.id}
+                                                        workout={workout}
+                                                    />
+                                                );
+                                            }
+                                        })}
+                                    </View>
+                                </ScrollView>
+                            </>}
                     </TouchableOpacity>
                 })}
-            </View>
+            </Layout>
         </View>
     );
 }
