@@ -66,6 +66,15 @@ const Workouts = () => {
             shadowOpacity: 0.8,
             shadowRadius: 2,
         },
+        unselected: {
+            backgroundColor: '#e8e5e5',
+            color: 'black',
+            textAlign: 'center',
+            fontSize: "1.0rem",
+            paddingTop: 2,
+            border: "1px solid #545353FF"
+
+        }
     });
 
     // use state to keep track of which week is currently open
@@ -153,7 +162,7 @@ const Workouts = () => {
                     console.log(weeks)
                     return <TouchableOpacity
                                              key={index} onPress={() => handleWeekClick(week)} style={week === currentWeek ? {marginTop: 18} : {}}>
-                        {week !== currentWeek ? <Text>Week {week.toDateString()}</Text> :
+                        {week !== currentWeek ? <Text style={styles.unselected}>Week {week.toDateString()}</Text> :
                             <><View><Text style={styles.selectedWeek}>Week {week.toDateString()}</Text></View>
                                 <ScrollView>
                                     <View style={styles.workoutCardsContainer}>
