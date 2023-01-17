@@ -1,6 +1,7 @@
 
 import {Image, StyleSheet, Text} from 'react-native';
 import View from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedView";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
     container: {
@@ -71,27 +72,75 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     tagText: {
-        color: '#fff',
+        color: 'red',
         fontSize: 14,
+    },
+    circlesContainer: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        flexDirection: 'row',
+    },
+    circle: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        backgroundColor: 'white',
+        border: "2px solid white",
+        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    circleText: {
+        color: '#c51d1d',
+        fontWeight: 'bold',
+        fontSize: "0.6rem",
+        textAlign:'center'
+    },
+    imageOverlay: {
+        position: 'absolute',
+        bottom: 10,
+        left: 10,
+        padding: 10,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    overlayText: {
+        color: '#d90a0a',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    circleInner: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
     },
 });
 
 const WorkoutCards = ({workout}) => {
-                return (
-                    <View key={workout.id} style={styles.workoutCard}>
-                        <Image source={{ uri: workout.image }} style={styles.workoutCardImage} />
-                        <View style={styles.workoutCardHeader}>
-                            <Text style={styles.workoutCardHeaderText}>{workout.date}</Text>
-                        </View>
-                        <View style={styles.workoutCardBody}>
-                            <Text style={styles.workoutCardName}>{workout.name}</Text>
-                            <Text style={styles.workoutCardTime}>Expected Time: {workout.expectedTime}</Text>
-                            <View style={styles.tagContainer}>
-                                <Text style={styles.tagText}>{workout.category}</Text>
-                            </View>
-                        </View>
+    const dayOfWeek = new Date(workout.date).toLocaleString('en-us', { weekday: 'short' });
+
+    return (
+        <View style={styles.workoutCard}>
+            <Image source={{ uri: workout.image }} style={styles.workoutCardImage} />
+            <View style={styles.imageOverlay}>
+                <Text style={styles.overlayText}>{dayOfWeek} - {workout.name}</Text>
+            </View>
+            <View style={styles.circlesContainer}>
+                <View style={styles.circle}>
+                    <View style={styles.circleInner}>
+                        <Text style={styles.circleText}>{workout.time}</Text>
                     </View>
-                );
+                </View>
+                <View style={styles.circle}>
+                    {workout.completed ? (
+                        <MaterialCommunityIcons name="check" size={20} color="green" />
+                    ) : (
+                        <View />
+                    )}
+                </View>
+            </View>
+        </View>
+    );
 
 };
 
