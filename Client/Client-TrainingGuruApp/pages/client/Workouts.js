@@ -121,7 +121,6 @@ const Workouts = () => {
             <Layout>
                 <View style={styles.container}>
                 {/* display the weeks at the bottom of the screen */}
-                <div>{weeks.length.toString()}</div>
                 {weeks.map((week, index) => {
                     console.log(weeks)
                     return <TouchableOpacity key={index} onPress={() => handleWeekClick(week)}>
