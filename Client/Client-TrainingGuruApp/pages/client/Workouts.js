@@ -110,18 +110,15 @@ const Workouts = () => {
 
     // use useEffect to set the state of current week as the week that has today's date
     useEffect(() => {
+        let map = {}
         workouts.map((workout) => {
             const startWeek = getWeekStartDate(new Date(workout.date));
-            if (!weeks.includes(startWeek)) {
-                setWeeks((prevWeeks) => [...prevWeeks, startWeek]);
+            if (!map[startWeek]) {
+                map[startWeek] = 1
+                setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
             }
             setCurrentWeek(startWeek)
         });
-
-
-        setWeeks((prevWeeks) => [...prevWeeks.sort((b, a) => b - a).filter(function (item, pos, self) {
-            return self.indexOf(item) == pos;
-        })]);
 
 
     }, [workouts]);
