@@ -7,23 +7,29 @@ import Layout from "../../components/structure/Layout";
 const Workouts = () => {
     const [weeks, setWeeks] = useState([])
     const styles = StyleSheet.create({
-        container: {},
+        container: {
+            marginTop: 15
+        },
         workoutCardsContainer: {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            marginTop: 10
+            marginTop: 20
         },
         workoutCard: {
             width: '100%',
             height: 200,
             borderRadius: 10,
             backgroundColor: 'white',
-            marginVertical: 10,
-            padding: 10,
+            marginTop: 10,
+            marginBottom: 10,
+            borderWidth: 1,
+            borderColor: 'black',
+            overflow: 'scroll',
+            display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
         },
         workoutCardImage: {
             width: '100%',
