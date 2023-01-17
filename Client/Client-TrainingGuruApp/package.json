@@ -27,6 +27,7 @@
     "react-liquid-gauge": "^1.2.4",
     "react-native": "0.69.6",
     "react-native-gesture-handler": "~2.5.0",
+    "react-native-material-textfield": "^0.16.1",
     "react-native-media-query": "^2.0.0",
     "react-native-nested-stylesheet": "^0.0.8",
     "react-native-reanimated": "~2.9.1",

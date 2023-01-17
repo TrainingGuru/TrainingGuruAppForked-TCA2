@@ -11,6 +11,7 @@ import Login from "./pages/registration-login/Login";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Router, Route, Switch} from "./routing";
 import ClientHome from "./pages/client/ClientHome";
+import Workouts from "./pages/client/Workouts";
 
 function HomeScreen() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
                   <Route exact path="/" render={props => <Home {...props} />} />
                   <Route path="/profile" render={props => <Profile {...props} />} />
                   <Route exact path="/homeclient" render={props => <ClientHome {...props} />} />
+                  <Route exact path="/workouts" render={props => <Workouts {...props} />} />
               </Switch>
           </Router>
       </View>

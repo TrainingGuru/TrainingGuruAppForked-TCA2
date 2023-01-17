@@ -33,6 +33,9 @@ export const clientHome = () => {
             }
         }
     }, {
+        '.clientHome > div': {
+            backgroundColor: 'red',
+        },
         clientHome: {
             display: "flex",
             width: "100%",
@@ -75,10 +78,26 @@ export const clientHome = () => {
                         justifyContent: "space-between",
                         margin: "1%",
                     },
-                    weightButton: {
-                        fontSize: "0.8rem",
-                        padding: "1%"
+                    topRow: {
+                        gap: "2%",
+                        width: '100%',
+                        display: "flex",
+                        justifyContent: 'space-between',
+                        weightAmmount: {
 
+                            textField: {
+
+                            },
+                            width: "62%"
+                        },
+                        weight: {
+                            width: "30%",
+                            weightButton: {
+                                flex: "1",
+                                fontSize: "0.8rem",
+                                padding: "1%",
+                            },
+                        }
                     },
                     body: {
                         display: "flex",
@@ -88,7 +107,7 @@ export const clientHome = () => {
 
                     },
 
-                    },
+                },
                 nutritionList: {
                     listOfFood: {
                         width: "100%",
@@ -99,6 +118,11 @@ export const clientHome = () => {
 
                 }
             }
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderRadius: `4px 0 0 4px`,
+            },
         }
     }, layout)
 
@@ -110,8 +134,6 @@ export const clientHome = () => {
     const handleSubmit = async () => {
         const api = new NinjaAPI();
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
-
-
 
         let temp = shoppingList.concat(nutritionInfo)
 
@@ -172,16 +194,27 @@ export const clientHome = () => {
             {/*</CardLayout>*/}
             <CardLayout style={styles.clientHome.first.nutrition}>
 
-                <ToggleButtonGroup>
-                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="grams" selected={unit === "grams"} onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>
-                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="kg" selected={unit === "kg"} onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>
-                    <ToggleButton style={styles.clientHome.first.nutrition.weightButton} value="litres" selected={unit === "litres"} onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>
+                <div style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup
+                    style={styles.clientHome.first.nutrition.topRow.weight}>
+                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="grams"
+                                  selected={unit === "grams"}
+                                  onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>
+                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="kg"
+                                  selected={unit === "kg"}
+                                  onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>
+                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="litres"
+                                  selected={unit === "litres"}
+                                  onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>
                 </ToggleButtonGroup>
-                <TextField
-                    label="Value"
-                    value={value}
-                    onChange={event => setValue(event.target.value)}
-                />
+                    <TextField style={styles.clientHome.first.nutrition.topRow.weightAmmount}
+                               label="Value"
+                               value={value}
+                               onChange={event => setValue(event.target.value)}
+                               borderRadius={"90px!important"}
+
+                    />
+
+                </div>
                 <TextField
                     label="Food Name"
                     value={foodName}
@@ -193,12 +226,11 @@ export const clientHome = () => {
             </CardLayout>
 
 
-
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
                 <div style={styles.clientHome.first.nutritionList.listOfFood}>
                     ddfsdfdf
                     {shoppingList.length > 0 && shoppingList.map((item) => {
-                       return <><p>fsdsdf</p>
+                        return <>
                             <MealWidget
                                 item={item}
                                 name={item.name}
