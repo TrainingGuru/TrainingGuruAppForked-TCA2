@@ -119,10 +119,8 @@ const Workouts = () => {
 
     return (
             <Layout>
-                <h2>dsdfsdf</h2>
                 <View style={styles.container}>
                 {/* display the weeks at the bottom of the screen */}
-                {weeks.length > 0 && <div>{weeks[0].toLocaleString()}</div>}
                 <div>{weeks.length.toString()}</div>
                 {weeks.map((week, index) => {
                     console.log(weeks)
