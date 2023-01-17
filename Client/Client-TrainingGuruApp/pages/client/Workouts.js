@@ -8,9 +8,7 @@ const Workouts = () => {
  const [weeks, setWeeks] = useState([])
     const styles = StyleSheet.create({
         container: {
-            flex: 1,
-            alignItems: 'center',
-            backgroundColor: "red"
+
         },
         workoutCardsContainer: {
             width: '100%',
@@ -19,7 +17,7 @@ const Workouts = () => {
             alignItems: 'center',
         },
         workoutCard: {
-            width: '95%',
+            width: '100%',
             height: 200,
             borderRadius: 10,
             backgroundColor: 'white',
@@ -120,8 +118,9 @@ const Workouts = () => {
     }
 
     return (
-        <View style={styles.container}>
             <Layout>
+                <h2>dsdfsdf</h2>
+                <View style={styles.container}>
                 {/* display the weeks at the bottom of the screen */}
                 {weeks.length > 0 && <div>{weeks[0].toLocaleString()}</div>}
                 <div>{weeks.length.toString()}</div>
@@ -148,8 +147,8 @@ const Workouts = () => {
                             </>}
                     </TouchableOpacity>
                 })}
+                </View>
             </Layout>
-        </View>
     );
 }
 
