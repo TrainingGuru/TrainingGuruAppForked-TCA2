@@ -98,16 +98,16 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     imageOverlay: {
-        position: 'absolute',
-        bottom: 10,
         left: 10,
-        padding: 10,
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        margin: 'auto',
+        padding: 10
     },
     overlayText: {
-        color: '#d90a0a',
+        color: '#1e1c1c',
         fontWeight: 'bold',
         fontSize: 18,
+        textAlign: "center",
+        textTransform: "Uppercase"
     },
     circleInner: {
         alignItems: 'center',
