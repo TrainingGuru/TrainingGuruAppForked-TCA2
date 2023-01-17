@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
+import {useEffect, useState} from "react";
+import {Text, TouchableOpacity, View,  StyleSheet, ScrollView} from "react-native";
+import WorkoutCard from "../../components/workout/WorkoutCard";
+
 
 const Workouts = () => {
+ const [weeks, setWeeks] = useState([])
     const styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -11,6 +13,7 @@ const Workouts = () => {
         },
         workoutCardsContainer: {
             width: '100%',
+            display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
         },
@@ -51,101 +54,100 @@ const Workouts = () => {
         },
     });
 
+    // use state to keep track of which week is currently open
+    const [currentWeek, setCurrentWeek] = useState(new Date());
     const [workouts, setWorkouts] = useState([
         {
             id: 1,
-            date: 'Jan 1, 2021',
+            date: 'Jan 15, 2022',
+            name: 'Full body workout',
             image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            time: '20 mins',
             completed: true
         },
         {
             id: 2,
-            date: 'Jan 2, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            date: 'March 2, 2022',
+            name: 'Abs workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '15 mins',
             completed: false
         },
         {
             id: 3,
-            date: 'Jan 3, 2021',
+            date: 'Jan 3, 2022',
+            name: 'Cardio workout',
             image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 1,
-            date: 'Jan 1, 2021',
-            image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 2,
-            date: 'Jan 2, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: false
-        },
-        {
-            id: 3,
-            date: 'Jan 3, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 1,
-            date: 'Jan 1, 2021',
-            image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 2,
-            date: 'Jan 2, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: false
-        },
-        {
-            id: 3,
-            date: 'Jan 3, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 1,
-            date: 'Jan 1, 2021',
-            image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            completed: true
-        },
-        {
-            id: 2,
-            date: 'Jan 2, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            completed: false
-        },
-        {
-            id: 3,
-            date: 'Jan 3, 2021',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
             completed: true
         },
         // ... more workouts
     ]);
 
-    const sortedWorkouts = workouts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let weekMap = {};
+
+    // use useEffect to set the state of current week as the week that has today's date
+    useEffect(() => {
+        workouts.map((workout) => {
+            const startWeek = getWeekStartDate(new Date(workout.date));
+            if (!weeks.includes(startWeek)) {
+                setWeeks((prevWeeks) => [...prevWeeks, startWeek]);
+            }
+        });
+    }, [workouts]);
+
+    const getWeekStartDate = (date) => {
+        const currentYear = date.getFullYear();
+        const currentMonth = date.getMonth();
+        const currentDate = date.getDate();
+
+        const firstDayOfWeek = new Date(currentYear, currentMonth, currentDate - date.getUTCDay());
+        firstDayOfWeek.setUTCHours(0, 0, 0, 0);
+
+        return firstDayOfWeek;
+    }
+
+    // function to get the week number from a date
+    const isInWeekRange = (date, week) => {
+        return date >= week.startDate && date <= week.endDate;
+    }
+
+// function to handle when a week is clicked
+    const handleWeekClick = (weekNumber) => {
+        setCurrentWeek(weekNumber);
+    }
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.workoutCardsContainer}>
-                    {sortedWorkouts.map(workout => {
-                        return (
-                            <WorkoutCard
-                                key={workout.id}
-                                workout={workout}
-                                onPress={() => { /* function to be called when the card is pressed */ }}
-                            />
-                        );
+                    {workouts.map(workout => {
+                        // only display workouts for the currently open week
+                        if (isInWeekRange(new Date(workout.date), currentWeek)) {
+                            return (
+                                <WorkoutCard
+                                    key={workout.id}
+                                    workout={workout}
+                                />
+                            );
+                        }
                     })}
                 </View>
             </ScrollView>
+
+            <View>
+                {/* display the weeks at the bottom of the screen */}
+                {weeks.length > 0 && <div>{weeks[0].toLocaleString()}</div>}
+                <div>{weeks.length.toString()}</div>
+                {weeks.map((week,index) => {
+                    console.log(weeks)
+                return  <TouchableOpacity key={index} onPress={() => handleWeekClick(week)}>
+                        <Text>Week {week.toDateString()}</Text>
+                    </TouchableOpacity>
+                })}
+            </View>
         </View>
     );
 }
 
-export default Workouts;
+export default Workouts
