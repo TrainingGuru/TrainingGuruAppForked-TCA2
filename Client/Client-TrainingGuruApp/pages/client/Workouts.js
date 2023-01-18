@@ -92,7 +92,24 @@ const Workouts = () => {
             name: 'Full body workout',
             image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             time: '20 mins',
-            completed: true
+            exercises: [
+                {
+                    id: 1,
+                    name: 'Squats',
+                    reps: 8,
+                    previousWeight: 20,
+                    previousDate: 'Jan 10, 2022',
+                    completed: false
+                },
+                {
+                    id: 2,
+                    name: 'Push ups',
+                    reps: 12,
+                    previousWeight: null,
+                    previousDate: null,
+                    completed: false
+                },
+                ]
         },
         {
             id: 2,

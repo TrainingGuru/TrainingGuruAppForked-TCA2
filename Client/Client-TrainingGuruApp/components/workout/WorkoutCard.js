@@ -120,7 +120,7 @@ const WorkoutCards = ({workout}) => {
     const dayOfWeek = new Date(workout.date).toLocaleString('en-us', { weekday: 'short' });
 
     return (
-        <View style={styles.workoutCard}>
+        <View style={styles.workoutCard} >
             <Image source={{ uri: workout.image }} style={styles.workoutCardImage} />
             <View style={styles.imageOverlay}>
                 <Text style={styles.overlayText}>{dayOfWeek} - {workout.name}</Text>
