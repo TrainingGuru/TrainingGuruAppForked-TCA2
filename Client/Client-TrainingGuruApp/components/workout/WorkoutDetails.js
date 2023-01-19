@@ -2,7 +2,9 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Checkbox } from "react-native-paper";
 
-const WorkoutDetails = ({ workout }) => {
+const WorkoutDetails = ({ route }) => {
+    const workout = route.params.workout;
+
     const [exercises, setExercises] = useState(workout.exercises);
 
     const handleExerciseToggle = (id) => {

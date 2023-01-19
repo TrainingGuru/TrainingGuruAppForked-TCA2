@@ -76,6 +76,7 @@ function Layout({children}) {
                 },
             },
             body: {
+                paddingBottom: 120,
                 flex: 1,
                 flexDirection: "row",
                 content: {

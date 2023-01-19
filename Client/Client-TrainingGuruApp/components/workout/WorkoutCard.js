@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     workoutCardTime: {
-        fontSize: 18,
+        fontSize: 12,
         color: '#777',
         marginTop: 5,
     },
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     circleText: {
         color: '#c51d1d',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 10,
         textAlign:'center'
     },
     imageOverlay: {
