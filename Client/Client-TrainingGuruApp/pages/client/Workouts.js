@@ -2,9 +2,19 @@ import {useEffect, useState} from "react";
 import {Text, TouchableOpacity, View, StyleSheet, ScrollView} from "react-native";
 import WorkoutCard from "../../components/workout/WorkoutCard";
 import Layout from "../../components/structure/Layout";
+import {useNavigation} from "@react-navigation/core";
 
 
 const Workouts = () => {
+        const navigation = useNavigation();
+
+    const handleWorkoutPress = (workout) => {
+        if (workout && workout.exercises && workout.exercises.length > 0) {
+            navigation.navigate('WorkoutDetails', { workout });
+        }
+    };
+
+
     const [weeks, setWeeks] = useState([])
     const styles = StyleSheet.create({
         container: {
@@ -103,7 +113,6 @@ const Workouts = () => {
                     id: 2,
                     name: 'Push ups',
                     reps: 12,
-                    previousWeight: null,
                     previousDate: null,
                     completed: false
                 },
@@ -301,7 +310,7 @@ const Workouts = () => {
                                         {workouts.map(workout => {
                                             if (isInWeekRange(new Date(workout.date), currentWeek)) {
                                                 return (
-                                                    <View key={workout.id}><WorkoutCard workout={workout}/></View>
+                                                    <TouchableOpacity key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
                                                 );
                                             }
                                         })}
