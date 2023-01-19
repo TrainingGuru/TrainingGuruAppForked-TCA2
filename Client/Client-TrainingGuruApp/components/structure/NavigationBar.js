@@ -1,9 +1,9 @@
-import {Dimensions, StyleSheet} from "react-native";
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
+import {Dimensions, StyleSheet, View} from "react-native";
+// import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faMugSaucer} from '@fortawesome/free-solid-svg-icons/faMugSaucer'
-import {faHouseChimney} from "@fortawesome/free-solid-svg-icons/faHouseChimney";
-import {faPeopleGroup} from "@fortawesome/free-solid-svg-icons/faPeopleGroup";
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
+// import {faHouseChimney} from "@fortawesome/free-solid-svg-icons/faHouseChimney";
+// import {faPeopleGroup} from "@fortawesome/free-solid-svg-icons/faPeopleGroup";
+// import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 
 function NavigationBar() {
@@ -65,18 +65,18 @@ function NavigationBar() {
 
 
     return <>
-        <div style={styles.listNav}>
-            <FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>
+        <View style={styles.listNav}>
+            {/*<FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>*/}
             {size >  768 &&  <>Home</>}
-        </div>
-        <div style={styles.listNav}>
-            <FontAwesomeIcon style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>
+        </View>
+        <View style={styles.listNav}>
+            {/*<FontAwesomeIcon style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>*/}
             {size >  768 && <>Clients</>}
-        </div>
-        <div style={styles.listNav}>
-            <FontAwesomeIcon  style={styles.listNav.icon} icon={faUser}/>
+        </View>
+        <View style={styles.listNav}>
+            {/*<FontAwesomeIcon  style={styles.listNav.icon} icon={faUser}/>*/}
             {size >  768 &&<>Profile</>}
-        </div>
+        </View>
     </>
 
 }

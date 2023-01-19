@@ -9,5 +9,7 @@ webStyles, mobileStyles, layout
     // Return a function that combines wraps web and mobile styles
      if (layout.width < 768 ) {
             return mobile
-        } else return web
+        } else {
+         return web
+     }
 }

@@ -1,12 +1,10 @@
-
-
-
+import {View} from "react-native";
 
 
 function Widget(){
-    return <div>
+    return <View>
 
-    </div>
+    </View>
 }
 
 export default Widget;

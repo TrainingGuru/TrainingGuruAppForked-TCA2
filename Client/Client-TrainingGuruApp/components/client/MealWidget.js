@@ -1,6 +1,6 @@
-import {Dimensions} from "react-native";
+import {Dimensions, View} from "react-native";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
-import {Divider} from "@mui/material";
+import {Divider} from "native-base";
 
 export default function MealWidget({name, weight, time, unit, value, calories, fat, protein, carbs, item}) {
     let layout = {
@@ -57,32 +57,32 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
         }
 
     }, layout)
-    return  <div style={styles.mealWidget}>
-        <div style={styles.mealWidget.gen}>
-            <div>
+    return  <View style={styles.mealWidget}>
+        <View style={styles.mealWidget.gen}>
+            <View>
                 {name}
-            </div>
-            <div style={styles.mealWidget.gen.weight}>
+            </View>
+            <View style={styles.mealWidget.gen.weight}>
                 {value}g
-            </div>
-            <div style={styles.mealWidget.gen.record}>
+            </View>
+            <View style={styles.mealWidget.gen.record}>
                 {time}
-            </div>
-        </div>
-        <div style={styles.mealWidget.mealInfo}>
-            <div style={styles.mealWidget.mealInfo.sugar}>
+            </View>
+        </View>
+        <View style={styles.mealWidget.mealInfo}>
+            <View style={styles.mealWidget.mealInfo.sugar}>
                 carbs {carbs}g
-            </div>
-            <div style={styles.mealWidget.mealInfo.calories}>
+            </View>
+            <View style={styles.mealWidget.mealInfo.calories}>
                 Calories {calories}
-            </div>
-            <div style={styles.mealWidget.mealInfo.protein}>
+            </View>
+            <View style={styles.mealWidget.mealInfo.protein}>
                 Protein {protein}g
-            </div>
-            <div style={styles.mealWidget.mealInfo.fat}>
+            </View>
+            <View style={styles.mealWidget.mealInfo.fat}>
                 Fat {fat}g
-            </div>
-        </div>
+            </View>
+        </View>
         <Divider/>
-    </div>
+    </View>
 }

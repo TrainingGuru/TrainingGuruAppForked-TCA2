@@ -1,5 +1,5 @@
 import Layout from "../../components/structure/Layout";
-import {Dimensions, StyleSheet} from "react-native";
+import {Dimensions, StyleSheet, View} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
@@ -33,7 +33,7 @@ export const clientHome = () => {
             }
         }
     }, {
-        '.clientHome > div': {
+        '.clientHome > View': {
             backgroundColor: 'red',
         },
         clientHome: {
@@ -141,15 +141,15 @@ export const clientHome = () => {
     }
 
     return <Layout>
-        <div style={styles.clientHome}>
-            {/*<div style={styles.clientHome.title}>*/}
+        <View style={styles.clientHome}>
+            {/*<View style={styles.clientHome.title}>*/}
             {/*    Home*/}
-            {/*</div>*/}
+            {/*</View>*/}
             <CardLayout>
                 <CalorieBrokenDown/>
             </CardLayout>
 
-            <div style={styles.clientHome.first}>
+            <View style={styles.clientHome.first}>
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon
                         style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
@@ -168,11 +168,11 @@ export const clientHome = () => {
                         icon={faHeartPulse} color={"red"}/>
                     <h2 style={styles.clientHome.first.steps.title}>50 BPM</h2>
                 </CardLayout>
-            </div>
+            </View>
 
 
             {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
-            {/*    <div style={styles.clientHome.first.nutrition.header}>*/}
+            {/*    <View style={styles.clientHome.first.nutrition.header}>*/}
             {/*        <h2>*/}
             {/*            Nutrition*/}
             {/*        </h2>*/}
@@ -186,15 +186,15 @@ export const clientHome = () => {
             {/*            <ToggleButton value="ios">(KG)</ToggleButton>*/}
             {/*            <ToggleButton value="ios">(LB)</ToggleButton>*/}
             {/*        </ToggleButtonGroup>*/}
-            {/*    </div>*/}
-            {/*    <div style={styles.clientHome.first.nutrition.body}>*/}
+            {/*    </View>*/}
+            {/*    <View style={styles.clientHome.first.nutrition.body}>*/}
             {/*        <TextField onChange={(e) => setText(e.currentTarget.value)}  id="outlined-basic" label="Search" variant="outlined"/>*/}
             {/*        <Button  onSubmit={() => add()} variant="contained">Add</Button>*/}
-            {/*    </div>*/}
+            {/*    </View>*/}
             {/*</CardLayout>*/}
             <CardLayout style={styles.clientHome.first.nutrition}>
 
-                <div style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup
+                <View style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup
                     style={styles.clientHome.first.nutrition.topRow.weight}>
                     <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="grams"
                                   selected={unit === "grams"}
@@ -214,7 +214,7 @@ export const clientHome = () => {
 
                     />
 
-                </div>
+                </View>
                 <TextField
                     label="Food Name"
                     value={foodName}
@@ -227,7 +227,7 @@ export const clientHome = () => {
 
 
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
-                <div style={styles.clientHome.first.nutritionList.listOfFood}>
+                <View style={styles.clientHome.first.nutritionList.listOfFood}>
                     ddfsdfdf
                     {shoppingList.length > 0 && shoppingList.map((item) => {
                         return <>
@@ -242,10 +242,10 @@ export const clientHome = () => {
                             /></>
                     })
                     })
-                </div>
+                </View>
             </CardLayout>
 
-        </div>
+        </View>
     </Layout>
 
 

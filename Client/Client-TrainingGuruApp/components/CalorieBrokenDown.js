@@ -1,5 +1,5 @@
 import CalorieGauge from "./reusable/CalorieGauge";
-import {Dimensions} from "react-native";
+import {Dimensions, View} from "react-native";
 import CreateResponsiveStyle from "../utils/responsiveStyle";
 
 
@@ -22,16 +22,16 @@ function calorieBrokenDown() {
             margin: "4px"
         }
     }, layout)
-    return <div style={styles.calorieBrokenDown}>
-        <div>Fat
-            <CalorieGauge startColor={"#f80202"} endColor={"#f80202"}/></div>
-        <div>Protein
-            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/></div>
-        <div>Carbs
-            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/></div>
-        <div>Fat
-            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/></div>
-    </div>
+    return <View style={styles.calorieBrokenDown}>
+        <View>Fat
+            <CalorieGauge startColor={"#f80202"} endColor={"#f80202"}/></View>
+        <View>Protein
+            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/></View>
+        <View>Carbs
+            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/></View>
+        <View>Fat
+            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/></View>
+    </View>
 }
 
 export default calorieBrokenDown;

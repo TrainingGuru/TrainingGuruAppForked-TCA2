@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 const styles = StyleSheet.create({
     'profile-content': {
@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
 })
 
 export const Profile = ({navigation, route}) => {
-    return <div style={styles["profile-content"]}>
+    return <View style={styles["profile-content"]}>
        Profile
-    </div>
+    </View>
 }
 
 
