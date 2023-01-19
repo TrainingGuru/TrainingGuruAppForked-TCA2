@@ -58,32 +58,48 @@ const WorkoutDetails = ({ route }) => {
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
-                        <Text style={styles.reps}>{exercise.reps} reps</Text>
-                        <Text style={styles.weight}>
-                            Weight: {exercise.weight} lbs (last used on{" "}
-                            {exercise.lastUsedDate})
-                        </Text>
-                        {exercise.previousWeight ? (
+                        <View style={styles.weightContainer}>
+                            {exercise.previousWeight ? (
+                                <Text style={styles.weight}>
+                                    Weight: {exercise.weight} lbs (last used on{" "}
+                                    {exercise.lastUsedDate})
+                                </Text>
+                            ) : null}
                             <TextInput
                                 placeholder="Enter weight"
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
-                        ) : null}
-                        <Checkbox
-                            status={exercise.completed ? "checked" : "unchecked"}
-                            onPress={() => handleExerciseToggle(exercise.id)}
-                        />
+                        </View>
+                        <View style={styles.reps}>
+                            <Text style={styles.reps}>{exercise.reps} reps</Text>
+                            <Checkbox
+                                status={exercise.completed ? "checked" : "unchecked"}
+                                onPress={() => handleExerciseToggle(exercise.id)}
+                            />
+                        </View>
                     </View>
                 ))}
             </Animated.View>
         </View>
+
     );
 };
 
 const styles = StyleSheet.create({
+    exerciseNameContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    weightContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 10
+    },
     container: {
         padding: 20,
-        backgroundColor: '#f5f5f5'
+        backgroundColor: '#f5f5f5',
+        width: "100%"
     },
     name: {
         fontSize: 24,
@@ -92,39 +108,38 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333'
     },
-    exerciseRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginVertical: 10,
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
+        exerciseRow: {
+            flexDirection: "column",
+            alignItems: "center",
+            marginVertical: 10,
+            backgroundColor: '#fff',
+            padding: 20,
+            borderRadius: 10,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    exerciseName: {
-        fontWeight: "bold",
-        flex: 1,
-        fontSize: 18,
-        color: '#333',
-    },
-    reps: {
-        marginHorizontal: 10,
-        fontSize: 14,
-        color: '#555',
-    },
-    weight: {
-        marginHorizontal: 10,
-        flex: 1,
-        fontSize: 14,
-        color: '#555',
-    },
+        exerciseName: {
+            fontWeight: "bold",
+            textAlign: "center",
+            fontSize: 18,
+            color: '#333',
+            marginBottom: 10
+        },
+        reps: {
+            marginHorizontal: 10,
+            fontSize: 14,
+            color: '#555',
+        },
+        weight: {
+            fontSize: 14,
+            color: '#555',
+        },
     input: {
         backgroundColor: '#f5f5f5',
         borderRadius: 10,
