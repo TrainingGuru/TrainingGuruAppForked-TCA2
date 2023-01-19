@@ -61,7 +61,7 @@ const Workouts = () => {
             backgroundColor: '#e2dbdb',
             color: 'black',
             textAlign: 'center',
-            fontSize: "1.2rem",
+            fontSize: 12,
             paddingTop: 2,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
@@ -76,7 +76,7 @@ const Workouts = () => {
             backgroundColor: '#e8e5e5',
             color: 'black',
             textAlign: 'center',
-            fontSize: "1.0rem",
+            fontSize: 12,
             paddingTop: 2,
             border: "1px solid #545353FF"
 
@@ -109,10 +109,10 @@ const Workouts = () => {
                     previousDate: null,
                     completed: false
                 },
-                ]
+            ]
         },
         {
-            id: 2,
+            id: 233,
             date: 'March 2, 2022',
             name: 'Abs workout',
             image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
@@ -120,7 +120,7 @@ const Workouts = () => {
             completed: false
         },
         {
-            id: 2,
+            id: 22,
             date: 'March 3, 2022',
             name: 'Abs workout',
             image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
@@ -128,7 +128,7 @@ const Workouts = () => {
             completed: false
         },
         {
-            id: 3,
+            id: 23,
             date: 'Jan 3, 2022',
             name: 'Cardio workout',
             image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
@@ -180,29 +180,27 @@ const Workouts = () => {
     return (
         <Layout>
             <View style={styles.container}>
-                {/* display the weeks at the bottom of the screen */}
+                {/*display the weeks at the bottom of the screen*/}
                 {weeks.map((week, index) => {
                     console.log(weeks)
-                    return <TouchableOpacity
-                                             key={index} onPress={() => handleWeekClick(week)} style={week === currentWeek ? {marginTop: 18} : {}}>
-                        {week !== currentWeek ? <Text style={styles.unselected}>Week {week.toDateString()}</Text> :
-                            <><View><Text style={styles.selectedWeek}>Week {week.toDateString()}</Text></View>
+                    return <TouchableOpacity key={index} onPress={() => handleWeekClick(week)} style={week === currentWeek ? {marginTop: 18} : {}}>
+                        {week !== currentWeek ?   <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text> :
+                            <View>
+
+                                <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
+
                                 <ScrollView>
                                     <View style={styles.workoutCardsContainer}>
                                         {workouts.map(workout => {
-                                            // only display workouts for the currently open week
                                             if (isInWeekRange(new Date(workout.date), currentWeek)) {
                                                 return (
-                                                    <WorkoutCard
-                                                        key={workout.id}
-                                                        workout={workout}
-                                                    />
+                                                    <View key={workout.id} ><WorkoutCard workout={workout} /></View>
                                                 );
                                             }
                                         })}
                                     </View>
                                 </ScrollView>
-                            </>}
+                            </View>}
                     </TouchableOpacity>
                 })}
             </View>

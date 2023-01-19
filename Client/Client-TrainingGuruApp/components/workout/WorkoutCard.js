@@ -1,6 +1,5 @@
 
-import {Image, StyleSheet, Text} from 'react-native';
-import View from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedView";
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
@@ -30,8 +29,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     workoutCardImage: {
-        width: '100%',
-        height: '70%',
+    width: 300,
+        height: "60%"
     },
     workoutCardHeader: {
         width: '100%',
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     circleText: {
         color: '#c51d1d',
         fontWeight: 'bold',
-        fontSize: "0.6rem",
+        fontSize: 18,
         textAlign:'center'
     },
     imageOverlay: {
@@ -107,13 +106,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
         textAlign: "center",
-        textTransform: "Uppercase"
     },
     circleInner: {
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
     },
+
+    workoutCardImageHolder: {
+        height: "80%",
+        width: "100%",
+        backgroundColor: "red"
+    }
 });
 
 const WorkoutCards = ({workout}) => {
@@ -121,9 +125,12 @@ const WorkoutCards = ({workout}) => {
 
     return (
         <View style={styles.workoutCard} >
-            <Image source={{ uri: workout.image }} style={styles.workoutCardImage} />
+                <Image
+                    source={{ uri: workout.image }}
+                    style={styles.workoutCardImage}
+                />
             <View style={styles.imageOverlay}>
-                <Text style={styles.overlayText}>{dayOfWeek} - {workout.name}</Text>
+                <Text style={styles.overlayText}>{dayOfWeek.toUpperCase()} - {workout.name.toUpperCase()}</Text>
             </View>
             <View style={styles.circlesContainer}>
                 <View style={styles.circle}>

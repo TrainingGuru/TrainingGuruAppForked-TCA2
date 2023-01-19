@@ -19,7 +19,6 @@ function NavigationBar() {
     let styles = CreateResponsiveStyle(    {
         listNav: {
             fontSize: "1.2rem",
-            textTransform: "uppercase",
             fontWeight: "Bold",
             flexDirection: "row",
             alignContent: "space-around",
@@ -41,7 +40,6 @@ function NavigationBar() {
         {
             listNav: {
                 fontSize: "12.5rem",
-                textTransform: "uppercase",
                 fontWeight: "Bold",
                 flexDirection: "row",
                 alignContent: "space-around",
