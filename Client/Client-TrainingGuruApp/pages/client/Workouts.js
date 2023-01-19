@@ -113,7 +113,6 @@ const Workouts = () => {
                     id: 2,
                     name: 'Push ups',
                     reps: 12,
-                    previousWeight: null,
                     previousDate: null,
                     completed: false
                 },
