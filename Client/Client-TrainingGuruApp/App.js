@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "red",
     },
     image: {
         width: 90,
-        height: 70
+        height: 55,
+        paddingBottom: "30%"
     },
 });
 
@@ -24,7 +24,7 @@ function App() {
 
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Home" component={Home}   options={{
+                    <Stack.Screen ame="Workouts" component={Workouts}   options={{
                         headerTitleAlign: 'center',
                         headerTitle: () => (
                             <View style={styles.container}>
