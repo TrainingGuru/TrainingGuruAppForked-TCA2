@@ -8,10 +8,13 @@ import {useNavigation} from "@react-navigation/core";
 const Workouts = () => {
         const navigation = useNavigation();
 
-        const handleWorkoutPress = (workout) => {
-            alert("fsdfsdfsd");
+    const handleWorkoutPress = (workout) => {
+        if (workout && workout.exercises && workout.exercises.length > 0) {
             navigation.navigate('WorkoutDetails', { workout });
-        };
+        }
+    };
+
+
     const [weeks, setWeeks] = useState([])
     const styles = StyleSheet.create({
         container: {
@@ -308,7 +311,7 @@ const Workouts = () => {
                                         {workouts.map(workout => {
                                             if (isInWeekRange(new Date(workout.date), currentWeek)) {
                                                 return (
-                                                    <TouchableOpacity key={week.id} onPress={() => handleWorkoutPress(week)}><WorkoutCard workout={workout}/></TouchableOpacity>
+                                                    <TouchableOpacity key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
                                                 );
                                             }
                                         })}
