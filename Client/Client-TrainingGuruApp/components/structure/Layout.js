@@ -13,6 +13,7 @@ function Layout({children}) {
 
     const styles = CreateResponsiveStyle({
         layout: {
+            backgroundColor: "red",
             height: "100%",
             margin: "2%",
             display: "flex",
@@ -46,6 +47,7 @@ function Layout({children}) {
         }
     }, {
         layout: {
+            backgroundColor: "red",
             flex: 1,
             flexDirection: "column",
             base: {
@@ -84,10 +86,10 @@ console.log(styles)
 
     return <View style={styles.layout}>
         <View style={styles.layout.base}>
-            <View style={styles.layout.base.header}>
-                <Image style={styles.layout.base.header.img}
-                     source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}/>
-            </View>
+            {/*<View style={styles.layout.base.header}>*/}
+            {/*    <Image style={styles.layout.base.header.img}*/}
+            {/*         source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}/>*/}
+            {/*</View>*/}
             <View style={styles.layout.base.navigation}>
                 {/*<NavigationBar/>*/}
             </View>
