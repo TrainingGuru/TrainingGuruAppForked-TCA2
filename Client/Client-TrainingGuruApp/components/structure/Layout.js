@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import flex from "native-base/src/components/primitives/Flex/index";
 import StyleSheet from 'react-native-media-query';
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
-import {Dimensions, Image, View, Text} from "react-native";
+import {Dimensions, Image, View, Text, ScrollView} from "react-native";
 
 function Layout({children}) {
 
@@ -84,7 +84,6 @@ function Layout({children}) {
                     marginTop: 1,
                     height: "100%",
                     zIndex: 0,
-                    backgroundColor: "green"
                 }
             },
         }
@@ -102,11 +101,11 @@ console.log(styles)
             <NavigationBar/>
         </View>}
 
-        <View style={styles.layout.body}>
+        <ScrollView><View style={styles.layout.body}>
             <View style={styles.layout.body.content}>
                 <View>{children}</View>
             </View>
-        </View>
+        </View></ScrollView>
     </View>
 
 }

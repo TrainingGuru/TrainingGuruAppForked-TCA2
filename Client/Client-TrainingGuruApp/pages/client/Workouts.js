@@ -15,7 +15,7 @@ const Workouts = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            marginTop: 20
+            marginTop: 20,
         },
         workoutCard: {
             width: '100%',
@@ -23,7 +23,6 @@ const Workouts = () => {
             borderRadius: 10,
             backgroundColor: 'white',
             marginTop: 10,
-            marginBottom: 10,
             borderWidth: 1,
             borderColor: 'black',
             display: 'flex',
@@ -151,6 +150,78 @@ const Workouts = () => {
             time: '30 mins',
             completed: true
         },
+        {
+            id: 231,
+            date: 'Jan 4, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 232,
+            date: 'Jan 5, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 233,
+            date: 'Jan 9, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 234,
+            date: 'Dec 3, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 235,
+            date: 'Jan 3, 2021',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 236,
+            date: 'Jun 3, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 237,
+            date: 'Nov 3, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 238,
+            date: 'May 9, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
+        {
+            id: 239,
+            date: 'Aug 3, 2022',
+            name: 'Cardio workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '30 mins',
+            completed: true
+        },
         // ... more workouts
     ]);
 
@@ -209,7 +280,7 @@ const Workouts = () => {
 
                                     <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
 
-                                    <ScrollView>
+
                                         <View style={styles.workoutCardsContainer}>
                                             {workouts.map(workout => {
                                                 if (isInWeekRange(new Date(workout.date), currentWeek)) {
@@ -219,14 +290,13 @@ const Workouts = () => {
                                                 }
                                             })}
                                         </View>
-                                    </ScrollView>
+
                                 </View>}
                         </TouchableOpacity> : <View key={index} style={week === currentWeek ? {marginTop: 18} : {}}>
                             <View>
 
                                 <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
 
-                                <ScrollView>
                                     <View style={styles.workoutCardsContainer}>
                                         {workouts.map(workout => {
                                             if (isInWeekRange(new Date(workout.date), currentWeek)) {
@@ -236,7 +306,6 @@ const Workouts = () => {
                                             }
                                         })}
                                     </View>
-                                </ScrollView>
                             </View>
 
 
