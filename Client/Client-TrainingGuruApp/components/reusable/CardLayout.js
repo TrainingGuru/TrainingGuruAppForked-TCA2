@@ -3,6 +3,8 @@ import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import LiquidFillGauge from 'react-liquid-gauge';
 import { interpolateRgb } from 'd3-interpolate';
 import {Divider} from "@mui/material";
+import View from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedView";
+import Text from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedText";
 
 function CardLayout({title, children, style}) {
     let layout = {
@@ -33,14 +35,14 @@ function CardLayout({title, children, style}) {
     }, layout)
 
 
-    return <div style={{...styles.cardLayout, ...style}} >
-        {title && <h2 style={styles.cardLayout.header}>
+    return <View style={{...styles.cardLayout, ...style}} >
+        {title && <Text style={styles.cardLayout.header}>
             {title}
-        </h2>}
-        <div style={styles.cardLayout.content}>
+        </Text>}
+        <View style={styles.cardLayout.content}>
             {children}
-        </div>
-    </div>
+        </View>
+    </View>
 }
 
 export default CardLayout;

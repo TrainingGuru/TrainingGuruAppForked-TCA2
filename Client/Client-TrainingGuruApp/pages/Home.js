@@ -6,11 +6,11 @@ const styles = StyleSheet.create({})
 
 export const Home = () => {
     return <View>
-        <div style={styles.container}>
+        <View style={styles.container}>
           <Layout>
               home
           </Layout>
-        </div>
+        </View>
     </View>
 }
 
