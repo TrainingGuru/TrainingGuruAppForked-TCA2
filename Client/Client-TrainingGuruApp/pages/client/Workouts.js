@@ -26,7 +26,6 @@ const Workouts = () => {
             marginBottom: 10,
             borderWidth: 1,
             borderColor: 'black',
-            overflow: 'scroll',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -127,6 +126,23 @@ const Workouts = () => {
             time: '15 mins',
             completed: false
         },
+
+        {
+            id: 222222,
+            date: 'March 3, 2022',
+            name: 'Abs workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '15 mins',
+            completed: false
+        },
+        {
+            id: 22224,
+            date: 'March 3, 2022',
+            name: 'Abs workout',
+            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            time: '15 mins',
+            completed: false
+        },
         {
             id: 23,
             date: 'Jan 3, 2022',
@@ -183,8 +199,29 @@ const Workouts = () => {
                 {/*display the weeks at the bottom of the screen*/}
                 {weeks.map((week, index) => {
                     console.log(weeks)
-                    return <TouchableOpacity key={index} onPress={() => handleWeekClick(week)} style={week === currentWeek ? {marginTop: 18} : {}}>
-                        {week !== currentWeek ?   <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text> :
+
+
+                    return week !== currentWeek ?
+                        <TouchableOpacity key={index} onPress={() => week !== currentWeek && handleWeekClick(week)}
+                                          style={week === currentWeek ? {marginTop: 18} : {}}>
+                            {week !== currentWeek ? <Text style={styles.unselected}>Week {week.toDateString()}</Text> :
+                                <View>
+
+                                    <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
+
+                                    <ScrollView>
+                                        <View style={styles.workoutCardsContainer}>
+                                            {workouts.map(workout => {
+                                                if (isInWeekRange(new Date(workout.date), currentWeek)) {
+                                                    return (
+                                                        <View key={workout.id}><WorkoutCard workout={workout}/></View>
+                                                    );
+                                                }
+                                            })}
+                                        </View>
+                                    </ScrollView>
+                                </View>}
+                        </TouchableOpacity> : <View key={index} style={week === currentWeek ? {marginTop: 18} : {}}>
                             <View>
 
                                 <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
@@ -194,14 +231,16 @@ const Workouts = () => {
                                         {workouts.map(workout => {
                                             if (isInWeekRange(new Date(workout.date), currentWeek)) {
                                                 return (
-                                                    <View key={workout.id} ><WorkoutCard workout={workout} /></View>
+                                                    <View key={workout.id}><WorkoutCard workout={workout}/></View>
                                                 );
                                             }
                                         })}
                                     </View>
                                 </ScrollView>
-                            </View>}
-                    </TouchableOpacity>
+                            </View>
+
+
+                        </View>
                 })}
             </View>
         </Layout>

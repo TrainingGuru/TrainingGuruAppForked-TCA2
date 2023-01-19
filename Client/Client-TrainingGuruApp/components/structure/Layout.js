@@ -70,7 +70,9 @@ function Layout({children}) {
                     alignItems: 'center',
                     backgroundColor: 'grey',
                     padding: 20,
-                    justifyContent: "space-around"
+                    zIndex: 1,
+                    justifyContent: "space-around",
+
                 },
             },
             body: {
@@ -79,7 +81,10 @@ function Layout({children}) {
                 content: {
                     flex: 1,
                     margin: 20,
-                    marginTop: 10
+                    marginTop: 1,
+                    height: "100%",
+                    zIndex: 0,
+                    backgroundColor: "green"
                 }
             },
         }
