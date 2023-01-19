@@ -5,7 +5,7 @@ const styles = StyleSheet.create({})
 
 export const Home = () => {
     return <Layout>
-            <Text>home dfgdfg</Text>
+            <Text>rome gfhghdfgdfg</Text>
           </Layout>
 
 }

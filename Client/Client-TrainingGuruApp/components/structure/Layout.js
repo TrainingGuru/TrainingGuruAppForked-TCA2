@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import flex from "native-base/src/components/primitives/Flex/index";
 import StyleSheet from 'react-native-media-query';
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
-import {Dimensions, Image, View, Text} from "react-native";
+import {Dimensions, Image, View, Text, ScrollView} from "react-native";
 
 function Layout({children}) {
 
@@ -46,12 +46,13 @@ function Layout({children}) {
         }
     }, {
         layout: {
+            position: "relative",
             flex: 1,
             flexDirection: "column",
             base: {
-                flexDirection: "row-reverse",
-                justifyContent: "center",
-                height: "10%",
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
                 header: {
                     flex: 1,
                     alignContent: "center",
@@ -61,12 +62,17 @@ function Layout({children}) {
                     }
                 },
                 navigation: {
-                    flexDirection: "row",
-                    alignSelf: "flex-end",
-                    margin: 20,
-                    position: "absolute",
+                    position: 'absolute',
                     bottom: 0,
-                    backgroundColor: "grey"
+                    left: 0,
+                    right: 0,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    backgroundColor: 'grey',
+                    padding: 20,
+                    zIndex: 1,
+                    justifyContent: "space-around",
+
                 },
             },
             body: {
@@ -75,7 +81,9 @@ function Layout({children}) {
                 content: {
                     flex: 1,
                     margin: 20,
-                    marginTop: -10
+                    marginTop: 1,
+                    height: "100%",
+                    zIndex: 0,
                 }
             },
         }
@@ -83,21 +91,21 @@ function Layout({children}) {
 console.log(styles)
 
     return <View style={styles.layout}>
-        <View style={styles.layout.base}>
-            <View style={styles.layout.base.header}>
-                <Image style={styles.layout.base.header.img}
-                     source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}/>
-            </View>
-            <View style={styles.layout.base.navigation}>
-                {/*<NavigationBar/>*/}
-            </View>
-        </View>
 
-        <View style={styles.layout.body}>
+
+        {layout.width > 768 ? <View style={styles.layout.base}>
+            <View style={styles.layout.base.navigation}>
+                <NavigationBar/>
+            </View>
+        </View> : <View style={styles.layout.base.navigation}>
+            <NavigationBar/>
+        </View>}
+
+        <ScrollView><View style={styles.layout.body}>
             <View style={styles.layout.body.content}>
                 <View>{children}</View>
             </View>
-        </View>
+        </View></ScrollView>
     </View>
 
 }

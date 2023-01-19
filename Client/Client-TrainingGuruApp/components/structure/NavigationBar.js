@@ -1,10 +1,11 @@
 import {Dimensions, StyleSheet, View} from "react-native";
-// import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
+ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faMugSaucer} from '@fortawesome/free-solid-svg-icons/faMugSaucer'
-// import {faHouseChimney} from "@fortawesome/free-solid-svg-icons/faHouseChimney";
-// import {faPeopleGroup} from "@fortawesome/free-solid-svg-icons/faPeopleGroup";
-// import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
+ import {faHouseChimney} from "@fortawesome/free-solid-svg-icons/faHouseChimney";
+ import {faPeopleGroup} from "@fortawesome/free-solid-svg-icons/faPeopleGroup";
+import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
+import { Platform } from 'react-native';
 
 function NavigationBar() {
 
@@ -18,8 +19,6 @@ function NavigationBar() {
     let styles = CreateResponsiveStyle(    {
         listNav: {
             fontSize: "1.2rem",
-            textTransform: "uppercase",
-            fontFamily: "Play",
             fontWeight: "Bold",
             flexDirection: "row",
             alignContent: "space-around",
@@ -40,9 +39,7 @@ function NavigationBar() {
     },
         {
             listNav: {
-                fontSize: "1.2rem",
-                textTransform: "uppercase",
-                fontFamily: "Play",
+                fontSize: "12.5rem",
                 fontWeight: "Bold",
                 flexDirection: "row",
                 alignContent: "space-around",
@@ -50,12 +47,11 @@ function NavigationBar() {
                 display: "flex",
                 justifyContent: "center",
                 gap: "2rem",
-
                 icon: {
-                    width: "4.5rem",
-                    height: "100%",
+                    fill: "red",
+                    width: "1.5rem",
                     people: {
-                        width: "7.5rem"
+                        width: "2.5rem"
                     }
                 }
             }
@@ -66,15 +62,16 @@ function NavigationBar() {
 
     return <>
         <View style={styles.listNav}>
-            {/*<FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>*/}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faHouseChimney} size={Platform.OS !== 'web' && size <  768 && 35 }/> :<FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>}
             {size >  768 &&  <>Home</>}
         </View>
+
         <View style={styles.listNav}>
-            {/*<FontAwesomeIcon style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>*/}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faPeopleGroup} size={Platform.OS !== 'web' && size <  768 && 47 }/> : <FontAwesomeIcon  style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>}
             {size >  768 && <>Clients</>}
         </View>
         <View style={styles.listNav}>
-            {/*<FontAwesomeIcon  style={styles.listNav.icon} icon={faUser}/>*/}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faUser}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
             {size >  768 &&<>Profile</>}
         </View>
     </>
