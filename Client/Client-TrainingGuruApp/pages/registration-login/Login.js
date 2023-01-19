@@ -37,24 +37,24 @@ const styles = StyleSheet.create({
 
 function Login() {
 
-    return <div style={styles.login}>
-        <div style={styles.login.header}>
+    return <View style={styles.login}>
+        <View style={styles.login.header}>
             Training Guru
-        </div>
-        <div style={styles.login.body}>
-            <div style={styles.login.body.form}>
+        </View>
+        <View style={styles.login.body}>
+            <View style={styles.login.body.form}>
                 <InputBox text={"username"}/>
 
                 <InputBox text={"password"}/>
-            </div>
+            </View>
                 <button type="submit">Login</button>
                 <input type="checkbox" checked="checked"/> Remember me
                 <button type="button" className="cancelbtn"> Cancel</button>
                 Forgot <a href="#"> password? </a>
-            </div>
-        <div style={styles.login.footer}>
-    </div>
-    </div>
+            </View>
+        <View style={styles.login.footer}>
+    </View>
+    </View>
 }
 
 export default Login;

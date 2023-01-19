@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "client-trainingguruapp",
+    "slug": "client-trainingguruapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+    }
+  },
+  "dependencies": {
+    "react": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-web": "^0.18.10",
+    "expo": "^46.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "babel-preset-expo": "^9.2.2"
+  }
+}

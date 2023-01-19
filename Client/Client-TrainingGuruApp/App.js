@@ -1,59 +1,70 @@
-import {Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Profile from "./pages/Profile";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from "./pages/Home";
-import Messages from "./pages/Messages";
-import {Container} from "native-base";
-import Layout from "./components/structure/Layout";
-import Login from "./pages/registration-login/Login";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {Router, Route, Switch} from "./routing";
-import ClientHome from "./pages/client/ClientHome";
+import Profile from "./pages/Profile";
 import Workouts from "./pages/client/Workouts";
+import {Image, View, StyleSheet} from "react-native";
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
+const Stack = createStackNavigator();
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "red",
+    },
+    image: {
+        width: 90,
+        height: 70
+    },
+});
+
+function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={Home}   options={{
+                    headerTitleAlign: 'center',
+                    headerTitle: () => (
+                        <View style={styles.container}>
+                            <Image
+                                style={styles.image}
+                                source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}
+                            />
+                        </View>
+                    ),
+                    headerStyle: {
+                        borderBottomWidth: 0,
+                        height: "100%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        display: "flex",
+
+                    }
+                }} />
+                <Stack.Screen name="Profile" component={Profile}  options={{
+                    headerTitle: () => (
+                        <View style={styles.container}>
+                            <Image
+                                style={styles.image}
+                                source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}
+                            />
+                        </View>
+                    )
+                }} />
+                <Stack.Screen name="Workouts" component={Workouts} options={{
+                    headerTitle: () => (
+                        <View style={styles.container}>
+                            <Image
+                                style={styles.image}
+                                source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}
+                            />
+                        </View>
+                    )
+                }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-    const styles = StyleSheet.create({
-        container: {
-           height: "100%"
-        },
-    })
-  return (
-      <View style={styles.container}>
-          <Router>
-              <Switch>
-                  <Route exact path="/" render={props => <Home {...props} />} />
-                  <Route path="/profile" render={props => <Profile {...props} />} />
-                  <Route exact path="/homeclient" render={props => <ClientHome {...props} />} />
-                  <Route exact path="/workouts" render={props => <Workouts {...props} />} />
-              </Switch>
-          </Router>
-      </View>
-  );
-}
-
-function makeIconRender(name) {
-  return ({ color, size }) => (
-    <MaterialCommunityIcons name={name} color={color} size={size} />
-  );
-}
+export default App;
