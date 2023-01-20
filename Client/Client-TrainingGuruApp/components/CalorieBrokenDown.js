@@ -32,7 +32,7 @@ function calorieBrokenDown() {
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Carbs</Text>
             <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/>
         </View>
-        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Calories</Text>
             <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/>
         </View>
     </View>
