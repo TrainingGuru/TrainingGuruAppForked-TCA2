@@ -1,9 +1,9 @@
-import { Sequelize } from 'sequelize';
+const mysql = require('mysql');
 
-const sequelize = new Sequelize('TrainingGuru', 'root', 'root', {
-    dialect: 'mysql',
+let connection = mysql.createConnection({
     host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'todoapp'
 });
-
-export default sequelize;
 
