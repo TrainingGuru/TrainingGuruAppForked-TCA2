@@ -12,7 +12,7 @@ import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
 // import {NinjaAPI} from "../../services/nutrition-service";
 
-export const clientHome = () => {
+export const ClientHome = () => {
 
 
     const [unit, setUnit] = useState('grams');
@@ -240,4 +240,4 @@ export const clientHome = () => {
 
 }
 
-export default clientHome;
+export default ClientHome;
