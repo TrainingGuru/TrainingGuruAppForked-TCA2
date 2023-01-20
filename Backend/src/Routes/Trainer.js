@@ -4,6 +4,6 @@ const router = express.Router();
 
 const trainerController = require('../Controllers/TrainerController')
 
-router.get("/", trainerController.getAll);
+//router.get("/", trainerController.getAll);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const PORT = 8080
 // const HOSTNAME = '192.168.1.137' // change to yours (Might change daily so needs updated)
 const express = require('express')
 const app = express()
-const connection = require("./Config/DatabaseConfig.js");
+const database = require("./Config/DatabaseConfig.js");
 const userRoute = require("./Routes/User.js");
 const trainerRoute = require("./Routes/Trainer.js");
 
@@ -27,7 +27,15 @@ app.use("/Trainer",trainerRoute);
 // });
 
 // console.log(`Server running at http://${HOSTNAME}:${PORT}`)
-
+async function testConection(){
+    try {
+        await database.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
+testConection();
 
 //app.listen(PORT,HOSTNAME)
 //if in college use this one - but mobile work with

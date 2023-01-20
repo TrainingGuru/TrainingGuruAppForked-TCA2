@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+const { Sequelize } = require('sequelize');
 
 const database = new Sequelize('TrainingGuru', 'root', 'root', {
     dialect: 'mysql',
@@ -6,5 +6,6 @@ const database = new Sequelize('TrainingGuru', 'root', 'root', {
     port: '8889'
 });
 
-export default database;
+
+module.exports = database;
 
