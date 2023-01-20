@@ -1,4 +1,4 @@
-import {Dimensions, View} from "react-native";
+import {Dimensions, Text, View} from "react-native";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import {Divider} from "native-base";
 
@@ -6,8 +6,6 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
     let layout = {
         width: Dimensions.get('window').width
     }
-    console.log(protein)
-    console.log(item)
 
     let timeNow = new Date(time);
     let timeNowString = timeNow.toLocaleTimeString();
@@ -18,7 +16,7 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-around",
-                fontSize: "20px",
+                fontSize: 20,
                 fontWeight: "bold",
                 name: {},
                 weight: {},
@@ -60,27 +58,27 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
     return  <View style={styles.mealWidget}>
         <View style={styles.mealWidget.gen}>
             <View>
-                {name}
+                <Text>{name}</Text>
             </View>
             <View style={styles.mealWidget.gen.weight}>
-                {value}g
+                <Text>{value}g</Text>
             </View>
             <View style={styles.mealWidget.gen.record}>
-                {time}
+                <Text>{time}</Text>
             </View>
         </View>
         <View style={styles.mealWidget.mealInfo}>
             <View style={styles.mealWidget.mealInfo.sugar}>
-                carbs {carbs}g
+                <Text>carbs {carbs}g</Text>
             </View>
             <View style={styles.mealWidget.mealInfo.calories}>
-                Calories {calories}
+                <Text>Calories {calories}</Text>
             </View>
             <View style={styles.mealWidget.mealInfo.protein}>
-                Protein {protein}g
+                <Text>Protein {protein}g</Text>
             </View>
             <View style={styles.mealWidget.mealInfo.fat}>
-                Fat {fat}g
+                <Text>Fat {fat}g</Text>
             </View>
         </View>
         <Divider/>
