@@ -48,6 +48,9 @@ async function testConection(){
 }
 testConection();
 
+
+
+database.sync();
 //app.listen(PORT,HOSTNAME)
 //if in college use this one - but mobile work with
 console.log(`Server running at http://localhost:${PORT}`)
