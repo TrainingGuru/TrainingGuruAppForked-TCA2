@@ -33,8 +33,7 @@ export const ClientHome = () => {
             }
         }
     }, {
-        '.clientHome > View': {
-        },
+        '.clientHome > View': {},
         clientHome: {
             display: "flex",
             width: "100%",
@@ -56,14 +55,13 @@ export const ClientHome = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 steps: {
-    width: "30%",
-
+                    width: "30%",
                     paddingHorizontal: 22,
-                    justifyContent:"center",
+                    justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
                     icon1: {
-                        width:  120,
+                        width: 120,
                         marginLeft: "auto",
                         marginRight: "auto",
                         textAlign: "center",
@@ -73,7 +71,6 @@ export const ClientHome = () => {
                         fontSize: 12,
                         textAlign: "center",
                         textOverflow: "nowrap",
-
                     }
                 },
                 nutrition: {
@@ -91,10 +88,7 @@ export const ClientHome = () => {
                         display: "flex",
                         justifyContent: 'space-between',
                         weightAmmount: {
-
-                            textField: {
-
-                            },
+                            textField: {},
                             width: "62%"
                         },
                         weight: {
@@ -111,10 +105,8 @@ export const ClientHome = () => {
                         justifyContent: "space-evenly",
                         alignItems: "center",
                         width: "100%",
-                        addButton:{
-                            button:{
-
-                            }
+                        addButton: {
+                            button: {}
                         }
                     },
 
@@ -196,7 +188,7 @@ export const ClientHome = () => {
             marginRight: 10
         },
         selectedMeasurement: {
-            backgroundColor: "#4CAF50"
+            backgroundColor: "#4CAF50",
         },
         submitButton: {
             backgroundColor: "#4CAF50",
@@ -219,7 +211,6 @@ export const ClientHome = () => {
         setUnit(unit);
     }
 
-
     const handleSubmit = async () => {
         const api = new NinjaAPI();
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
@@ -240,98 +231,93 @@ export const ClientHome = () => {
             <View style={styles.clientHome.first}>
                 <CardLayout style={{...styles.clientHome.first.steps}}>
                     <FontAwesomeIcon size={50}
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faShoePrints}/>
+                                     style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                                     icon={faShoePrints}/>
                     <Text style={styles.clientHome.first.steps.title}>13400/16000</Text>
                 </CardLayout>
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon size={50}
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faBed}/>
+                                     style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                                     icon={faBed}/>
                     <Text style={styles.clientHome.first.steps.title}>Good</Text>
                 </CardLayout>
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon size={50}
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faHeartPulse} color={"red"}/>
+                                     style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                                     icon={faHeartPulse} color={"red"}/>
                     <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
                 </CardLayout>
             </View>
 
+            <CardLayout>
+                <View style={styles.measurementRow}>
+                    <TouchableOpacity
+                        style={[
+                            styles.measurementButton,
+                            unit === "grams" ? styles.selectedMeasurement : {}
+                        ]}
+                        onPress={() => handleUnit("grams")}>
+                        <Text>grams</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[
+                            styles.measurementButton,
+                            unit === "lbs" ? styles.selectedMeasurement : {}
+                        ]}
+                        onPress={() => handleUnit("lbs")}
+                    >
+                        <Text>lbs</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[
+                            styles.measurementButton,
+                            unit === "oz" ? styles.selectedMeasurement : {}
+                        ]}
+                        onPress={() => handleUnit("oz")}
+                    >
+                        <Text>oz</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.foodNameContainer}>
+                    <TextInput
+                        style={styles.foodNameInput}
+                        placeholder="Enter food name"
+                        onChangeText={text => setFoodName(text)}
+                        value={foodName}
+                    />
+                    <TextInput
+                        style={styles.valueInput}
+                        placeholder="Enter value"
+                        keyboardType='numeric'
+                        onChangeText={text => setValue(text)}
+                        value={value}
+                    />
+                    <TouchableOpacity
+                        style={styles.submitButton}
+                        onPress={() => handleSubmit()}
+                    >
+                        <Text style={{color: "#fff"}}>Add</Text>
+                    </TouchableOpacity>
+                </View>
+            </CardLayout>
 
-
-                <CardLayout >
-                    <View style={styles.measurementRow}>
-                        <TouchableOpacity
-                            style={[
-                                styles.measurementButton,
-                                unit === "grams" ? styles.selectedMeasurement : {}
-                            ]}
-                            onPress={() => handleUnit("grams")}
-                        >
-                            <Text>grams</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={[
-                                styles.measurementButton,
-                                unit === "lbs" ? styles.selectedMeasurement : {}
-                            ]}
-                            onPress={() => handleUnit("lbs")}
-                        >
-                            <Text>lbs</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={[
-                                styles.measurementButton,
-                                unit === "oz" ? styles.selectedMeasurement : {}
-                            ]}
-                            onPress={() => handleUnit("oz")}
-                        >
-                            <Text>oz</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.foodNameContainer}>
-                        <TextInput
-                            style={styles.foodNameInput}
-                            placeholder="Enter food name"
-                            onChangeText={text => setFoodName(text)}
-                            value={foodName}
-                        />
-                        <TextInput
-                            style={styles.valueInput}
-                            placeholder="Enter value"
-                            keyboardType='numeric'
-                            onChangeText={text => setValue(text)}
-                            value={value}
-                        />
-                        <TouchableOpacity
-                            style={styles.submitButton}
-                            onPress={() => handleSubmit()}
-                        >
-                            <Text style={{ color: "#fff" }}>Add</Text>
-                        </TouchableOpacity>
-                    </View>
-                </CardLayout>
-
-
-
-            {/*<CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>*/}
-            {/*    <View style={styles.clientHome.first.nutritionList.listOfFood}>*/}
-            {/*        {shoppingList.length > 0 && shoppingList.map((item) => {*/}
-            {/*            return <>*/}
-            {/*                <MealWidget*/}
-            {/*                    item={item}*/}
-            {/*                    name={item.name}*/}
-            {/*                    value={item.value}*/}
-            {/*                    calories={item["calories"]}*/}
-            {/*                    fat={item["fat_total_g"]}*/}
-            {/*                    protein={item["protein_g"]}*/}
-            {/*                    carbs={item["carbohydrates_total_g"]}*/}
-            {/*                /></>*/}
-            {/*        })*/}
-            {/*        })*/}
-            {/*    </View>*/}
-            {/*</CardLayout>*/}
+            <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
+                <View style={styles.clientHome.first.nutritionList.listOfFood}>
+                    {shoppingList.length > 0 && shoppingList.map((item, index) => {
+                        return <View key={index}>
+                            <MealWidget
+                                item={item}
+                                name={item.name}
+                                value={item.value}
+                                calories={item["calories"]}
+                                fat={item["fat_total_g"]}
+                                protein={item["protein_g"]}
+                                carbs={item["carbohydrates_total_g"]}
+                            />
+                        </View>
+                    })}
+                </View>
+            </CardLayout>
 
         </View>
     </Layout>

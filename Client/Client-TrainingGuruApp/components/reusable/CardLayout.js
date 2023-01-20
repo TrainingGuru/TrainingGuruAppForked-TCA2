@@ -28,7 +28,6 @@ function CardLayout({title, children, style}) {
             header: {
                 textAlign: "center",
                 fontWeight: "bold",
-                fontFamily: "play"
             },
             content: {
                 width: "100%"
