@@ -2,7 +2,7 @@ import {Dimensions, Text, View} from "react-native";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import {Divider} from "native-base";
 
-export default function MealWidget({name, weight, time, unit, value, calories, fat, protein, carbs, item}) {
+export default function MealWidget({name, weight, time, unit, value, calories, fat, protein, carbs, item, maxCarbs, maxProtein, maxFat, MaxCalories}) {
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -52,8 +52,13 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
                 protein: {},
                 fat: {}
             }
+        },
+        divider: {
+            borderBottomColor: '#E0E0E0',
+            borderBottomWidth: 1,
+            margin: 10,
+            width: '100%'
         }
-
     }, layout)
     return  <View style={styles.mealWidget}>
         <View style={styles.mealWidget.gen}>
@@ -81,6 +86,6 @@ export default function MealWidget({name, weight, time, unit, value, calories, f
                 <Text>Fat {fat}g</Text>
             </View>
         </View>
-        <Divider/>
+        <View style={styles.divider}/>
     </View>
 }
