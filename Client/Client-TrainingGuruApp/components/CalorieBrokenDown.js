@@ -15,24 +15,24 @@ function calorieBrokenDown() {
             flexWrap: "wrap",
             placeContent: "flex-end center",
             alignItems: "center",
-            textAlign: "center",
             gap: 15,
             gridRowGap: 20,
             justifyContent: "space-around",
-            margin: 4
+            margin: 4,
+            flexDirection: "row"
         }
     }, layout)
     return <View style={styles.calorieBrokenDown}>
-        <View><Text>Fat</Text>
-            <CalorieGauge startColor={"#f80202"} endColor={"#f80202"}/>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
+            <CalorieGauge  startColor={"#f80202"} endColor={"#f80202"}/>
         </View>
-        <View><Text>Protein</Text>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Protein</Text>
             <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/>
         </View>
-        <View><Text>Carbs</Text>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Carbs</Text>
             <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/>
         </View>
-        <View><Text>Fat</Text>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
             <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/>
         </View>
     </View>

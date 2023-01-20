@@ -16,7 +16,7 @@ function CalorieGauge({ startColor, endColor }) {
                 width={5}
                 fill={state.value}
                 tintColor={fillColor}
-                backgroundColor="#3d5875"
+                backgroundColor="black"
             >
                 {
                     (fill) => (

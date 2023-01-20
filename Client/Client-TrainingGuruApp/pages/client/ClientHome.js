@@ -132,7 +132,6 @@ export const ClientHome = () => {
     return <Layout>
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
-                <Text>Home</Text>
             </View>
             <CardLayout>
                 <CalorieBrokenDown/>
