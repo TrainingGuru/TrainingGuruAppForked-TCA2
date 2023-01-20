@@ -1,5 +1,5 @@
 import Layout from "../../components/structure/Layout";
-import {Dimensions, StyleSheet, View, Text} from "react-native";
+import {Dimensions, StyleSheet, View, Text, TextInput, TouchableOpacity} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
@@ -100,7 +100,7 @@ export const ClientHome = () => {
                         weight: {
                             width: "30%",
                             weightButton: {
-                                flex: "1",
+                                flex: 1,
                                 fontSize: 10,
                                 padding: "1%",
                             },
@@ -111,7 +111,11 @@ export const ClientHome = () => {
                         justifyContent: "space-evenly",
                         alignItems: "center",
                         width: "100%",
+                        addButton:{
+                            button:{
 
+                            }
+                        }
                     },
 
                 },
@@ -128,6 +132,10 @@ export const ClientHome = () => {
         },
 
     }, layout)
+
+    const handleUnit = (unit) => {
+        setUnit(unit);
+    }
 
 
     const handleSubmit = async () => {
@@ -169,59 +177,40 @@ export const ClientHome = () => {
             </View>
 
 
-            {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
-            {/*    <View style={styles.clientHome.first.nutrition.header}>*/}
-            {/*        <h2>*/}
-            {/*            Nutrition*/}
-            {/*        </h2>*/}
-            {/*        <ToggleButtonGroup id={"togglebuttongroup"} style={styles.clientHome.first.nutrition.header.toggleValueButton}*/}
-            {/*            value={1}*/}
-            {/*            exclusive*/}
-            {/*            onChange={undefined}*/}
-            {/*            aria-label="Platform">*/}
-            {/*            <ToggleButton value="web">(g)</ToggleButton>*/}
-            {/*            <ToggleButton value="android">(l)</ToggleButton>*/}
-            {/*            <ToggleButton value="ios">(KG)</ToggleButton>*/}
-            {/*            <ToggleButton value="ios">(LB)</ToggleButton>*/}
-            {/*        </ToggleButtonGroup>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.clientHome.first.nutrition.body}>*/}
-            {/*        <TextField onChange={(e) => setText(e.currentTarget.value)}  id="outlined-basic" label="Search" variant="outlined"/>*/}
-            {/*        <Button  onSubmit={() => add()} variant="contained">Add</Button>*/}
-            {/*    </View>*/}
-            {/*</CardLayout>*/}
-            {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
+            <CardLayout style={styles.clientHome.first.nutrition}>
 
-            {/*    <View style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup*/}
-            {/*        style={styles.clientHome.first.nutrition.topRow.weight}>*/}
-            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="grams"*/}
-            {/*                      selected={unit === "grams"}*/}
-            {/*                      onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>*/}
-            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="kg"*/}
-            {/*                      selected={unit === "kg"}*/}
-            {/*                      onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>*/}
-            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="litres"*/}
-            {/*                      selected={unit === "litres"}*/}
-            {/*                      onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>*/}
-            {/*    </ToggleButtonGroup>*/}
-            {/*        <TextField style={styles.clientHome.first.nutrition.topRow.weightAmmount}*/}
-            {/*                   label="Value"*/}
-            {/*                   value={value}*/}
-            {/*                   onChange={event => setValue(event.target.value)}*/}
-            {/*                   borderRadius={"90px!important"}*/}
+                {/*<View style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup*/}
+                <View style={styles.clientHome.first.nutrition.topRow.weight}>
+                    <TouchableOpacity style={styles.clientHome.first.nutrition.topRow.weight.weightButton} onPress={() => handleUnit('grams')}>
+                        <Text>grams</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.clientHome.first.nutrition.topRow.weight.weightButton} onPress={() => handleUnit('lbs')}>
+                        <Text>lbs</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.clientHome.first.nutrition.topRow.weight.weightButton} onPress={() => handleUnit('oz')}>
+                        <Text>oz</Text>
+                    </TouchableOpacity>
+                </View>
 
-            {/*        />*/}
-
-            {/*    </View>*/}
-            {/*    <TextField*/}
-            {/*        label="Food Name"*/}
-            {/*        value={foodName}*/}
-            {/*        onChange={event => setFoodName(event.target.value)}*/}
-            {/*    />*/}
-            {/*    <Button variant="contained" onClick={handleSubmit}>*/}
-            {/*        <Text>Add Meal</Text>*/}
-            {/*    </Button>*/}
-            {/*</CardLayout>*/}
+        <View style={styles.clientHome.first.nutrition.body}>
+            <TextInput
+                placeholder="Enter food name"
+                onChangeText={text => setFoodName(text)}
+                value={foodName}
+            />
+            <TouchableOpacity  onPress={() => handleSubmit()}>
+                <Text>Add</Text>
+            </TouchableOpacity>
+        </View>
+                <TextInput
+                    label="Food Name"
+                    value={foodName}
+                    onChange={event => setFoodName(event.target.value)}
+                />
+                {/*<Button variant="contained" onClick={handleSubmit}>*/}
+                {/*    <Text>Add Meal</Text>*/}
+                {/*</Button>*/}
+            </CardLayout>
 
 
             {/*<CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>*/}
