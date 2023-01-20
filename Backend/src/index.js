@@ -1,11 +1,11 @@
-import connection from './Config/DatabaseConfig';
+
 
 const PORT = 8080
-const HOSTNAME = '192.168.1.137' // change to yours (Might change daily so needs updated)
+// const HOSTNAME = '192.168.1.137' // change to yours (Might change daily so needs updated)
 const express = require('express')
 const app = express()
 
-const userRoute = require("./Routes/User");
+const userRoute = require("./Routes/User.js");
 
 //if visit http://192.168.1.215:8080/hello will know if server is working
 app.get('/hello', (req, res) => {
@@ -14,15 +14,16 @@ app.get('/hello', (req, res) => {
 
 app.use("/user",userRoute);
 
-console.log(`Server running at http://${HOSTNAME}:${PORT}`)
-connection.connect(function(err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
+// console.log(`Server running at http://${HOSTNAME}:${PORT}`)
+// connection.connect(function(err) {
+//     if (err) {
+//         return console.error('error: ' + err.message);
+//     }
+//
+//     console.log('Connected to the MySQL server.');
+// });
 
-    console.log('Connected to the MySQL server.');
-});
-
-app.listen(PORT,HOSTNAME)
+//app.listen(PORT,HOSTNAME)
 //if in college use this one - but mobile work with
-//app.listen(PORT,() => console.log('Server listening on localhost: '+PORT))
+console.log(`Server running at http://localhost:${PORT}`)
+app.listen(PORT,() => console.log('Server listening on localhost: '+PORT))
