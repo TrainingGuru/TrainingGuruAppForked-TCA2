@@ -13,6 +13,8 @@ Setting up the backend I ran these commands:
 Packages installed:
 -npm i express dotenv brcypt cors uuid
 -npm i -g http
+-npm install mysql
+-npm i sequelize
 
 How to find your IP
 -ipconfig in command line  (look for en0)
