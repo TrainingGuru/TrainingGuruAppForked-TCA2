@@ -47,10 +47,9 @@ export const clientHome = () => {
             marginTop: "2%",
             gap: "2%",
             title: {
-                textTransform: "uppercase",
                 textAlign: "center",
                 padding: 4,
-                fontSize: "2rem",
+                fontSize: 12,
                 fontWeight: "bold"
             },
             first: {
@@ -60,7 +59,7 @@ export const clientHome = () => {
                 steps: {
                     padding: 15,
                     icon1: {
-                        width: "3rem",
+                        width:  30,
                         height: "100%",
                         textAlign: "center"
                     },
@@ -94,7 +93,7 @@ export const clientHome = () => {
                             width: "30%",
                             weightButton: {
                                 flex: "1",
-                                fontSize: "0.8rem",
+                                fontSize: 10,
                                 padding: "1%",
                             },
                         }
@@ -228,7 +227,6 @@ export const clientHome = () => {
 
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
                 <View style={styles.clientHome.first.nutritionList.listOfFood}>
-                    ddfsdfdf
                     {shoppingList.length > 0 && shoppingList.map((item) => {
                         return <>
                             <MealWidget
