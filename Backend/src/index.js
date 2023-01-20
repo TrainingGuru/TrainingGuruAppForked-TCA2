@@ -50,7 +50,10 @@ testConection();
 
 
 
-database.sync();
+database.sync({ force: false })
+    .then(() => {
+        console.log('re-sync done!')
+    })
 //app.listen(PORT,HOSTNAME)
 //if in college use this one - but mobile work with
 console.log(`Server running at http://localhost:${PORT}`)

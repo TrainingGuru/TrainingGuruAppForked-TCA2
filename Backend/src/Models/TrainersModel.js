@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import sequelize from '../Config/DatabaseConfig';
+const { Sequelize } = require('sequelize');
+const sequelize = require('../Config/DatabaseConfig');
 
 const Trainer = sequelize.define('trainer',{
     TrainerID:{
