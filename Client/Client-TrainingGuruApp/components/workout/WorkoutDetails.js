@@ -8,7 +8,7 @@ const WorkoutDetails = ({route}) => {
     console.log(workout)
     // rest of your component code
 
-    const [exercises, setExercises] = useState(workout.exercises);
+    const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false})));
     const [animationValue] = useState(new Animated.Value(0));
     useEffect(() => {
         Animated.timing(animationValue, {
@@ -65,11 +65,12 @@ const WorkoutDetails = ({route}) => {
                                     {exercise.lastUsedDate})
                                 </Text>
                             ) : null}
-                            <View style={{display: "flex", flexDirection: "row"}}><TextInput
-                                placeholder="Enter weight"  style={{width: "50%"}}
+                            <View style={{display: "flex", flexDirection: "row", alignItems: "center"}}><TextInput
+                                placeholder="Enter weight"      style={{width: "50%", fontSize: 15}}
+
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
-                            <Text>KG</Text>
+                            <Text  style={{ marginTop: 0, marginBottom: 0, fontSize: 15}}>KG</Text>
                             </View>
                         </View>) : null}
                         <View style={styles.reps}>
@@ -144,6 +145,7 @@ const styles = StyleSheet.create({
     weight: {
         fontSize: 14,
         color: '#555',
+        width: "40%"
     },
     input: {
         backgroundColor: '#f5f5f5',
