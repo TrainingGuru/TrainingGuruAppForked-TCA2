@@ -22,33 +22,51 @@ const WorkoutDetails = ({route}) => {
         setExercises(
             exercises.map((exercise) => {
                 if (exercise.id === id) {
-                    exercise.completed = !exercise.completed;
+                    if (exercise.weightEntered) {
+                        return {
+                            ...exercise,
+                            completed: !exercise.completed
+                        };
+                    } else {
+                        alert("Please enter weight first!");
+                        return exercise;
+                    }
                 }
-                return exercise;
             })
         );
     };
 
-    const handleExerciseChange = (id, key, value) => {
-        setExercises(prevExercises =>
-            prevExercises.map(exercise => {
-                if (exercise.id === id) {
-                    return {
-                        ...exercise,
-                        [key]: value
-                    };
-                }
-                return exercise;
-            })
-        );
-    };
+    // const handleExerciseChange = (id, key, value) => {
+    //     setExercises(prevExercises =>
+    //         prevExercises.map(exercise => {
+    //             if (exercise.id === id) {
+    //                 return {
+    //                     ...exercise,
+    //                     [key]: value
+    //                 };
+    //             }
+    //             return exercise;
+    //         })
+    //     );
+    // };
 
     const handleWeightChange = (id, value) => {
         if (isNaN(value)) {
             alert("Please enter a valid number for weight.");
             return;
         }
-        handleExerciseChange(id, "weight", value);
+        setExercises(prevExercises =>
+            prevExercises.map(exercise => {
+                if (exercise.id === id) {
+                    return {
+                        ...exercise,
+                        weightEntered: true,
+                        weight: value
+                    };
+                }
+                return exercise;
+            })
+        );
     };
 
     return (
@@ -70,13 +88,14 @@ const WorkoutDetails = ({route}) => {
 
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
-                            <Text  style={{ marginTop: 0, marginBottom: 0, fontSize: 15}}>KG</Text>
+                                <Text  style={{ marginTop: 0, marginBottom: 0, fontSize: 15}}>KG</Text>
                             </View>
                         </View>) : null}
                         <View style={styles.reps}>
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
                                 status={exercise.completed ? "checked" : "unchecked"}
+                                disabled={!exercise.weightEntered}
                                 onPress={() => handleExerciseToggle(exercise.id)}
                             />
                         </View>
