@@ -8,9 +8,9 @@ import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
+import {MealWidget} from "../../components/client/MealWidget";
 
 export const ClientHome = () => {
 
@@ -313,6 +313,10 @@ export const ClientHome = () => {
                                 fat={item["fat_total_g"]}
                                 protein={item["protein_g"]}
                                 carbs={item["carbohydrates_total_g"]}
+                                maxCarbs={50}
+                                maxProtein={100}
+                                maxFat={20}
+                                maxCalories={2000}
                             />
                         </View>
                     })}

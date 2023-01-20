@@ -16,6 +16,9 @@ export class NinjaAPI {
             }
             const json = await response.json();
             console.log(json)
+            console.log("food")
+            json.name = foodName
+            console.log(json)
             return json;
         } catch (error) {
             console.error(`Error fetching nutrition info: ${error}`);
