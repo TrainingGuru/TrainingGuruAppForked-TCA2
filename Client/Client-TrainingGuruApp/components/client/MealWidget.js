@@ -81,7 +81,7 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
 
                     <CalorieGauge value={fat} maxValue={maxFat} startColor="#9C27B0" endColor="#0e6cfa" label="Fat"/>
                 </View>
-                <View style={styles.cardMiddleRowMiddle}>
+                <View style={styles.cardMiddleRowMiddle}  >
 
                     <CalorieGauge value={protein} maxValue={maxProtein} startColor="#2196F3" endColor="#ff7500"
                                   label="Protein"/>
@@ -92,7 +92,7 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
                                   label="Carbs"/>
                 </View>
                 <View style={styles.cardBottomRowLeft}>
-                    <CalorieGauge value={calories} maxValue={maxCalories} startColor="#F44336" endColor="#FF9800"
+                    <CalorieGauge value={calories} maxValue={maxCalories} startColor="#F44336" endColor="#0e6cfa"
                                   label="Calories"/>
                 </View>
             </View>

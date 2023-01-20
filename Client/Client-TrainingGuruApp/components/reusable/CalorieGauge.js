@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
-function CalorieGauge({ startColor, endColor }) {
+function CalorieGauge({ startColor, endColor , value, maxValue}) {
     const radius = 30;
     let state = {
-        value: 50
+        value: (value/ maxValue) * 100
     };
     const fillColor = endColor;
 
