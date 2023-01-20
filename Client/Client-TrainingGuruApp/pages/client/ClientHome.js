@@ -2,7 +2,7 @@ import Layout from "../../components/structure/Layout";
 import {Dimensions, StyleSheet, View, Text} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
-// import CalorieBrokenDown from "../../components/CalorieBrokenDown";
+import CalorieBrokenDown from "../../components/CalorieBrokenDown";
 // import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 // import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 // import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
@@ -10,7 +10,7 @@ import CreateResponsiveStyle from "../../utils/responsiveStyle";
 // import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
-// import {NinjaAPI} from "../../services/nutrition-service";
+import {NinjaAPI} from "../../services/nutrition-service";
 
 export const ClientHome = () => {
 
@@ -23,121 +23,120 @@ export const ClientHome = () => {
     let layout = {
         width: Dimensions.get('window').width
     }
-    // const styles = CreateResponsiveStyle({
-    //     clientHome: {
-    //         display: "flex",
-    //         title: {
-    //             textTransform: "uppercase",
-    //             textAlign: "center",
-    //             padding: 4,
-    //         }
-    //     }
-    // }, {
-    //     '.clientHome > View': {
-    //         backgroundColor: 'red',
-    //     },
-    //     clientHome: {
-    //         display: "flex",
-    //         width: "100%",
-    //         height: "100%",
-    //         flexDirection: "column",
-    //         alignItems: "center",
-    //         fontFamily: "Play",
-    //         marginTop: "2%",
-    //         gap: "2%",
-    //         title: {
-    //             textAlign: "center",
-    //             padding: 4,
-    //             fontSize: 12,
-    //             fontWeight: "bold"
-    //         },
-    //         first: {
-    //             width: "100%",
-    //             display: "flex",
-    //             gap: "2%",
-    //             steps: {
-    //                 padding: 15,
-    //                 icon1: {
-    //                     width:  30,
-    //                     height: "100%",
-    //                     textAlign: "center"
-    //                 },
-    //                 title: {
-    //                     fontSize: 17,
-    //                     textAlign: "center",
-    //                 }
-    //             },
-    //             nutrition: {
-    //                 display: "flex",
-    //                 width: "100%",
-    //                 header: {
-    //                     width: "100%",
-    //                     display: "flex",
-    //                     justifyContent: "space-between",
-    //                     margin: "1%",
-    //                 },
-    //                 topRow: {
-    //                     gap: "2%",
-    //                     width: '100%',
-    //                     display: "flex",
-    //                     justifyContent: 'space-between',
-    //                     weightAmmount: {
-    //
-    //                         textField: {
-    //
-    //                         },
-    //                         width: "62%"
-    //                     },
-    //                     weight: {
-    //                         width: "30%",
-    //                         weightButton: {
-    //                             flex: "1",
-    //                             fontSize: 10,
-    //                             padding: "1%",
-    //                         },
-    //                     }
-    //                 },
-    //                 body: {
-    //                     display: "flex",
-    //                     justifyContent: "space-evenly",
-    //                     alignItems: "stretch",
-    //                     width: "100%",
-    //
-    //                 },
-    //
-    //             },
-    //             nutritionList: {
-    //                 listOfFood: {
-    //                     width: "100%",
-    //                     display: "flex",
-    //                     flexDirection: "column",
-    //                     justifyContent: "space-around"
-    //                 }
-    //
-    //             }
-    //         }
-    //     },
-    //
-    // }, layout)
+    const styles = CreateResponsiveStyle({
+        clientHome: {
+            display: "flex",
+            title: {
+                textTransform: "uppercase",
+                textAlign: "center",
+                padding: 4,
+            }
+        }
+    }, {
+        '.clientHome > View': {
+            backgroundColor: 'red',
+        },
+        clientHome: {
+            display: "flex",
+            width: "100%",
+            height: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "2%",
+            gap: "2%",
+            title: {
+                textAlign: "center",
+                padding: 4,
+                fontSize: 12,
+                fontWeight: "bold"
+            },
+            first: {
+                width: "100%",
+                display: "flex",
+                gap: "2%",
+                steps: {
+                    padding: 15,
+                    icon1: {
+                        width:  30,
+                        height: "100%",
+                        textAlign: "center"
+                    },
+                    title: {
+                        fontSize: 17,
+                        textAlign: "center",
+                    }
+                },
+                nutrition: {
+                    display: "flex",
+                    width: "100%",
+                    header: {
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        margin: "1%",
+                    },
+                    topRow: {
+                        gap: "2%",
+                        width: '100%',
+                        display: "flex",
+                        justifyContent: 'space-between',
+                        weightAmmount: {
+
+                            textField: {
+
+                            },
+                            width: "62%"
+                        },
+                        weight: {
+                            width: "30%",
+                            weightButton: {
+                                flex: "1",
+                                fontSize: 10,
+                                padding: "1%",
+                            },
+                        }
+                    },
+                    body: {
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        alignItems: "stretch",
+                        width: "100%",
+
+                    },
+
+                },
+                nutritionList: {
+                    listOfFood: {
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-around"
+                    }
+
+                }
+            }
+        },
+
+    }, layout)
 
 
-    // const handleSubmit = async () => {
-    //     const api = new NinjaAPI();
-    //     const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
-    //
-    //     let temp = shoppingList.concat(nutritionInfo)
-    //
-    //     setShoppingList(temp);
-    // }
+    const handleSubmit = async () => {
+        const api = new NinjaAPI();
+        const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
+
+        let temp = shoppingList.concat(nutritionInfo)
+
+        setShoppingList(temp);
+    }
 
     return <Layout>
-        {/*<View style={styles.clientHome}>*/}
-            {/*<View style={styles.clientHome.title}>*/}
-            {/*    Home*/}
-            {/*</View>*/}
-            {/*<CardLayout>*/}
-            {/*    <CalorieBrokenDown/>*/}
-            {/*</CardLayout>*/}
+        <View style={styles.clientHome}>
+            <View style={styles.clientHome.title}>
+                <Text>Home</Text>
+            </View>
+            <CardLayout>
+                <CalorieBrokenDown/>
+            </CardLayout>
 
             {/*<View style={styles.clientHome.first}>*/}
             {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
@@ -234,7 +233,7 @@ export const ClientHome = () => {
             {/*    </View>*/}
             {/*</CardLayout>*/}
 
-        {/*</View>*/}
+        </View>
     </Layout>
 
 

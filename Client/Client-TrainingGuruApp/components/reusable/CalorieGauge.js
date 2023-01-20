@@ -1,6 +1,6 @@
 import {interpolateRgb} from "d3-interpolate";
 import LiquidFillGauge from "react-liquid-gauge";
-
+import {Text, View} from "react-native";
 function CalorieGauge({startColor, endColor}){
     const radius = 30;
     let state = {
@@ -52,10 +52,10 @@ function CalorieGauge({startColor, endColor}){
             };
 
             return (
-                <tspan>
-                    <tspan className="value" style={valueStyle}>{value}</tspan>
-                    <tspan style={percentStyle}>{props.percent}</tspan>
-                </tspan>
+                <View>
+                    <Text className="value" style={valueStyle}>{value}</Text>
+                    <Text style={percentStyle}>{props.percent}</Text>
+                </View>
             );
         }}
         riseAnimation
