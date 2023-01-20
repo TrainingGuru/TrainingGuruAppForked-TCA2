@@ -1,5 +1,5 @@
 import Layout from "../../components/structure/Layout";
-import {Dimensions, StyleSheet, View} from "react-native";
+import {Dimensions, StyleSheet, View, Text} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
@@ -42,7 +42,6 @@ export const clientHome = () => {
             height: "100%",
             flexDirection: "column",
             alignItems: "center",
-            textTransform: "uppercase",
             fontFamily: "Play",
             marginTop: "2%",
             gap: "2%",
@@ -64,7 +63,7 @@ export const clientHome = () => {
                         textAlign: "center"
                     },
                     title: {
-                        fontSize: "17px",
+                        fontSize: 17,
                         textAlign: "center",
                     }
                 },
@@ -118,17 +117,11 @@ export const clientHome = () => {
                 }
             }
         },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderRadius: `4px 0 0 4px`,
-            },
-        }
+
     }, layout)
 
 
-    const add = (e) => {
-
-    }
+    
 
     const handleSubmit = async () => {
         const api = new NinjaAPI();
@@ -153,19 +146,19 @@ export const clientHome = () => {
                     <FontAwesomeIcon
                         style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                         icon={faShoePrints}/>
-                    <h2 style={styles.clientHome.first.steps.title}>3400/6000</h2>
+                    <Text style={styles.clientHome.first.steps.title}>3400/6000</Text>
                 </CardLayout>
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon
                         style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                         icon={faBed}/>
-                    <h2 style={styles.clientHome.first.steps.title}>Good</h2>
+                    <Text style={styles.clientHome.first.steps.title}>Good</Text>
                 </CardLayout>
                 <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon
                         style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                         icon={faHeartPulse} color={"red"}/>
-                    <h2 style={styles.clientHome.first.steps.title}>50 BPM</h2>
+                    <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
                 </CardLayout>
             </View>
 
@@ -220,7 +213,7 @@ export const clientHome = () => {
                     onChange={event => setFoodName(event.target.value)}
                 />
                 <Button variant="contained" onClick={handleSubmit}>
-                    Add Meal
+                    <Text>Add Meal</Text>
                 </Button>
             </CardLayout>
 
