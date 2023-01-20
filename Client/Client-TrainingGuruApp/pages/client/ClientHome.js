@@ -3,11 +3,11 @@ import {Dimensions, StyleSheet, View, Text} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
-// import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-// import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
-// import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
-// import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
-// import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
+import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
+import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
+import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
@@ -34,7 +34,6 @@ export const ClientHome = () => {
         }
     }, {
         '.clientHome > View': {
-            backgroundColor: 'red',
         },
         clientHome: {
             display: "flex",
@@ -53,17 +52,28 @@ export const ClientHome = () => {
             first: {
                 width: "100%",
                 display: "flex",
-                gap: "2%",
+                flexDirection: "row",
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 steps: {
-                    padding: 15,
+    width: "30%",
+
+                    paddingHorizontal: 22,
+                    justifyContent:"center",
+                    alignItems: "center",
+                    display: "flex",
                     icon1: {
-                        width:  30,
-                        height: "100%",
-                        textAlign: "center"
+                        width:  120,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        textAlign: "center",
+                        margin: 0
                     },
                     title: {
-                        fontSize: 17,
+                        fontSize: 12,
                         textAlign: "center",
+                        textOverflow: "nowrap",
+
                     }
                 },
                 nutrition: {
@@ -76,7 +86,7 @@ export const ClientHome = () => {
                         margin: "1%",
                     },
                     topRow: {
-                        gap: "2%",
+                        gap: "22%",
                         width: '100%',
                         display: "flex",
                         justifyContent: 'space-between',
@@ -99,7 +109,7 @@ export const ClientHome = () => {
                     body: {
                         display: "flex",
                         justifyContent: "space-evenly",
-                        alignItems: "stretch",
+                        alignItems: "center",
                         width: "100%",
 
                     },
@@ -137,26 +147,26 @@ export const ClientHome = () => {
                 <CalorieBrokenDown/>
             </CardLayout>
 
-            {/*<View style={styles.clientHome.first}>*/}
-            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
-            {/*        <FontAwesomeIcon*/}
-            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
-            {/*            icon={faShoePrints}/>*/}
-            {/*        <Text style={styles.clientHome.first.steps.title}>3400/6000</Text>*/}
-            {/*    </CardLayout>*/}
-            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
-            {/*        <FontAwesomeIcon*/}
-            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
-            {/*            icon={faBed}/>*/}
-            {/*        <Text style={styles.clientHome.first.steps.title}>Good</Text>*/}
-            {/*    </CardLayout>*/}
-            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
-            {/*        <FontAwesomeIcon*/}
-            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
-            {/*            icon={faHeartPulse} color={"red"}/>*/}
-            {/*        <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>*/}
-            {/*    </CardLayout>*/}
-            {/*</View>*/}
+            <View style={styles.clientHome.first}>
+                <CardLayout style={{...styles.clientHome.first.steps}}>
+                    <FontAwesomeIcon size={50}
+                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                        icon={faShoePrints}/>
+                    <Text style={styles.clientHome.first.steps.title}>13400/16000</Text>
+                </CardLayout>
+                <CardLayout style={styles.clientHome.first.steps}>
+                    <FontAwesomeIcon size={50}
+                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                        icon={faBed}/>
+                    <Text style={styles.clientHome.first.steps.title}>Good</Text>
+                </CardLayout>
+                <CardLayout style={styles.clientHome.first.steps}>
+                    <FontAwesomeIcon size={50}
+                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
+                        icon={faHeartPulse} color={"red"}/>
+                    <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
+                </CardLayout>
+            </View>
 
 
             {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
