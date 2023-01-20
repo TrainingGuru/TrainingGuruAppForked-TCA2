@@ -1,10 +1,10 @@
 import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated} from "react-native";
-import { Checkbox } from "react-native-paper";
-import { useEffect, useState } from "react";
+import {Checkbox} from "react-native-paper";
+import {useEffect, useState} from "react";
 
-const WorkoutDetails = ({ route }) => {
-    const { workout } = route.params;
-    if(!workout) return <Text>Loading</Text>
+const WorkoutDetails = ({route}) => {
+    const {workout} = route.params;
+    if (!workout) return <Text>Loading</Text>
     console.log(workout)
     // rest of your component code
 
@@ -53,23 +53,25 @@ const WorkoutDetails = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Animated.View style={{ opacity: animationValue, alignItems: 'center', justifyContent: 'center' }}>
+            <Animated.View style={{opacity: animationValue, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>{workout.name}</Text>
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
-                        <View style={styles.weightContainer}>
+                        {exercise.previousWeight ? (  <View style={styles.weightContainer}>
                             {exercise.previousWeight ? (
                                 <Text style={styles.weight}>
-                                    Weight: {exercise.weight} lbs (last used on{" "}
+                                    Weight: last used on{" 22/01/22 "} {exercise.previousWeight} kgs
                                     {exercise.lastUsedDate})
                                 </Text>
                             ) : null}
-                            <TextInput
-                                placeholder="Enter weight"
+                            <View style={{display: "flex", flexDirection: "row"}}><TextInput
+                                placeholder="Enter weight"  style={{width: "50%"}}
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
-                        </View>
+                            <Text>KG</Text>
+                            </View>
+                        </View>) : null}
                         <View style={styles.reps}>
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
@@ -91,14 +93,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     weightContainer: {
-        flexDirection: "row",
+        flexDirection: "row-reverse",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginBottom: 10
     },
     container: {
         padding: 20,
-        backgroundColor: '#f5f5f5',
         width: "100%"
     },
     name: {
@@ -108,38 +109,42 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333'
     },
-        exerciseRow: {
-            flexDirection: "column",
-            alignItems: "center",
-            marginVertical: 10,
-            backgroundColor: '#fff',
-            padding: 20,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+    exerciseRow: {
+        flexDirection: "column",
+        alignItems: "center",
+        marginVertical: 10,
+        width: "100%",
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
         },
-        exerciseName: {
-            fontWeight: "bold",
-            textAlign: "center",
-            fontSize: 18,
-            color: '#333',
-            marginBottom: 10
-        },
-        reps: {
-            marginHorizontal: 10,
-            fontSize: 14,
-            color: '#555',
-        },
-        weight: {
-            fontSize: 14,
-            color: '#555',
-        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    exerciseName: {
+        fontWeight: "bold",
+        textAlign: "center",
+        fontSize: 18,
+        color: '#333',
+        marginBottom: 10
+    },
+    reps: {
+        marginHorizontal: 10,
+        fontSize: 14,
+        color: '#555',
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    weight: {
+        fontSize: 14,
+        color: '#555',
+    },
     input: {
         backgroundColor: '#f5f5f5',
         borderRadius: 10,

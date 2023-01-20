@@ -285,7 +285,7 @@ const Workouts = () => {
                         <TouchableOpacity key={index} onPress={() => week !== currentWeek && handleWeekClick(week)}
                                           style={week === currentWeek ? {marginTop: 18} : {}}>
                             {week !== currentWeek ? <Text style={styles.unselected}>Week {week.toDateString()}</Text> :
-                                <View>
+                                <View style={{width: "100%"}}>
 
                                     <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
 
