@@ -7,3 +7,7 @@ let connection = mysql.createConnection({
     database: 'todoapp'
 });
 
+
+
+export default connection;
+
