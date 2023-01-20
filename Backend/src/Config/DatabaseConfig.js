@@ -3,11 +3,12 @@ const mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'todoapp'
+    password: 'root',
+    database: 'TrainingGuru',
+    port: "8889"
 });
 
 
 
-export default connection;
+module.exports = connection;
 
