@@ -1,18 +1,18 @@
 import Layout from "../../components/structure/Layout";
-import {Dimensions, StyleSheet, View} from "react-native";
+import {Dimensions, StyleSheet, View, Text} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import CalorieBrokenDown from "../../components/CalorieBrokenDown";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
-import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
-import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
-import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
+// import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+// import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
+// import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
+// import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
+// import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import MealWidget from "../../components/client/MealWidget";
 import {useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 
-export const clientHome = () => {
+export const ClientHome = () => {
 
 
     const [unit, setUnit] = useState('grams');
@@ -42,15 +42,12 @@ export const clientHome = () => {
             height: "100%",
             flexDirection: "column",
             alignItems: "center",
-            textTransform: "uppercase",
-            fontFamily: "Play",
             marginTop: "2%",
             gap: "2%",
             title: {
-                textTransform: "uppercase",
                 textAlign: "center",
                 padding: 4,
-                fontSize: "2rem",
+                fontSize: 12,
                 fontWeight: "bold"
             },
             first: {
@@ -60,12 +57,12 @@ export const clientHome = () => {
                 steps: {
                     padding: 15,
                     icon1: {
-                        width: "3rem",
+                        width:  30,
                         height: "100%",
                         textAlign: "center"
                     },
                     title: {
-                        fontSize: "17px",
+                        fontSize: 17,
                         textAlign: "center",
                     }
                 },
@@ -94,7 +91,7 @@ export const clientHome = () => {
                             width: "30%",
                             weightButton: {
                                 flex: "1",
-                                fontSize: "0.8rem",
+                                fontSize: 10,
                                 padding: "1%",
                             },
                         }
@@ -119,17 +116,9 @@ export const clientHome = () => {
                 }
             }
         },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderRadius: `4px 0 0 4px`,
-            },
-        }
+
     }, layout)
 
-
-    const add = (e) => {
-
-    }
 
     const handleSubmit = async () => {
         const api = new NinjaAPI();
@@ -142,33 +131,33 @@ export const clientHome = () => {
 
     return <Layout>
         <View style={styles.clientHome}>
-            {/*<View style={styles.clientHome.title}>*/}
-            {/*    Home*/}
-            {/*</View>*/}
+            <View style={styles.clientHome.title}>
+                <Text>Home</Text>
+            </View>
             <CardLayout>
                 <CalorieBrokenDown/>
             </CardLayout>
 
-            <View style={styles.clientHome.first}>
-                <CardLayout style={styles.clientHome.first.steps}>
-                    <FontAwesomeIcon
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faShoePrints}/>
-                    <h2 style={styles.clientHome.first.steps.title}>3400/6000</h2>
-                </CardLayout>
-                <CardLayout style={styles.clientHome.first.steps}>
-                    <FontAwesomeIcon
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faBed}/>
-                    <h2 style={styles.clientHome.first.steps.title}>Good</h2>
-                </CardLayout>
-                <CardLayout style={styles.clientHome.first.steps}>
-                    <FontAwesomeIcon
-                        style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
-                        icon={faHeartPulse} color={"red"}/>
-                    <h2 style={styles.clientHome.first.steps.title}>50 BPM</h2>
-                </CardLayout>
-            </View>
+            {/*<View style={styles.clientHome.first}>*/}
+            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
+            {/*        <FontAwesomeIcon*/}
+            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
+            {/*            icon={faShoePrints}/>*/}
+            {/*        <Text style={styles.clientHome.first.steps.title}>3400/6000</Text>*/}
+            {/*    </CardLayout>*/}
+            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
+            {/*        <FontAwesomeIcon*/}
+            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
+            {/*            icon={faBed}/>*/}
+            {/*        <Text style={styles.clientHome.first.steps.title}>Good</Text>*/}
+            {/*    </CardLayout>*/}
+            {/*    <CardLayout style={styles.clientHome.first.steps}>*/}
+            {/*        <FontAwesomeIcon*/}
+            {/*            style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}*/}
+            {/*            icon={faHeartPulse} color={"red"}/>*/}
+            {/*        <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>*/}
+            {/*    </CardLayout>*/}
+            {/*</View>*/}
 
 
             {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
@@ -192,58 +181,57 @@ export const clientHome = () => {
             {/*        <Button  onSubmit={() => add()} variant="contained">Add</Button>*/}
             {/*    </View>*/}
             {/*</CardLayout>*/}
-            <CardLayout style={styles.clientHome.first.nutrition}>
+            {/*<CardLayout style={styles.clientHome.first.nutrition}>*/}
 
-                <View style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup
-                    style={styles.clientHome.first.nutrition.topRow.weight}>
-                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="grams"
-                                  selected={unit === "grams"}
-                                  onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>
-                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="kg"
-                                  selected={unit === "kg"}
-                                  onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>
-                    <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="litres"
-                                  selected={unit === "litres"}
-                                  onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>
-                </ToggleButtonGroup>
-                    <TextField style={styles.clientHome.first.nutrition.topRow.weightAmmount}
-                               label="Value"
-                               value={value}
-                               onChange={event => setValue(event.target.value)}
-                               borderRadius={"90px!important"}
+            {/*    <View style={styles.clientHome.first.nutrition.topRow}><ToggleButtonGroup*/}
+            {/*        style={styles.clientHome.first.nutrition.topRow.weight}>*/}
+            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="grams"*/}
+            {/*                      selected={unit === "grams"}*/}
+            {/*                      onChange={(event, newValue) => setUnit(newValue)}>grams</ToggleButton>*/}
+            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="kg"*/}
+            {/*                      selected={unit === "kg"}*/}
+            {/*                      onChange={(event, newValue) => setUnit(newValue)}>kg</ToggleButton>*/}
+            {/*        <ToggleButton style={styles.clientHome.first.nutrition.topRow.weight.weightButton} value="litres"*/}
+            {/*                      selected={unit === "litres"}*/}
+            {/*                      onChange={(event, newValue) => setUnit(newValue)}>litres</ToggleButton>*/}
+            {/*    </ToggleButtonGroup>*/}
+            {/*        <TextField style={styles.clientHome.first.nutrition.topRow.weightAmmount}*/}
+            {/*                   label="Value"*/}
+            {/*                   value={value}*/}
+            {/*                   onChange={event => setValue(event.target.value)}*/}
+            {/*                   borderRadius={"90px!important"}*/}
 
-                    />
+            {/*        />*/}
 
-                </View>
-                <TextField
-                    label="Food Name"
-                    value={foodName}
-                    onChange={event => setFoodName(event.target.value)}
-                />
-                <Button variant="contained" onClick={handleSubmit}>
-                    Add Meal
-                </Button>
-            </CardLayout>
+            {/*    </View>*/}
+            {/*    <TextField*/}
+            {/*        label="Food Name"*/}
+            {/*        value={foodName}*/}
+            {/*        onChange={event => setFoodName(event.target.value)}*/}
+            {/*    />*/}
+            {/*    <Button variant="contained" onClick={handleSubmit}>*/}
+            {/*        <Text>Add Meal</Text>*/}
+            {/*    </Button>*/}
+            {/*</CardLayout>*/}
 
 
-            <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
-                <View style={styles.clientHome.first.nutritionList.listOfFood}>
-                    ddfsdfdf
-                    {shoppingList.length > 0 && shoppingList.map((item) => {
-                        return <>
-                            <MealWidget
-                                item={item}
-                                name={item.name}
-                                value={item.value}
-                                calories={item["calories"]}
-                                fat={item["fat_total_g"]}
-                                protein={item["protein_g"]}
-                                carbs={item["carbohydrates_total_g"]}
-                            /></>
-                    })
-                    })
-                </View>
-            </CardLayout>
+            {/*<CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>*/}
+            {/*    <View style={styles.clientHome.first.nutritionList.listOfFood}>*/}
+            {/*        {shoppingList.length > 0 && shoppingList.map((item) => {*/}
+            {/*            return <>*/}
+            {/*                <MealWidget*/}
+            {/*                    item={item}*/}
+            {/*                    name={item.name}*/}
+            {/*                    value={item.value}*/}
+            {/*                    calories={item["calories"]}*/}
+            {/*                    fat={item["fat_total_g"]}*/}
+            {/*                    protein={item["protein_g"]}*/}
+            {/*                    carbs={item["carbohydrates_total_g"]}*/}
+            {/*                /></>*/}
+            {/*        })*/}
+            {/*        })*/}
+            {/*    </View>*/}
+            {/*</CardLayout>*/}
 
         </View>
     </Layout>
@@ -251,4 +239,4 @@ export const clientHome = () => {
 
 }
 
-export default clientHome;
+export default ClientHome;

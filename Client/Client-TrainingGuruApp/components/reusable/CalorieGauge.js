@@ -1,89 +1,33 @@
-import {interpolateRgb} from "d3-interpolate";
-import LiquidFillGauge from "react-liquid-gauge";
+import React from 'react';
+import { View, Text } from 'react-native';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
-function CalorieGauge({startColor, endColor}){
+function CalorieGauge({ startColor, endColor }) {
     const radius = 30;
     let state = {
         value: 50
     };
-    const interpolate = interpolateRgb(startColor, endColor);
-    const fillColor = interpolate(state.value / 100);
+    const fillColor = endColor;
 
-
-    const gradientStops = [
-        {
-            key: '0%',
-            stopColor: "#000000",
-            stopOpacity: 1,
-            offset: '0%'
-        },
-        {
-            key: '50%',
-            stopColor: fillColor,
-            stopOpacity: 0.75,
-            offset: '50%'
-        },
-        {
-            key: '100%',
-            stopColor: "#000000",
-            stopOpacity: 0.5,
-            offset: '100%'
-        }
-    ];
-
-    return   <LiquidFillGauge
-        style={{ margin: '0 auto' }}
-        width={radius * 2}
-        height={radius * 2}
-        value={state.value}
-        percent="%"
-        textSize={1}
-        textOffsetX={0}
-        textOffsetY={0}
-        textRenderer={(props) => {
-            const value = Math.round(props.value);
-            const radius = Math.min(props.height / 2, props.width / 2);
-            const textPixels = (props.textSize * radius / 2);
-            const valueStyle = {
-                fontSize: textPixels
-            };
-            const percentStyle = {
-                fontSize: textPixels * 0.6
-            };
-
-            return (
-                <tspan>
-                    <tspan className="value" style={valueStyle}>{value}</tspan>
-                    <tspan style={percentStyle}>{props.percent}</tspan>
-                </tspan>
-            );
-        }}
-        riseAnimation
-        waveAnimation
-        waveFrequency={2}
-        waveAmplitude={1}
-        gradient
-        gradientStops={gradientStops}
-        circleStyle={{
-            fill: fillColor
-        }}
-        waveStyle={{
-            fill: fillColor
-        }}
-        textStyle={{
-            fill: "#000000",
-            fontFamily: 'Arial'
-        }}
-        waveTextStyle={{
-            fill: "#000000",
-            fontFamily: 'Arial'
-        }}
-
-    />
-
-
-
-
+    return (
+        <View>
+            <AnimatedCircularProgress
+                size={radius * 2}
+                width={5}
+                fill={state.value}
+                tintColor={fillColor}
+                backgroundColor="#3d5875"
+            >
+                {
+                    (fill) => (
+                        <Text style={{ textAlign: 'center' }}>
+                            {`${Math.round(fill)}%`}
+                        </Text>
+                    )
+                }
+            </AnimatedCircularProgress>
+        </View>
+    );
 }
 
 export default CalorieGauge;
