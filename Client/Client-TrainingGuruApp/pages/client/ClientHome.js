@@ -195,6 +195,9 @@ export const ClientHome = () => {
             elevation: 5,
             marginRight: 10
         },
+        selectedMeasurement: {
+            backgroundColor: "#4CAF50"
+        },
         submitButton: {
             backgroundColor: "#4CAF50",
             padding: 10,
@@ -260,19 +263,28 @@ export const ClientHome = () => {
                 <CardLayout >
                     <View style={styles.measurementRow}>
                         <TouchableOpacity
-                            style={styles.measurementButton}
+                            style={[
+                                styles.measurementButton,
+                                unit === "grams" ? styles.selectedMeasurement : {}
+                            ]}
                             onPress={() => handleUnit("grams")}
                         >
                             <Text>grams</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={styles.measurementButton}
+                            style={[
+                                styles.measurementButton,
+                                unit === "lbs" ? styles.selectedMeasurement : {}
+                            ]}
                             onPress={() => handleUnit("lbs")}
                         >
                             <Text>lbs</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={styles.measurementButton}
+                            style={[
+                                styles.measurementButton,
+                                unit === "oz" ? styles.selectedMeasurement : {}
+                            ]}
                             onPress={() => handleUnit("oz")}
                         >
                             <Text>oz</Text>
