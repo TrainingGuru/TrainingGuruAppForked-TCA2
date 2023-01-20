@@ -23,6 +23,7 @@ app.use((_, res, next) => {
     next();
 });
 
+
 app.use("/User",userRoute);
 app.use("/Trainer",trainerRoute);
 
