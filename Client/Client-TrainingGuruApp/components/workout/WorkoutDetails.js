@@ -1,14 +1,14 @@
 import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated} from "react-native";
-import { Checkbox } from "react-native-paper";
-import { useEffect, useState } from "react";
+import {Checkbox} from "react-native-paper";
+import {useEffect, useState} from "react";
 
-const WorkoutDetails = ({ route }) => {
-    const { workout } = route.params;
-    if(!workout) return <Text>Loading</Text>
+const WorkoutDetails = ({route}) => {
+    const {workout} = route.params;
+    if (!workout) return <Text>Loading</Text>
     console.log(workout)
     // rest of your component code
 
-    const [exercises, setExercises] = useState(workout.exercises);
+    const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false})));
     const [animationValue] = useState(new Animated.Value(0));
     useEffect(() => {
         Animated.timing(animationValue, {
@@ -22,20 +22,46 @@ const WorkoutDetails = ({ route }) => {
         setExercises(
             exercises.map((exercise) => {
                 if (exercise.id === id) {
-                    exercise.completed = !exercise.completed;
+                    if (exercise.weightEntered) {
+                        return {
+                            ...exercise,
+                            completed: !exercise.completed
+                        };
+                    } else {
+                        alert("Please enter weight first!");
+                        return exercise;
+                    }
                 }
-                return exercise;
             })
         );
     };
 
-    const handleExerciseChange = (id, key, value) => {
+    // const handleExerciseChange = (id, key, value) => {
+    //     setExercises(prevExercises =>
+    //         prevExercises.map(exercise => {
+    //             if (exercise.id === id) {
+    //                 return {
+    //                     ...exercise,
+    //                     [key]: value
+    //                 };
+    //             }
+    //             return exercise;
+    //         })
+    //     );
+    // };
+
+    const handleWeightChange = (id, value) => {
+        if (isNaN(value)) {
+            alert("Please enter a valid number for weight.");
+            return;
+        }
         setExercises(prevExercises =>
             prevExercises.map(exercise => {
                 if (exercise.id === id) {
                     return {
                         ...exercise,
-                        [key]: value
+                        weightEntered: true,
+                        weight: value
                     };
                 }
                 return exercise;
@@ -43,37 +69,33 @@ const WorkoutDetails = ({ route }) => {
         );
     };
 
-    const handleWeightChange = (id, value) => {
-        if (isNaN(value)) {
-            alert("Please enter a valid number for weight.");
-            return;
-        }
-        handleExerciseChange(id, "weight", value);
-    };
-
     return (
         <View style={styles.container}>
-            <Animated.View style={{ opacity: animationValue, alignItems: 'center', justifyContent: 'center' }}>
+            <Animated.View style={{opacity: animationValue, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>{workout.name}</Text>
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
-                        <View style={styles.weightContainer}>
+                        {exercise.previousWeight ? (  <View style={styles.weightContainer}>
                             {exercise.previousWeight ? (
                                 <Text style={styles.weight}>
-                                    Weight: {exercise.weight} lbs (last used on{" "}
+                                    Weight: last used on{" 22/01/22 "} {exercise.previousWeight} kgs
                                     {exercise.lastUsedDate})
                                 </Text>
                             ) : null}
-                            <TextInput
-                                placeholder="Enter weight"
+                            <View style={{display: "flex", flexDirection: "row", alignItems: "center"}}><TextInput
+                                placeholder="Enter weight"      style={{width: "50%", fontSize: 15}}
+
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
-                        </View>
+                                <Text  style={{ marginTop: 0, marginBottom: 0, fontSize: 15}}>KG</Text>
+                            </View>
+                        </View>) : null}
                         <View style={styles.reps}>
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
                                 status={exercise.completed ? "checked" : "unchecked"}
+                                disabled={!exercise.weightEntered}
                                 onPress={() => handleExerciseToggle(exercise.id)}
                             />
                         </View>
@@ -91,14 +113,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     weightContainer: {
-        flexDirection: "row",
+        flexDirection: "row-reverse",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginBottom: 10
     },
     container: {
         padding: 20,
-        backgroundColor: '#f5f5f5',
         width: "100%"
     },
     name: {
@@ -108,38 +129,43 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333'
     },
-        exerciseRow: {
-            flexDirection: "column",
-            alignItems: "center",
-            marginVertical: 10,
-            backgroundColor: '#fff',
-            padding: 20,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
+    exerciseRow: {
+        flexDirection: "column",
+        alignItems: "center",
+        marginVertical: 10,
+        width: "100%",
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
         },
-        exerciseName: {
-            fontWeight: "bold",
-            textAlign: "center",
-            fontSize: 18,
-            color: '#333',
-            marginBottom: 10
-        },
-        reps: {
-            marginHorizontal: 10,
-            fontSize: 14,
-            color: '#555',
-        },
-        weight: {
-            fontSize: 14,
-            color: '#555',
-        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    exerciseName: {
+        fontWeight: "bold",
+        textAlign: "center",
+        fontSize: 18,
+        color: '#333',
+        marginBottom: 10
+    },
+    reps: {
+        marginHorizontal: 10,
+        fontSize: 14,
+        color: '#555',
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    weight: {
+        fontSize: 14,
+        color: '#555',
+        width: "40%"
+    },
     input: {
         backgroundColor: '#f5f5f5',
         borderRadius: 10,
