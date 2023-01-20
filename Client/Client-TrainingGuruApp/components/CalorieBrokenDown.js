@@ -27,13 +27,13 @@ function calorieBrokenDown() {
             <CalorieGauge startColor={"#f80202"} endColor={"#f80202"}/>
         </View>
         <View><Text>Protein</Text>
-            {/*<CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/>*/}
+            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/>
         </View>
         <View><Text>Carbs</Text>
-            {/*<CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/>*/}
+            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/>
         </View>
         <View><Text>Fat</Text>
-            {/*<CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/>*/}
+            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/>
         </View>
     </View>
 }
