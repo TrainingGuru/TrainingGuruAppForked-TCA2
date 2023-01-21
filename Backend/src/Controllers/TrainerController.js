@@ -1,5 +1,6 @@
 
 const Trainer = require("../Models/TrainersModel");
+const {EmptyPacket} = require("mysql/lib/protocol/packets");
 
 //GetAllTrainer
 const getAllTrainers = async (req,res) =>{
@@ -14,6 +15,16 @@ const getAllTrainers = async (req,res) =>{
 
 const registerTrainer = async (req, res) => {
 //TODO:: Hash Password, Error handling (Catch), Add account to db,
+
+    if(!req.body)
+        return res.status(400).json({message : 'No Body Sent'})
+
+    let trainer = {
+        Name : req.body.Name,
+        Email: req.body.Email,
+        Password: req.body.Password
+    }
+
     //Check email is not registered
     Trainer.findOne({where : {
         Email: req.body.Email,
@@ -23,7 +34,8 @@ const registerTrainer = async (req, res) => {
                 return res.status(409).json({message: 'User Email Already Used'})
             }
             else{
-                res.status(200).json({message: 'no user'})
+                return Trainer.create(trainer)
+                res.status(200).json(trainer)
             }
         })
 
