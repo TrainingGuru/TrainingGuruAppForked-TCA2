@@ -81,4 +81,151 @@ const ClientProfile = () => {
 };
 
 const styles = StyleSheet.create({
- 
+    goalContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 10,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: '#F8F8F8',
+    },
+    goalActions: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    goalButton: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    goalCard: {
+        flex: 1,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: '#F8F8F8',
+    },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#fff'
+    },
+    topCardsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 20
+    },
+    userCard: {
+        width: '45%',
+        height: '60%',
+        borderRadius: 10,
+        backgroundColor: '#F8F8F8',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    userImage: {
+        width: '60%',
+        height: '60%',
+        borderRadius: 100,
+        overflow: 'hidden'
+    },
+    updateImageButton: {
+        width: '80%',
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#4169E1',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    updateImageButtonText: {
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+    fitbitCard: {
+        width: '45%',
+        height: '60%',
+        borderRadius: 10,
+        backgroundColor: '#F8F8F8',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    fitbitConnectedContainer: {
+        width: '80%',
+        height: '40%',
+        borderRadius: 10,
+        backgroundColor: '#228B22',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    fitbitConnectedText: {
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+    coachContainer: {
+        width: '80%',
+        height: '40%',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    coachImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        overflow: 'hidden',
+        marginRight: 10
+    },
+    coachName: {
+        fontWeight: 'bold'
+    },
+    goalsContainer: {
+        marginVertical: 20,
+        width: '100%',
+        height: '30%',
+        borderRadius: 10,
+        backgroundColor: '#F8F8F8',
+        padding: 20
+    },
+    goalsTitle: {
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    goalItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10
+    },
+    goalText: {
+        marginRight: 10
+    },
+    addGoalButton: {
+        width: 30,
+        height: 30,
+        backgroundColor: '#228B22',
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    addGoalButtonText: {
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+        removeGoalButton: {
+            width: 30,
+            height: 30,
+            backgroundColor: '#ff0000',
+            borderRadius: 15,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        removeGoalButtonText: {
+            color: '#fff',
+            fontWeight: 'bold'
+        }
+    });
+
+export default ClientProfile;

@@ -110,15 +110,15 @@ function NavigationBar() {
             </View>
             <View style={styles.listNav}>
                 {Platform.OS || size < 767  ?
-                    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ClientProfile')}>
                         <FontAwesomeIcon size={size < 768 && 35}
                                                           icon={faUser}
-                                                          color={activeRoute === 'Profile' ? '#ff0000' : '#000000'}/>
+                                                          color={activeRoute === 'ClientProfile' ? '#ff0000' : '#000000'}/>
                     </TouchableOpacity>
                         : <FontAwesomeIcon style={styles.listNav.icon}
                                       icon={faUser}
-                                      color={activeRoute === 'Profile' ? '#ff0000' : '#000000'}
-                                      onPress={() => navigation.navigate('Profile')}
+                                      color={activeRoute === 'ClientProfile' ? '#ff0000' : '#000000'}
+                                      onPress={() => navigation.navigate('ClientProfile')}
                 />}
             </View>
         </View>) : <View>

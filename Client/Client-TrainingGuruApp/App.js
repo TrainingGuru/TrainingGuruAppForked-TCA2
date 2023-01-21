@@ -7,6 +7,7 @@ import {Text, Image, View, StyleSheet} from "react-native";
 import WorkoutDetails from "./components/workout/WorkoutDetails";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import ClientHome from "./pages/client/ClientHome";
+import ClientProfile from "./pages/client/ClientProfile";
 
 const Stack = createStackNavigator();
 const styles = StyleSheet.create({
@@ -29,6 +30,20 @@ function App() {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name="ClientHome" component={ClientHome}   options={{
+                        headerTitleAlign: 'center',
+                        headerTitle: () => (
+                            <View style={styles.container}>
+                                <Image
+                                    style={styles.image}
+                                    source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}
+                                />
+                            </View>
+                        ),
+                        headerStyle: {
+                            borderBottomWidth: 0
+                        }
+                    }} />
+                    <Stack.Screen name="ClientProfile" component={ClientProfile}  options={{
                         headerTitleAlign: 'center',
                         headerTitle: () => (
                             <View style={styles.container}>
