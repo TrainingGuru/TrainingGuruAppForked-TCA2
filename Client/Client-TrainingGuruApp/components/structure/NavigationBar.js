@@ -83,7 +83,7 @@ function NavigationBar() {
         {clientView ? (<View style={{width: "100%",     flexDirection: "row",
             justifyContent: "space-evenly"}}>
             <View style={styles.listNav}>
-                {Platform.OS !== 'web' ? <TouchableOpacity onPress={() => navigation.navigate('ClientHome')}>
+                {Platform.OS !== 'web' || size < 767  ? <TouchableOpacity onPress={() => navigation.navigate('ClientHome')}>
                         <FontAwesomeIcon icon={faHouseChimney}
                                          size={Platform.OS !== 'web' && size < 768 && 35}
                                          color={activeRoute === 'ClientHome' ? '#ff0000' : '#000000'}
@@ -96,7 +96,7 @@ function NavigationBar() {
             </View>
 
             <View style={styles.listNav}>
-                {Platform.OS !== 'web' ?
+                {Platform.OS !== 'web' || size < 767 ?
                     <TouchableOpacity onPress={() => navigation.navigate('Workouts')}>
                     <FontAwesomeIcon icon={faDumbbell} size={Platform.OS !== 'web' && size < 768 && 47}
                                      color={activeRoute === 'Workouts' ? '#ff0000' : '#000000'}
@@ -109,7 +109,7 @@ function NavigationBar() {
                     />}
             </View>
             <View style={styles.listNav}>
-                {Platform.OS !== 'web' ?
+                {Platform.OS || size < 767  ?
                     <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                         <FontAwesomeIcon size={size < 768 && 35}
                                                           icon={faUser}

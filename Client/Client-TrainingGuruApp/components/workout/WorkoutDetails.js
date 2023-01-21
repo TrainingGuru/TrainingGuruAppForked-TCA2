@@ -32,36 +32,25 @@ const WorkoutDetails = ({route}) => {
                         return exercise;
                     }
                 }
+                return exercise;
             })
         );
     };
 
-    // const handleExerciseChange = (id, key, value) => {
-    //     setExercises(prevExercises =>
-    //         prevExercises.map(exercise => {
-    //             if (exercise.id === id) {
-    //                 return {
-    //                     ...exercise,
-    //                     [key]: value
-    //                 };
-    //             }
-    //             return exercise;
-    //         })
-    //     );
-    // };
-
     const handleWeightChange = (id, value) => {
-        if (isNaN(value)) {
+        let weightEntered = true;
+        if (isNaN(value) || value === "") {
             alert("Please enter a valid number for weight.");
-            return;
+            weightEntered = false;
         }
         setExercises(prevExercises =>
             prevExercises.map(exercise => {
                 if (exercise.id === id) {
                     return {
                         ...exercise,
-                        weightEntered: true,
-                        weight: value
+                        weightEntered,
+                        weight: value,
+                        completed: weightEntered ? exercise.completed : false
                     };
                 }
                 return exercise;
