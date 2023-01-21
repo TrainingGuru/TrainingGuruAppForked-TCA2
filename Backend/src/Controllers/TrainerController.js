@@ -16,8 +16,8 @@ const getAllTrainers = async (req,res) =>{
 const registerTrainer = async (req, res) => {
 //TODO:: Hash Password, Error handling (Catch), Add account to db,
 
-    if(!req.body)
-        return res.status(400).json({message : 'No Body Sent'})
+    // if(!req.body)
+    //     return res.status(400).json({message : 'No Body Sent'})
 
     let trainer = {
         Name : req.body.Name,
