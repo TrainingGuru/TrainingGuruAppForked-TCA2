@@ -8,6 +8,7 @@ import {
     ScrollView,
     Animated
 } from 'react-native';
+import Layout from "../../components/structure/Layout";
 
 const ClientProfile = () => {
     const [userImage, setUserImage] = useState('https://example.com/user-image.jpg');
@@ -30,12 +31,12 @@ const ClientProfile = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <Layout><View style={styles.container}>
             <View style={styles.cardContainer}>
                 <View style={styles.leftCard}>
                     <View style={styles.imageContainer}>
                         <Image
-                            source={{ uri: userImage }}
+                            source={{uri: userImage}}
                             style={styles.userImage}
                         />
                     </View>
@@ -50,7 +51,7 @@ const ClientProfile = () => {
                         </View>
                         <View style={styles.coachContainer}>
                             <Image
-                                source={{ uri: 'https://example.com/coach-image.jpg' }}
+                                source={{uri: 'https://example.com/coach-image.jpg'}}
                                 style={styles.coachImage}
                             />
                             <Text style={styles.coachName}>Coach Name</Text>
@@ -76,7 +77,7 @@ const ClientProfile = () => {
                     ))}
                 </ScrollView>
             </View>
-        </View>
+        </View></Layout>
     );
 };
 
