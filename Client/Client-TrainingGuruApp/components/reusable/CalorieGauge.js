@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
-function CalorieGauge({ startColor, endColor }) {
+function CalorieGauge({ startColor, endColor , value, maxValue}) {
     const radius = 30;
     let state = {
-        value: 50
+        value: (value/ maxValue) * 100
     };
     const fillColor = endColor;
 
@@ -16,13 +16,20 @@ function CalorieGauge({ startColor, endColor }) {
                 width={5}
                 fill={state.value}
                 tintColor={fillColor}
-                backgroundColor="#3d5875"
+                backgroundColor="black"
             >
                 {
                     (fill) => (
-                        <Text style={{ textAlign: 'center' }}>
+
+
+                        <View>
+                            <Text style={{textAlign: 'center', fontSize: 12}}>
+                                {Math.round(value).toString()} / {maxValue.toString()}
+                            </Text>
+                            <Text style={{textAlign: 'center', fontSize: 10}}>
                             {`${Math.round(fill)}%`}
                         </Text>
+                        </View>
                     )
                 }
             </AnimatedCircularProgress>

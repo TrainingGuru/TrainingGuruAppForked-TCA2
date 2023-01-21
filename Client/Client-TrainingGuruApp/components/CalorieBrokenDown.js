@@ -15,25 +15,25 @@ function calorieBrokenDown() {
             flexWrap: "wrap",
             placeContent: "flex-end center",
             alignItems: "center",
-            textAlign: "center",
             gap: 15,
             gridRowGap: 20,
             justifyContent: "space-around",
-            margin: 4
+            margin: 4,
+            flexDirection: "row"
         }
     }, layout)
     return <View style={styles.calorieBrokenDown}>
-        <View><Text>Fat</Text>
-            <CalorieGauge startColor={"#f80202"} endColor={"#f80202"}/>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
+            <CalorieGauge  startColor={"#f80202"} endColor={"#0e6cfa"} maxValue={500} value={50}/>
         </View>
-        <View><Text>Protein</Text>
-            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}/>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Protein</Text>
+            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}  maxValue={500} value={50}/>
         </View>
-        <View><Text>Carbs</Text>
-            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}/>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Carbs</Text>
+            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}  maxValue={500} value={50}/>
         </View>
-        <View><Text>Fat</Text>
-            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}/>
+        <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Calories</Text>
+            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}  maxValue={500} value={50}/>
         </View>
     </View>
 }

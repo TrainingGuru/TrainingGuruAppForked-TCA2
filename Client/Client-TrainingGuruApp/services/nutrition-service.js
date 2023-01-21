@@ -1,6 +1,6 @@
 export class NinjaAPI {
     baseUrl = 'https://api.api-ninjas.com/v1/nutrition?';
-    apiKey = '+sygVI7ZQDqtRvcrc56DBA==FjWbc5kg3rKI9ynG';
+    apiKey = 'PpzKdkDkxB6inFeVsTvUvSlOwBq5lR6Kh7Mabjbw';
 
     async getNutritionInfo(unit, value, foodName) {
         try {
@@ -9,12 +9,18 @@ export class NinjaAPI {
             const options = {
                 headers: headers
             }
-            const url = `${this.baseUrl}query=${foodName}`;
+
+
+            var query = `${value}${unit} ${foodName}`
+            const url = `${this.baseUrl}query=` + query ;
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
             const json = await response.json();
+            console.log(json)
+            console.log("food")
+            json.name = foodName
             console.log(json)
             return json;
         } catch (error) {

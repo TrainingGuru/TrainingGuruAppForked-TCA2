@@ -107,7 +107,7 @@ const Workouts = () => {
                     reps: 8,
                     previousWeight: 20,
                     previousDate: 'Jan 10, 2022',
-                    completed: false
+                    completed: false,
                 },
                 {
                     id: 2,
@@ -278,7 +278,7 @@ const Workouts = () => {
             <View style={styles.container}>
                 {/*display the weeks at the bottom of the screen*/}
                 {weeks.map((week, index) => {
-                    console.log(weeks)
+                    // console.log(weeks)
 
 
                     return week !== currentWeek ?

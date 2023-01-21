@@ -89,7 +89,7 @@ function Layout({children}) {
             },
         }
     }, layout)
-console.log(styles)
+// console.log(styles)
 
     return <View style={styles.layout}>
 

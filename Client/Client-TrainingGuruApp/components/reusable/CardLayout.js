@@ -19,11 +19,15 @@ function CardLayout({title, children, style}) {
             marginTop: "4%",
             padding: 5,
             boxShadow: "4px 4px 10px 2px rgba(0,0,0,.8)",
-            borderRadius: 20,
+            borderRadius: 10,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
             header: {
                 textAlign: "center",
                 fontWeight: "bold",
-                fontFamily: "play"
             },
             content: {
                 width: "100%"
