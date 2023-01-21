@@ -8,7 +8,4 @@ const router = express.Router();
 router.get("/",trainerController.getAllTrainers)
 
 
-
-//router.get("/", trainerController.getAll);
-
 module.exports = router;
