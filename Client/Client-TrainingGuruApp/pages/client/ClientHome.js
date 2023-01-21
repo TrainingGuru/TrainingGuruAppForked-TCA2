@@ -309,7 +309,7 @@ export const ClientHome = () => {
                             <MealWidget
                                 item={item}
                                 name={item.name}
-                                value={item.value}
+                                value={item["serving_size_g"]}
                                 calories={item["calories"]}
                                 fat={item["fat_total_g"]}
                                 protein={item["protein_g"]}

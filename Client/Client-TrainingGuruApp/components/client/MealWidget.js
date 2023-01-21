@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import CalorieGauge from "../reusable/CalorieGauge";
+import {Center} from "native-base";
 
 
 export const MealWidget = ({ name, weight, time, unit, value, calories, fat, protein, carbs, maxCarbs, maxProtein, maxFat, maxCalories }) => {
@@ -14,18 +15,20 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             alignItems: 'center'
         },
         cardTopRowLeft: {
-            flex: 1
+            flex: 1,
+            display: "flex"
         },
         cardTopRowLeftText: {
             fontWeight: 'bold',
-            fontSize: 18
+            fontSize: 16,
+            textAlign: "center"
         },
         cardTopRowRight: {
             flex: 1,
-            alignItems: 'flex-end'
         },
         cardTopRowRightText: {
-            fontSize: 16
+            fontSize: 14,
+            textAlign: "center"
         },
         cardMiddleRow: {
             flexDirection: 'row',
@@ -78,10 +81,10 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
         <View style={styles.cardContainer}>
             <View style={styles.cardTopRow}>
                 <View style={styles.cardTopRowLeft}>
-                    <Text style={styles.cardTopRowLeftText}>{name}</Text>
+                    <Text style={styles.cardTopRowLeftText}>{name.toUpperCase()}</Text>
                 </View>
                 <View style={styles.cardTopRowRight}>
-                    <Text style={styles.cardTopRowRightText}>{value} {unit}</Text>
+                    <Text style={styles.cardTopRowRightText}>{value} g</Text>
                 </View>
             </View>
             <View style={styles.cardMiddleRow}>
