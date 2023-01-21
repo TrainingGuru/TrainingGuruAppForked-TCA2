@@ -9,6 +9,7 @@ import { Platform } from 'react-native';
 
 function NavigationBar() {
 
+    let clientView = !false;
 
 
    let  size = Dimensions.get('window').width;
@@ -61,6 +62,7 @@ function NavigationBar() {
 
 
     return <>
+    {clientView ? (<>
         <View style={styles.listNav}>
             {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faHouseChimney} size={Platform.OS !== 'web' && size <  768 && 35 }/> :<FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>}
             {size >  768 &&  <>Home</>}
@@ -74,8 +76,22 @@ function NavigationBar() {
             {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faUser}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
             {size >  768 &&<>Profile</>}
         </View>
-    </>
+    </>): <>
+        <View style={styles.listNav}>
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faHouseChimney} size={Platform.OS !== 'web' && size <  768 && 35 }/> :<FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}/>}
+            {size >  768 &&  <>Home</>}
+        </View>
 
+        <View style={styles.listNav}>
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faPeopleGroup} size={Platform.OS !== 'web' && size <  768 && 47 }/> : <FontAwesomeIcon  style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>}
+            {size >  768 && <>Clients</>}
+        </View>
+        <View style={styles.listNav}>
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faUser}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
+            {size >  768 &&<>Profile</>}
+        </View>
+    </>}
+    </>
 }
 
 export default NavigationBar
