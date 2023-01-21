@@ -6,6 +6,7 @@ import {faMugSaucer} from '@fortawesome/free-solid-svg-icons/faMugSaucer'
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import { Platform } from 'react-native';
+import {faDumbbell} from "@fortawesome/free-solid-svg-icons/faDumbbell";
 
 function NavigationBar() {
 
@@ -69,11 +70,11 @@ function NavigationBar() {
         </View>
 
         <View style={styles.listNav}>
-            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faPeopleGroup} size={Platform.OS !== 'web' && size <  768 && 47 }/> : <FontAwesomeIcon  style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon  icon={faDumbbell} size={Platform.OS !== 'web' && size <  768 && 47 }/> : <FontAwesomeIcon  style={{...styles.listNav.icon, ...styles.listNav.icon.people}} icon={faPeopleGroup}/>}
             {size >  768 && <>Clients</>}
         </View>
         <View style={styles.listNav}>
-            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faUser}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faPeople}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
             {size >  768 &&<>Profile</>}
         </View>
     </>): <>
