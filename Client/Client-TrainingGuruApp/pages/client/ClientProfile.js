@@ -1,232 +1,179 @@
-import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    TouchableOpacity,
-    StyleSheet,
-    ScrollView,
-    Animated
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, TextInput, ScrollView, FlatList} from 'react-native';
+import CardLayout from "../../components/reusable/CardLayout";
 import Layout from "../../components/structure/Layout";
 
-const ClientProfile = () => {
-    const [userImage, setUserImage] = useState('https://example.com/user-image.jpg');
-    const [goals, setGoals] = useState(['Lift weights', 'Gain 10kg of muscle']);
+function ClientProfile() {
+    const [userName, setUserName] = useState("Josh Mitvh");
+    const [userImage, setUserImage] = useState("https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    const [coachName, setCoachName] = useState("Frsny Pis");
+    const [coachImage, setCoachImage] = useState("https://images.unsplash.com/photo-1556623695-bc86a6edb75a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZHVkZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+    const [goals, setGoals] = useState([]);
+    const [fitbitConnected, setFitbitConnected] = useState(false);
 
-    const handleUpdateImage = () => {
-        // code to update user image
-    }
-
-    const handleGoalAdd = () => {
+    const handleAddGoal = () => {
         if (goals.length < 4) {
-            setGoals([...goals, 'New Goal']);
+            setGoals([...goals, ""]);
         }
     }
 
-    const handleGoalRemove = () => {
-        if (goals.length > 0) {
-            setGoals(goals.slice(0, -1));
+    const handleDeleteGoal = (index) => {
+        if (goals.length > 1) {
+            setGoals(goals.filter((goal, i) => i !== index));
         }
+    }
+
+    const handleEditGoal = (text, index) => {
+        setGoals(goals.map((goal, i) => {
+            if (i === index) {
+                return text;
+            }
+            return goal;
+        }));
+    }
+
+    const handleConnectFitbit = () => {
+        setFitbitConnected(!fitbitConnected);
     }
 
     return (
-        <Layout><View style={styles.container}>
-            <View style={styles.cardContainer}>
-                <View style={styles.leftCard}>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            source={{uri: userImage}}
-                            style={styles.userImage}
-                        />
-                    </View>
-                    <TouchableOpacity onPress={handleUpdateImage}>
-                        <Text style={styles.updateButton}>Update Image</Text>
+        <Layout><View>
+            <View style={styles.topRowContainer}>
+                <CardLayout  style={{...styles.cardContainer, width: "40%"}}>
+                    <TouchableOpacity onPress={() => {
+                    }}>
+
+                        <Image source={{uri: userImage}} style={styles.image}/>
+
+                    </TouchableOpacity>
+                    <Text style={styles.nameText}>{userName}</Text>
+                    <TouchableOpacity style={styles.cameraButton} onPress={() => {
+                    }}>
+                        <Text>Camera</Text>
+                    </TouchableOpacity>
+                </CardLayout>
+                <CardLayout style={{...styles.cardContainer, width: "40%"}}>
+
+                    <Image source={{uri: coachImage}} style={styles.image}/>
+                    <Text style={styles.nameText}>{coachName}</Text>
+
+                </CardLayout>
+            </View>
+            <CardLayout>
+                <View style={styles.goalHeaderContainer}>
+                    <Text style={styles.goalHeaderText}>User Goals</Text>
+                    <TouchableOpacity style={styles.addGoalButton} onPress={handleAddGoal}>
+                        <Text>+</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.rightCard}>
-                    <View style={styles.fitbitContainer}>
-                        <View style={styles.fitbitIndicator}>
-                            <Text style={styles.fitbitText}>Fitbit Connected</Text>
-                        </View>
-                        <View style={styles.coachContainer}>
-                            <Image
-                                source={{uri: 'https://example.com/coach-image.jpg'}}
-                                style={styles.coachImage}
+                <FlatList
+                    data={goals}
+                    renderItem={({item, index}) => (
+                        <View style={styles.goalContainer}>
+                            <TextInput
+                                style={styles.goalText}
+                                value={item}
+                                onChangeText={text => handleEditGoal(text, index)}
+                                onFocus={() => {
+                                }}
+                                onBlur={() => {
+                                }}
                             />
-                            <Text style={styles.coachName}>Coach Name</Text>
+                            <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(index)}>
+                                <Text>Delete</Text>
+                            </TouchableOpacity>
                         </View>
-                    </View>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </CardLayout>
+            <CardLayout style={styles.cardContainer}>
+                <View style={styles.fitbitContainer}>
+                    <Text style={styles.fitbitText}>
+                        {fitbitConnected ? "Fitbit Connected" : "Fitbit Disconnected"}
+                    </Text>
+                    <TouchableOpacity style={styles.fitbitButton} onPress={handleConnectFitbit}>
+                        <Text>{fitbitConnected ? "Disconnect" : "Connect"}</Text>
+                    </TouchableOpacity>
                 </View>
-            </View>
-            <View style={styles.goalContainer}>
-                <Text style={styles.goalTitle}>Goals</Text>
-                <ScrollView>
-                    {goals.map((goal, index) => (
-                        <View key={index} style={styles.goalCard}>
-                            <Text style={styles.goalText}>{goal}</Text>
-                            <View style={styles.goalActions}>
-                                <TouchableOpacity onPress={handleGoalRemove}>
-                                    <Text style={styles.goalButton}>-</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={handleGoalAdd}>
-                                    <Text style={styles.goalButton}>+</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    ))}
-                </ScrollView>
-            </View>
+            </CardLayout>
         </View></Layout>
     );
-};
+}
 
-const styles = StyleSheet.create({
-    goalContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginVertical: 10,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: '#F8F8F8',
+const styles = {
+    topRowContainer: {
+        flexDirection: "row",
+        display: "flex",
+        justifyContent: "space-between"
     },
-    goalActions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+    cardContainer: {
+
+        display:"flex",
+        alignItems: "center"
     },
-    goalButton: {
-        width: 30,
-        height: 30,
-        borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
+    image: {
+        width: "100%",
+        height: 60,
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderRadius: 50
     },
-    goalCard: {
-        flex: 1,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: '#F8F8F8',
+    nameText: {
+        textAlign: "center",
+        fontWeight: "bold",
     },
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff'
+    cameraButton: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
     },
-    topCardsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 20
+    goalHeaderContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
-    userCard: {
-        width: '45%',
-        height: '60%',
-        borderRadius: 10,
-        backgroundColor: '#F8F8F8',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    userImage: {
-        width: '60%',
-        height: '60%',
-        borderRadius: 100,
-        overflow: 'hidden'
-    },
-    updateImageButton: {
-        width: '80%',
-        marginTop: 10,
-        padding: 10,
-        backgroundColor: '#4169E1',
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    updateImageButtonText: {
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-    fitbitCard: {
-        width: '45%',
-        height: '60%',
-        borderRadius: 10,
-        backgroundColor: '#F8F8F8',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    fitbitConnectedContainer: {
-        width: '80%',
-        height: '40%',
-        borderRadius: 10,
-        backgroundColor: '#228B22',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    fitbitConnectedText: {
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-    coachContainer: {
-        width: '80%',
-        height: '40%',
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    coachImage: {
-        width: 50,
-        height: 50,
-        borderRadius: 100,
-        overflow: 'hidden',
-        marginRight: 10
-    },
-    coachName: {
-        fontWeight: 'bold'
-    },
-    goalsContainer: {
-        marginVertical: 20,
-        width: '100%',
-        height: '30%',
-        borderRadius: 10,
-        backgroundColor: '#F8F8F8',
-        padding: 20
-    },
-    goalsTitle: {
-        fontWeight: 'bold',
-        marginBottom: 10
-    },
-    goalItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 10
-    },
-    goalText: {
-        marginRight: 10
+    goalHeaderText: {
+        textAlign: "center",
+        fontWeight: "bold",
     },
     addGoalButton: {
         width: 30,
         height: 30,
-        backgroundColor: '#228B22',
         borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: "lightblue",
+        justifyContent: "center",
+        alignItems: "center",
     },
-    addGoalButtonText: {
-        color: '#fff',
-        fontWeight: 'bold'
+    goalContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 5,
     },
-        removeGoalButton: {
-            width: 30,
-            height: 30,
-            backgroundColor: '#ff0000',
-            borderRadius: 15,
-            alignItems: 'center',
-            justifyContent: 'center'
-        },
-        removeGoalButtonText: {
-            color: '#fff',
-            fontWeight: 'bold'
-        }
-    });
+    goalText: {
+        flex: 1,
+        padding: 5,
+        borderWidth: 1,
+        borderColor: "lightgray",
+        borderRadius: 5,
+    },
+    deleteGoalButton: {
+        marginLeft: 10,
+    },
+    fitbitContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    fitbitText: {
+        fontWeight: "bold",
+        fontSize: 20,
+    },
+    fitbitButton: {
+        marginTop: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 5,
+    },
+}
 
 export default ClientProfile;

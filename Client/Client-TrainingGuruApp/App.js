@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 });
 
 function App() {
+
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
 
