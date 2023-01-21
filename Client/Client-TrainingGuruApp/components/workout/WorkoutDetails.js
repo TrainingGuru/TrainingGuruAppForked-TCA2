@@ -23,6 +23,8 @@ const WorkoutDetails = ({route}) => {
 
 
     const handleSubmit = () => {
+    const  completed = exercises.every(exercise => exercise.completed === true);
+
         if (completed) {
             Alert.alert(
                 "Good Job!",
@@ -83,12 +85,8 @@ const WorkoutDetails = ({route}) => {
                 return exercise;
             })
         );
-        const allCompleted = exercises.every(exercise => exercise.completed);
-        if (allCompleted) {
-            setCompleted(true);
-        } else {
-            setCompleted(false);
-        }
+        console.log(exercises)
+
     };
 
     const handleWeightChange = (id, value) => {
