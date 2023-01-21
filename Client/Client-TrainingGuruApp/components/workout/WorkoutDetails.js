@@ -1,9 +1,13 @@
-import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated,Modal, Alert} from "react-native";
 import {Checkbox} from "react-native-paper";
+import {useNavigation} from '@react-navigation/native';
+
 import {useEffect, useState} from "react";
 
 const WorkoutDetails = ({route}) => {
+    const [modalVisible, setModalVisible] = useState(false);
     const {workout} = route.params;
+    const navigation = useNavigation();
     if (!workout) return <Text>Loading</Text>
     // console.log(workout)
     // // rest of your component code
@@ -16,6 +20,52 @@ const WorkoutDetails = ({route}) => {
             useNativeDriver: true
         }).start();
     }, []);
+
+
+    const handleSubmit = () => {
+        if (completed) {
+            Alert.alert(
+                "Good Job!",
+                "Record your notes",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () => setModalVisible(true) }
+                ],
+                { cancelable: false }
+            );
+        } else {
+            Alert.alert(
+                "Not completed",
+                "You have not completed all exercises, submit any way and record your notes to help the coach understand why you could not finish the workout.",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () =>  setModalVisible(true) }
+                ],
+                { cancelable: false }
+            );
+        }
+    }
+
+    const [completed, setCompleted] = useState(false);
+    const [notes, setNotes] = useState("");
+
+
+    const submitNotes = () => {
+        // Send notes to coach
+        // navigate to workout overview page
+        navigation.navigate('Workouts')
+    }
+
+
+
 
     const handleExerciseToggle = (id) => {
         setExercises(
@@ -33,6 +83,12 @@ const WorkoutDetails = ({route}) => {
                 return exercise;
             })
         );
+        const allCompleted = exercises.every(exercise => exercise.completed);
+        if (allCompleted) {
+            setCompleted(true);
+        } else {
+            setCompleted(false);
+        }
     };
 
     const handleWeightChange = (id, value) => {
@@ -58,6 +114,43 @@ const WorkoutDetails = ({route}) => {
 
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                }}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalInnerContainer}>
+                        <Text style={styles.modalTitle}>Notes for your Coach</Text>
+                        <TextInput
+                            placeholder="Enter your notes here"
+                            style={styles.notesInput}
+                            multiline={true}
+                            onChangeText={text => setNotes(text)}
+                            value={notes}
+                        />
+                        <View style={styles.modalButtonsContainer}>
+                            <TouchableOpacity
+                                style={styles.modalCancelButton}
+                                onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                }}>
+                                <Text style={styles.modalButtonText}>Cancel</Text>
+                        </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.modalSubmitButton}
+                                onPress={submitNotes}
+                            >
+                                <Text style={styles.modalButtonText}>Submit</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
             <Animated.View style={{opacity: animationValue, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>{workout.name}</Text>
                 {exercises.map((exercise) => (
@@ -88,6 +181,11 @@ const WorkoutDetails = ({route}) => {
                         </View>
                     </View>
                 ))}
+
+                    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                        <Text style={styles.submitButtonText}>Submit</Text>
+                    </TouchableOpacity>
+
             </Animated.View>
         </View>
 
@@ -148,11 +246,58 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center"
     },
+    modalContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)"
+    },
+    modalInnerContainer: {
+        width: "80%",
+        height: "40%",
+        backgroundColor: "#fff",
+        padding: 20,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    modalTitle: {
+        fontSize: 20,
+        marginBottom: 20
+    },
+    notesInput: {
+        width: "100%",
+        height: "60%",
+        borderWidth: 1,
+        borderColor: "#ccc",
+        padding: 10,
+        marginBottom: 20,
+        textAlignVertical: "top"
+    },
+    modalButtonsContainer: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    modalCancelButton: {
+        backgroundColor: "#ccc",
+        padding: 10,
+        width: "40%"
+    },
+    modalSubmitButton: {
+        backgroundColor: "#33cc33",
+        padding: 10,
+        width: "40%"
+    },
+    modalButtonText: {
+        textAlign: "center",
+        color: "#fff"
+    },
     weight: {
         fontSize: 14,
         color: '#555',
         width: "40%"
     },
+
     input: {
         backgroundColor: '#f5f5f5',
         borderRadius: 10,
@@ -160,7 +305,18 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 14,
         color: '#555',
-    }
+    },
+    submitButton: {
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        margin: 15,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    submitButtonText:{
+        color: 'white',
+    },
 });
 export default WorkoutDetails;
 
