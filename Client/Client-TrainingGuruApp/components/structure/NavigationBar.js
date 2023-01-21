@@ -13,10 +13,7 @@ import {useState, useEffect} from "react";
 
 function NavigationBar() {
     const navigation = useNavigation();
-    console.log("navigation")
-    console.log(navigation)
     const [activeRoute, setActiveRoute] = useState(navigation.state ? navigation.state.routes[navigation.state.routes.length -1].name : '');
-    console.log("sdsadsa")
     console.log(activeRoute)
 
 
