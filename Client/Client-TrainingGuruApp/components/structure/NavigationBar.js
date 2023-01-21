@@ -74,7 +74,7 @@ function NavigationBar() {
             {size >  768 && <>Clients</>}
         </View>
         <View style={styles.listNav}>
-            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faPeople}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
+            {Platform.OS !== 'web' ?  <FontAwesomeIcon size={size <  768 && 35 } icon={faUser}/> : <FontAwesomeIcon   style={styles.listNav.icon} icon={faUser}/>}
             {size >  768 &&<>Profile</>}
         </View>
     </>): <>
