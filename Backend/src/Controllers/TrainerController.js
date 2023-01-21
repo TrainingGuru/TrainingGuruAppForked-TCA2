@@ -13,14 +13,14 @@ const getAllTrainers = async (req,res) =>{
 }
 
 const registerTrainer = async (req, res) => {
-
+//TODO:: Hash Password, Error handling (Catch), Add account to db,
     //Check email is not registered
     Trainer.findOne({where : {
-        email: req.body.email,
+        Email: req.body.Email,
         }})
         .then(userAccount => {
             if(userAccount){
-                return res.status(409)
+                return res.status(409).json({message: 'User Email Already Used'})
             }
             else{
                 res.status(200).json({message: 'no user'})
@@ -29,4 +29,4 @@ const registerTrainer = async (req, res) => {
 
 }
 
-module.exports = {getAllTrainers}
+module.exports = {getAllTrainers, registerTrainer}
