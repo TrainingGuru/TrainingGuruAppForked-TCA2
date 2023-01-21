@@ -278,7 +278,7 @@ const Workouts = () => {
             <View style={styles.container}>
                 {/*display the weeks at the bottom of the screen*/}
                 {weeks.map((week, index) => {
-                    console.log(weeks)
+                    // console.log(weeks)
 
 
                     return week !== currentWeek ?

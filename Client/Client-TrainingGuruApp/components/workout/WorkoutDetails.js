@@ -5,8 +5,8 @@ import {useEffect, useState} from "react";
 const WorkoutDetails = ({route}) => {
     const {workout} = route.params;
     if (!workout) return <Text>Loading</Text>
-    console.log(workout)
-    // rest of your component code
+    // console.log(workout)
+    // // rest of your component code
 
     const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false})));
     const [animationValue] = useState(new Animated.Value(0));

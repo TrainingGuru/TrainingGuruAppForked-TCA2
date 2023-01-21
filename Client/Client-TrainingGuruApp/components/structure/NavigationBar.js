@@ -13,16 +13,23 @@ import {useState, useEffect} from "react";
 
 function NavigationBar() {
     const navigation = useNavigation();
-    const [activeRoute, setActiveRoute] = useState(navigation.state ? navigation.state.routeName : '');
+    console.log("navigation")
+    console.log(navigation)
+    const [activeRoute, setActiveRoute] = useState(navigation.state ? navigation.state.routes[navigation.state.routes.length -1].name : '');
     console.log("sdsadsa")
     console.log(activeRoute)
 
+
+
+
+
     useEffect(() => {
-        if (navigation.state) {
-            setActiveRoute(navigation.state.routeName)
-            console.log(navigation)
-        }
-    }, [navigation])
+        const unsubscribe = navigation.addListener('state', e => {
+            setActiveRoute(e.data.state.routes[e.data.state.routes.length -1].name)
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
 
     let clientView = true;
