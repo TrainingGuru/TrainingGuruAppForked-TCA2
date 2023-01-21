@@ -31,7 +31,7 @@ function App() {
 
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Splash" component={SplashScreen} />
+                    {/*<Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }}  />*/}
                     <Stack.Screen name="ClientHome" component={ClientHome}   options={{
                         headerTitleAlign: 'center',
                         headerTitle: () => (
