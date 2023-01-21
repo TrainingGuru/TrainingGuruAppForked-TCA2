@@ -13,5 +13,4 @@ const getAllTrainers = async (req,res) =>{
     }
 }
 
-
 module.exports = {getAllTrainers}
