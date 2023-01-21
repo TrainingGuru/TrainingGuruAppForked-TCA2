@@ -107,7 +107,7 @@ const Workouts = () => {
                     reps: 8,
                     previousWeight: 20,
                     previousDate: 'Jan 10, 2022',
-                    completed: false
+                    completed: false,
                 },
                 {
                     id: 2,

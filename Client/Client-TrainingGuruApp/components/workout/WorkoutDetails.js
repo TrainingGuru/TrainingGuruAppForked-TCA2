@@ -8,8 +8,7 @@ const WorkoutDetails = ({route}) => {
     // console.log(workout)
     // // rest of your component code
 
-    const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false})));
-    const [animationValue] = useState(new Animated.Value(0));
+    const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
     useEffect(() => {
         Animated.timing(animationValue, {
             toValue: 1,
@@ -22,14 +21,13 @@ const WorkoutDetails = ({route}) => {
         setExercises(
             exercises.map((exercise) => {
                 if (exercise.id === id) {
-                    if (exercise.weightEntered) {
+                    if (!exercise.requiresWeight || (exercise.requiresWeight && exercise.weightEntered)) {
                         return {
                             ...exercise,
                             completed: !exercise.completed
                         };
                     } else {
                         alert("Please enter weight first!");
-                        return exercise;
                     }
                 }
                 return exercise;
@@ -84,7 +82,7 @@ const WorkoutDetails = ({route}) => {
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
                                 status={exercise.completed ? "checked" : "unchecked"}
-                                disabled={!exercise.weightEntered}
+                                disabled={exercise.previousWeight ? !exercise.weightEntered : false}
                                 onPress={() => handleExerciseToggle(exercise.id)}
                             />
                         </View>
