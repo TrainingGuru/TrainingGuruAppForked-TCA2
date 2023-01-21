@@ -26,7 +26,6 @@ const Trainer = sequelize.define('Trainer',{
     timestamps: false,
     createdAt: false,
     updatedAt: false
-
 });
 
 module.exports = Trainer;
