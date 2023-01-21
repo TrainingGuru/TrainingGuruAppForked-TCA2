@@ -8,6 +8,7 @@ import WorkoutDetails from "./components/workout/WorkoutDetails";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import ClientHome from "./pages/client/ClientHome";
 import ClientProfile from "./pages/client/ClientProfile";
+import SplashScreen from "./pages/SplashScreen";
 
 const Stack = createStackNavigator();
 const styles = StyleSheet.create({
@@ -30,6 +31,7 @@ function App() {
 
             <NavigationContainer>
                 <Stack.Navigator>
+                    <Stack.Screen name="Splash" component={SplashScreen} />
                     <Stack.Screen name="ClientHome" component={ClientHome}   options={{
                         headerTitleAlign: 'center',
                         headerTitle: () => (
