@@ -15,6 +15,7 @@ Packages installed:
 -npm i -g http
 -npm install mysql
 -npm i sequelize
+-npm install sequelize-auto
 
 How to find your IP
 -ipconfig in command line  (look for en0)

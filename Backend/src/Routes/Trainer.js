@@ -5,7 +5,7 @@ const trainerController = require('../Controllers/TrainerController')
 const router = express.Router();
 
 //GetAllTrainers
-router.get("/Trainers",trainerController.getAllTrainers)
+router.get("/",trainerController.getAllTrainers)
 
 
 
