@@ -34,13 +34,19 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             marginTop: 10
         },
         cardMiddleRowLeft: {
-            flex: 1
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
         },
         cardMiddleRowMiddle: {
-            flex: 1
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
         },
         cardMiddleRowRight: {
-            flex: 1
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
         },
         cardBottomRow: {
             flexDirection: 'row',
@@ -49,7 +55,9 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             marginTop: 10
         },
         cardBottomRowLeft: {
-            flex: 1
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
         },
         cardBottomRowRight: {
             flex: 1
@@ -78,20 +86,21 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             </View>
             <View style={styles.cardMiddleRow}>
                 <View style={styles.cardMiddleRowLeft}>
-
+                    <Text style={{ marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>Fat</Text>
                     <CalorieGauge value={fat} maxValue={maxFat} startColor="#9C27B0" endColor="#0e6cfa" label="Fat"/>
                 </View>
                 <View style={styles.cardMiddleRowMiddle}  >
-
+                    <Text>Protein</Text>
                     <CalorieGauge value={protein} maxValue={maxProtein} startColor="#2196F3" endColor="#ff7500"
                                   label="Protein"/>
                 </View>
                 <View style={styles.cardMiddleRowRight}>
-
+                    <Text>Carbs</Text>
                     <CalorieGauge value={carbs} maxValue={maxCarbs} startColor="#4CAF50" endColor="#ee25ee"
                                   label="Carbs"/>
                 </View>
                 <View style={styles.cardBottomRowLeft}>
+                    <Text>Carlories</Text>
                     <CalorieGauge value={calories} maxValue={maxCalories} startColor="#F44336" endColor="#0e6cfa"
                                   label="Calories"/>
                 </View>

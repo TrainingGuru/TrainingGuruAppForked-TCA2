@@ -20,9 +20,16 @@ function CalorieGauge({ startColor, endColor , value, maxValue}) {
             >
                 {
                     (fill) => (
-                        <Text style={{ textAlign: 'center' }}>
+
+
+                        <View>
+                            <Text style={{textAlign: 'center', fontSize: 12}}>
+                                {Math.round(value).toString()} / {maxValue.toString()}
+                            </Text>
+                            <Text style={{textAlign: 'center', fontSize: 10}}>
                             {`${Math.round(fill)}%`}
                         </Text>
+                        </View>
                     )
                 }
             </AnimatedCircularProgress>

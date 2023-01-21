@@ -304,6 +304,7 @@ export const ClientHome = () => {
             <CardLayout title={"Meal History"} style={styles.clientHome.first.nutritionList}>
                 <View style={styles.clientHome.first.nutritionList.listOfFood}>
                     {shoppingList.length > 0 && shoppingList.map((item, index) => {
+                        console.log(item)
                         return <View key={index}>
                             <MealWidget
                                 item={item}

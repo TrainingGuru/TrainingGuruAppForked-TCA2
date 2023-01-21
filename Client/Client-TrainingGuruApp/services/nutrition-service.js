@@ -9,7 +9,10 @@ export class NinjaAPI {
             const options = {
                 headers: headers
             }
-            const url = `${this.baseUrl}query=${foodName} ${value}${unit}`;
+
+
+            var query = `${value}${unit} ${foodName}`
+            const url = `${this.baseUrl}query=` + query ;
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error(response.statusText);
