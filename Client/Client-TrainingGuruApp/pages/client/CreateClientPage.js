@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
-import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet} from "react-native";
+import React, { useState, useRef } from 'react';
+import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
+import CardLayout from "../../components/reusable/CardLayout";
 
 export const CreateClientPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -64,7 +65,7 @@ export const CreateClientPage = () => {
         container: {
             flex: 1,
             alignItems: 'center',
-            justifyContent: 'center',
+            marginTop: "10%"
         },
         input: {
             width: '80%',
@@ -78,6 +79,7 @@ export const CreateClientPage = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+
         },
         goalHeaderText: {
             textAlign: "center",
@@ -93,6 +95,9 @@ export const CreateClientPage = () => {
         },
         goalContainer: {
             flexDirection: "row",
+            alignItems: "center",
+            marginVertical: 5,
+            width: '80%',
         },
         goalText: {
             flex: 1,
@@ -118,64 +123,67 @@ export const CreateClientPage = () => {
     });
 
     return (
+        <ScrollView>
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="First Name"
-                onChangeText={setFirstName}
-                value={firstName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Last Name"
-                onChangeText={setLastName}
-                value={lastName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                onChangeText={setEmail}
-                value={email}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                onChangeText={setPassword}
-                value={password}
-                secureTextEntry={true}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Coach Code"
-                onChangeText={setCoachCode}
-                value={coachCode}
-            />
-            <View style={styles.goalHeaderContainer}>
-                <Text style={styles.goalHeaderText}>Goals</Text>
-                <TouchableOpacity style={styles.addGoalButton} onPress={handleAddGoal}>
-                    <Text>+</Text>
-                </TouchableOpacity>
-            </View>
-            <FlatList
-                data={goals}
-                renderItem={({item, index}) => (
-                    <View style={styles.goalContainer}>
-                        <TextInput
-                            style={styles.goalText}
-                            value={item}
-                            onChangeText={text => handleEditGoal(text, index)}
-                        />
-                        <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(index)}>
-                            <Text>Delete</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Last Name"
+                    onChangeText={setLastName}
+                    value={lastName}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    onChangeText={setEmail}
+                    value={email}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    onChangeText={setPassword}
+                    value={password}
+                    secureTextEntry={true}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Coach Code"
+                    onChangeText={setCoachCode}
+                    value={coachCode}
+                />
+                <CardLayout style={{width: "80%", marginBottom: "5%"}}>
+                    <View style={styles.goalHeaderContainer}>
+                        <Text style={styles.goalHeaderText}>User Goals</Text>
+                        <TouchableOpacity style={styles.addGoalButton} onPress={handleAddGoal}>
+                            <Text>+</Text>
                         </TouchableOpacity>
                     </View>
-                )}
-                keyExtractor={(item, index) => index.toString()}
-            />
-            <TouchableOpacity style={styles.createClientButton} onPress={handleCreateClient}>
-                <Text style={styles.createClientButtonText}>Create Client</Text>
-            </TouchableOpacity>
+                    <FlatList
+                        data={goals}
+                        renderItem={({item, index}) => (
+                            <View style={styles.goalContainer}>
+                                <TextInput
+                                    style={styles.goalText}
+                                    value={item}
+                                    onChangeText={text => handleEditGoal(text, index)}
+                                    onFocus={() => {
+                                    }}
+                                    onBlur={() => {
+                                    }}
+                                />
+                                <TouchableOpacity style={styles.deleteGoalButton}
+                                                  onPress={() => handleDeleteGoal(index)}>
+                                    <Text>Delete</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </CardLayout>
+                <TouchableOpacity style={styles.createClientButton} onPress={handleCreateClient}>
+                    <Text style={styles.createClientButtonText}>Create Client</Text>
+                </TouchableOpacity>
         </View>
+    </ScrollView>
     );
 }
 
