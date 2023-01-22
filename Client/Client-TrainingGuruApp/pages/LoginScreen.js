@@ -124,9 +124,6 @@ export const LoginScreen = ({ navigation }) => {
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
             <Text style={styles.orText}>OR</Text>
-            <TouchableOpacity style={styles.createAccount} onPress={() => navigation.navigate('Signup')}>
-                <Text style={styles.createAccountText}>Create an account</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.createAccount} onPress={() => navigation.navigate('CreateClientPage')}>
                 <Text style={styles.createAccountText}>Create Client Account</Text>
             </TouchableOpacity>

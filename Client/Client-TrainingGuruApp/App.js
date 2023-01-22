@@ -10,7 +10,7 @@ import ClientHome from "./pages/client/ClientHome";
 import ClientProfile from "./pages/client/ClientProfile";
 import SplashScreen from "./pages/SplashScreen";
 import {LoginScreen} from "./pages/LoginScreen";
-import CreateClientPage from "./pages/client/CreateClientPage";
+import {CreateClientPage} from "./pages/client/CreateClientPage";
 
 const Stack = createStackNavigator();
 const styles = StyleSheet.create({

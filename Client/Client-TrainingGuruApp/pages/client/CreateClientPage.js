@@ -1,7 +1,7 @@
-import Animated, { Easing } from 'react-native-reanimated';
 import { useState, useRef } from 'react';
+import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet} from "react-native";
 
-const CreateClientPage = () => {
+export const CreateClientPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -43,7 +43,6 @@ const CreateClientPage = () => {
                 toValue: 0,
                 duration: 250,
                 easing: Easing.ease,
-                useNativeDriver: true,
             }).start();
         } else {
             Animated.timing(slideAnim, {
@@ -180,4 +179,3 @@ const CreateClientPage = () => {
     );
 }
 
-export default CreateClientPage();
