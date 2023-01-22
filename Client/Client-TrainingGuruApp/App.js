@@ -10,6 +10,7 @@ import ClientHome from "./pages/client/ClientHome";
 import ClientProfile from "./pages/client/ClientProfile";
 import SplashScreen from "./pages/SplashScreen";
 import {LoginScreen} from "./pages/LoginScreen";
+import CreateClientPage from "./pages/client/CreateClientPage";
 
 const Stack = createStackNavigator();
 const styles = StyleSheet.create({
@@ -34,6 +35,20 @@ function App() {
                 <Stack.Navigator>
                     {/*<Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }}  />*/}
                     <Stack.Screen name="LoginScreen" component={LoginScreen}   options={{
+                        headerTitleAlign: 'center',
+                        headerTitle: () => (
+                            <View style={styles.container}>
+                                <Image
+                                    style={styles.image}
+                                    source={{ uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}}
+                                />
+                            </View>
+                        ),
+                        headerStyle: {
+                            borderBottomWidth: 0
+                        }
+                    }} />
+                    <Stack.Screen name="CreateClientPage" component={CreateClientPage}   options={{
                         headerTitleAlign: 'center',
                         headerTitle: () => (
                             <View style={styles.container}>

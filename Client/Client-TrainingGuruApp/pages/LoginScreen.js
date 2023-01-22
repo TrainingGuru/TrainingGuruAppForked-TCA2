@@ -127,6 +127,10 @@ export const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.createAccount} onPress={() => navigation.navigate('Signup')}>
                 <Text style={styles.createAccountText}>Create an account</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.createAccount} onPress={() => navigation.navigate('CreateClientPage')}>
+                <Text style={styles.createAccountText}>Create Client Account</Text>
+            </TouchableOpacity>
+
 
             {image && <Image source={{ uri: image.uri }} style={styles.previewImage} />}
         </View>
