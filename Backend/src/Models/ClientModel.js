@@ -42,6 +42,6 @@ const Client = sequelize.define('Client',{
         updatedAt: false
     });
 
-Trainer.hasMany(Client);
-Client.belongsTo(Trainer);
+//Trainer.hasMany(Client);
+Client.belongsTo(Trainer,{foreignKey: 'TrainerID'});
 module.exports = Client;

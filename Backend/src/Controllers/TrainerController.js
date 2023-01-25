@@ -1,5 +1,4 @@
 const Trainer = require("../Models/TrainersModel");
-const {EmptyPacket} = require("mysql/lib/protocol/packets");
 
 //TODO:: VALIDATION in phase two
 //GetAllTrainer
