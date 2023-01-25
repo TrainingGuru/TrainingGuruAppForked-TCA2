@@ -21,6 +21,9 @@ How to find your IP
 -ipconfig in command line  (look for en0)
 Mines: 192.168.1.215
 
+TODO:: LIST
+Update and Deletes on Trainer,User,Other endpoints
+
 
 
 

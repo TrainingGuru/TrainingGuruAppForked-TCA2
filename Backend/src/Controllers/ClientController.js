@@ -1,4 +1,5 @@
 const Client = require("../Models/ClientModel");
+const Trainer = require("../Models/TrainersModel");
 
 const getAllClients = async (req,res) =>{
     let clients = await Client.findAll()
@@ -56,5 +57,27 @@ const loginClient = async (req, res) => {
     }
 }
 
+const registerClient =  (req, res) => {
 
-module.exports = {getAllClients,getAllClientsForTrainer,loginClient}
+    let client = {
+        Name: req.body.Name,
+        Email: req.body.Email,
+        Password: req.body.Password
+    }
+
+    if (client.Name == null && client.Password == null & client.Email == null) {
+        return res.status(400).json({message: 'Missing information in Body'})
+    } else {
+        Client.create(client).then((clientToAdd) => res.status(201).send(clientToAdd)).catch((err) => {
+            res.status(400).send(err);
+        });
+    }
+}
+
+
+module.exports = {
+    getAllClients,
+    getAllClientsForTrainer,
+    loginClient,
+    registerClient
+}
