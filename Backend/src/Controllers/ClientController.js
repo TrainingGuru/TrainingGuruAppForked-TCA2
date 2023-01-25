@@ -17,15 +17,6 @@ const getAllClients = async (req,res) =>{
 const getAllClientsForTrainer = async (req,res) =>{
 
     let id = req.params.id;
-    // let clients = await Client.findAll({where : {TrainerID: id}});
-    // if(clients.length < 1){
-    //     res.status(404)
-    //     res.end()
-    // }
-    // else{
-    //     res.status(200).send(clients)
-    //     res.end();
-    // }
 
     Client.findAll({
         where : {
