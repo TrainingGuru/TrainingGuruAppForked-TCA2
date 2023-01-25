@@ -18,18 +18,20 @@ const getAllTrainers = async (req,res) =>{
 const registerTrainer =  (req, res) => {
 //TODO:: Hash Password, Error handling (Catch), Add account to db,
 // https://www.promisejs.org/
-    if(!req.body){
-        return res.status(400).json({message : 'No Body Sent'})
+    let trainer = {
+        Name : req.body.Name,
+        Email: req.body.Email,
+        Password: req.body.Password
+    }
+
+    if(trainer.Name == null && trainer.Password == null & trainer.Email == null){
+        return res.status(400).json({message : 'Missing information in Body'})
         console.log("no body")
     }else{
-        let trainer = {
-            Name : req.body.Name,
-            Email: req.body.Email,
-            Password: req.body.Password
-        }
+
 
         Trainer.create(trainer).then((trainerToAdd) => res.status(201).send(trainerToAdd)).catch((err) => {
-            console.log(err);
+            //console.log(err);
             res.status(400).send(err);
         });
     }

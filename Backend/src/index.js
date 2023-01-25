@@ -6,10 +6,6 @@ const database = require("./Config/DatabaseConfig.js");
 const userRoute = require("./Routes/User.js");
 const trainerRoute = require("./Routes/Trainer.js");
 
-//if visit http://192.168.1.215:8080/hello will know if server is working
-app.get('/hello', (req, res) => {
-    res.json('Hello from Server!!!')
-})
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
