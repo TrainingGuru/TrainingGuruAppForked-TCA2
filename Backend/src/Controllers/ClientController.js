@@ -13,25 +13,6 @@ const getAllClients = async (req,res) =>{
     }
 }
 
-//Just returns Names
-const getAllClientsForTrainer = async (req,res) =>{
-
-    let id = req.params.id;
-
-    Client.findAll({
-        where : {
-            TrainerID : id
-        },
-        attributes:['Name'],
-    }).then(function (list){
-        if(list.length <= 0){
-            res.status(404).json("Trainer has No Clients")
-        }
-        else{
-            res.status(200).json(list);
-        }
-    })
-}
 
 const loginClient = async (req, res) => {
 
@@ -79,7 +60,6 @@ const registerClient = async (req, res) => {
 
 module.exports = {
     getAllClients,
-    getAllClientsForTrainer,
     loginClient,
     registerClient
 }
