@@ -32,7 +32,10 @@ const Client = sequelize.define('Client',{
         NutritionID:{
             type: Sequelize.INTEGER,
             allowNull: true,
-            foreignKey: true,
+            references:{
+                model: 'Trainers',
+                key: 'TrainerID'
+            }
         }
     },
     {
