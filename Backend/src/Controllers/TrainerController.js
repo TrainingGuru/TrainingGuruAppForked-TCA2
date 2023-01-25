@@ -1,6 +1,7 @@
 const Trainer = require("../Models/TrainersModel");
 const {EmptyPacket} = require("mysql/lib/protocol/packets");
 
+//TODO:: VALIDATION in phase two
 //GetAllTrainer
 const getAllTrainers = async (req,res) =>{
     let trainers = await Trainer.findAll()
@@ -79,6 +80,10 @@ const loginTrainer = async (req, res) => {
     }else{
         res.status(401).send("Incorrect Password")
     }
+}
+
+const getClientList = (req, res) => {
+    //TODO:: Implement
 }
 
 module.exports = {getAllTrainers, registerTrainer, loginTrainer}
