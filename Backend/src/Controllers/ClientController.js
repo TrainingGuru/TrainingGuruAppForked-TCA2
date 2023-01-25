@@ -58,14 +58,14 @@ const registerClient = async (req, res) => {
     }
 }
 
-const getClientNutrition = (req,res) => {
+const getClientNutrition = async (req,res) => {
 
-    let client = Client.findOne({where : {
+    let client = await Client.findOne({where : {
         ClientID : req.params.id
         }})
 
     if(client.NutritionID != null){
-        let nutritionValue = Nutrition.findOne({where : {
+        let nutritionValue = await Nutrition.findOne({where : {
                 NutritionID : client.NutritionID
             }});
         res.status(200).json(nutritionValue);
