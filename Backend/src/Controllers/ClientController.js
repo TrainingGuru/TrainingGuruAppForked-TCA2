@@ -57,9 +57,15 @@ const registerClient = async (req, res) => {
     }
 }
 
+const getClientNutrition = (req,res) => {
+
+
+}
+
 
 module.exports = {
     getAllClients,
     loginClient,
-    registerClient
+    registerClient,
+    getClientNutrition
 }
