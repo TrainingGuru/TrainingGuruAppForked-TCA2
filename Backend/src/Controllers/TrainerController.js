@@ -1,5 +1,4 @@
 const Trainer = require("../Models/TrainersModel");
-const {EmptyPacket} = require("mysql/lib/protocol/packets");
 
 //TODO:: VALIDATION in phase two
 //GetAllTrainer
@@ -24,7 +23,7 @@ const registerTrainer =  (req, res) => {
         Password: req.body.Password
     }
 
-    if(trainer.Name == null && trainer.Password == null & trainer.Email == null){
+    if(trainer.Name === ""  || trainer.Password === "" ||  trainer.Email === ""){
         return res.status(400).json({message : 'Missing information in Body'})
         console.log("no body")
     }else{
@@ -82,8 +81,6 @@ const loginTrainer = async (req, res) => {
     }
 }
 
-const getClientList = (req, res) => {
-    //TODO:: Implement
-}
+
 
 module.exports = {getAllTrainers, registerTrainer, loginTrainer}

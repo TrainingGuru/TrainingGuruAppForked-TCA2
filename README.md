@@ -39,5 +39,5 @@ Files
 src file - Contains the project code
 - index.js: Sever Starting point
 - Config: Code for connection to database etc
-- Routes: Endpoints code - different files for each endpoint e.g User.js = /User endpoint
+- Routes: Endpoints code - different files for each endpoint e.g Trainers.js = /Trainers endpoint
 - Models: Database data schema for sending data to Database
