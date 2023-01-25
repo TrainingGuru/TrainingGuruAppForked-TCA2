@@ -82,4 +82,8 @@ const loginTrainer = async (req, res) => {
     }
 }
 
+const getClientList = (req, res) => {
+    //TODO:: Implement
+}
+
 module.exports = {getAllTrainers, registerTrainer, loginTrainer}
