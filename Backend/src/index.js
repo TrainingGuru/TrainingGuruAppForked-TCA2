@@ -1,5 +1,3 @@
-
-
 const PORT = 8080
 // const HOSTNAME = '192.168.1.137' // change to yours (Might change daily so needs updated)
 const express = require('express')
