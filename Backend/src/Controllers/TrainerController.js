@@ -1,4 +1,3 @@
-
 const Trainer = require("../Models/TrainersModel");
 const {EmptyPacket} = require("mysql/lib/protocol/packets");
 
@@ -67,4 +66,19 @@ const registerTrainer =  (req, res) => {
 
 }
 
-module.exports = {getAllTrainers, registerTrainer}
+const loginTrainer = async (req, res) => {
+
+    let trainer = await Trainer.findOne({where : {
+        Email: req.body.Email,
+        }});
+
+    if(!trainer){
+        res.status(404).send("No User found")
+    }else if(trainer.Password == req.body.Password){
+        res.status(200).send("Login Details Valid")
+    }else{
+        res.status(401).send("Incorrect Password")
+    }
+}
+
+module.exports = {getAllTrainers, registerTrainer, loginTrainer}
