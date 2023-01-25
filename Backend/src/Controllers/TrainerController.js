@@ -23,7 +23,7 @@ const registerTrainer =  (req, res) => {
         Password: req.body.Password
     }
 
-    if(trainer.Name == null && trainer.Password == null & trainer.Email == null){
+    if(trainer.Name === ""  || trainer.Password === "" ||  trainer.Email === ""){
         return res.status(400).json({message : 'Missing information in Body'})
         console.log("no body")
     }else{

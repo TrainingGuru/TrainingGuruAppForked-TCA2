@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/",clientController.getAllClients)
 router.get("/Trainer/:id",clientController.getAllClientsForTrainer)
 router.get("/Login",clientController.loginClient)
-router.post("/Register",clientController.registerClient)
+router.put("/Register",clientController.registerClient)
 
 
 module.exports = router;
