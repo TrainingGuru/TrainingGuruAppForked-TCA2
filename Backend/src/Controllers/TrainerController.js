@@ -81,4 +81,4 @@ const loginTrainer = (req, res) => {
     }
 }
 
-module.exports = {getAllTrainers, registerTrainer}
+module.exports = {getAllTrainers, registerTrainer, loginTrainer}
