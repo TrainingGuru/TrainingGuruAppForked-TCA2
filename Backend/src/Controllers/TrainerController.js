@@ -1,4 +1,5 @@
 const Trainer = require("../Models/TrainersModel");
+const Client = require("../Models/ClientModel");
 
 //TODO:: VALIDATION in phase two
 //GetAllTrainer
@@ -65,7 +66,6 @@ const registerTrainer =  (req, res) => {
     //     })
 
 }
-
 const loginTrainer = async (req, res) => {
 
     let trainer = await Trainer.findOne({where : {
@@ -81,6 +81,26 @@ const loginTrainer = async (req, res) => {
     }
 }
 
+//Just returns Names
+const getAllClientsForTrainer = async (req,res) =>{
+
+    let id = req.params.id;
+
+    Client.findAll({
+        where : {
+            TrainerID : id
+        },
+        attributes:['Name'],
+    }).then(function (list){
+        if(list.length <= 0){
+            res.status(404).json("Trainer has No Clients")
+        }
+        else{
+            res.status(200).json(list);
+        }
+    })
+}
 
 
-module.exports = {getAllTrainers, registerTrainer, loginTrainer}
+
+module.exports = {getAllTrainers, registerTrainer, loginTrainer, getAllClientsForTrainer}

@@ -1,5 +1,5 @@
 const express = require("express");
-const trainerController = require('../Controllers/TrainerController')
+const trainerController = require('../Controllers/TrainerController');
 
 
 const router = express.Router();
@@ -8,6 +8,6 @@ const router = express.Router();
 router.get("/",trainerController.getAllTrainers)
 router.put("/Register",trainerController.registerTrainer)
 router.get("/Login",trainerController.loginTrainer)
-
+router.get("/:id/Clients",trainerController.getAllClientsForTrainer)
 
 module.exports = router;

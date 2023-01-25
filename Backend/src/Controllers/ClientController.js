@@ -1,5 +1,6 @@
 const Client = require("../Models/ClientModel");
 const Trainer = require("../Models/TrainersModel");
+const Nutrition = require("../Models/NutritionModel");
 
 const getAllClients = async (req,res) =>{
     let clients = await Client.findAll()
@@ -13,25 +14,6 @@ const getAllClients = async (req,res) =>{
     }
 }
 
-//Just returns Names
-const getAllClientsForTrainer = async (req,res) =>{
-
-    let id = req.params.id;
-
-    Client.findAll({
-        where : {
-            TrainerID : id
-        },
-        attributes:['Name'],
-    }).then(function (list){
-        if(list.length <= 0){
-            res.status(404).json("Trainer has No Clients")
-        }
-        else{
-            res.status(200).json(list);
-        }
-    })
-}
 
 const loginClient = async (req, res) => {
 
@@ -76,10 +58,28 @@ const registerClient = async (req, res) => {
     }
 }
 
+const getClientNutrition = async (req,res) => {
+
+    let client = await Client.findOne({where : {
+        ClientID : req.params.id
+        }})
+
+    if(client.NutritionID != null){
+        let nutritionValue = await Nutrition.findOne({where : {
+                NutritionID : client.NutritionID
+            }});
+        res.status(200).json(nutritionValue);
+    }
+    else{
+        res.status(404).json("No Nutrition Plan Found")
+    }
+
+}
+
 
 module.exports = {
     getAllClients,
-    getAllClientsForTrainer,
     loginClient,
-    registerClient
+    registerClient,
+    getClientNutrition
 }

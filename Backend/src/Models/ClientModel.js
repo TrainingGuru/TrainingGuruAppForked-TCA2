@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 const Trainer = require("./TrainersModel");
+const Nutrition = require("./NutritionModel");
 
 const Client = sequelize.define('Client',{
         ClientID:{
@@ -32,7 +33,10 @@ const Client = sequelize.define('Client',{
         NutritionID:{
             type: Sequelize.INTEGER,
             allowNull: true,
-            foreignKey: true,
+            references:{
+                model: 'Trainers',
+                key: 'TrainerID'
+            }
         }
     },
     {
@@ -43,4 +47,5 @@ const Client = sequelize.define('Client',{
     });
 
 Client.belongsTo(Trainer,{foreignKey: 'TrainerID'});
+Client.hasOne(Nutrition, {foreignKey: 'NutritionID'})
 module.exports = Client;
