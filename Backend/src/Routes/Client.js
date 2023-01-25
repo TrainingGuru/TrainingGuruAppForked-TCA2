@@ -8,6 +8,7 @@ const router = express.Router();
 router.get("/",clientController.getAllClients)
 router.get("/Login",clientController.loginClient)
 router.put("/Register",clientController.registerClient)
+router.get("/:id/NutritionValue",clientController.getClientNutrition)
 
 
 module.exports = router;

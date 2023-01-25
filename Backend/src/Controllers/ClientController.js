@@ -64,14 +64,14 @@ const getClientNutrition = (req,res) => {
         ClientID : req.params.id
         }})
 
-    let nutritionValue = Nutrition.findOne({where : {
-        NutritionID : client.NutritionID
-        }})
-
-    if(nutritionValue == null){
+    if(client.NutritionID != null){
+        let nutritionValue = Nutrition.findOne({where : {
+                NutritionID : client.NutritionID
+            }});
+        res.status(200).json(nutritionValue);
+    }
+    else{
         res.status(404).json("No Nutrition Plan Found")
-    }else{
-        res.status(200).json(nutritionValue)
     }
 
 }
