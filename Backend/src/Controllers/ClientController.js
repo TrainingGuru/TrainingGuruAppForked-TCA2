@@ -51,6 +51,7 @@ const loginClient = async (req, res) => {
 const registerClient =  (req, res) => {
 
     let client = {
+        TrainerID: req.body.TrainerID,
         Name: req.body.Name,
         Email: req.body.Email,
         Password: req.body.Password
