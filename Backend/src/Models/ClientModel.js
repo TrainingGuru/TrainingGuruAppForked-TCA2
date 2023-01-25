@@ -43,4 +43,5 @@ const Client = sequelize.define('Client',{
     });
 
 Trainer.hasMany(Client);
+Client.belongsTo(Trainer);
 module.exports = Client;
