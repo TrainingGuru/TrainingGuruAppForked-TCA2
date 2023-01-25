@@ -25,13 +25,6 @@ app.use("/Trainer",trainerRoute);
 
 
 
-// connection.connect(function(err) {
-//     if (err) {
-//         return console.error('error: ' + err.message);
-//     }
-//
-//     console.log('Connected to the MySQL server.');
-// });
 
 // console.log(`Server running at http://${HOSTNAME}:${PORT}`)
 async function testConection(){
