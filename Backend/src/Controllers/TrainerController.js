@@ -65,7 +65,6 @@ const registerTrainer =  (req, res) => {
     //     })
 
 }
-
 const loginTrainer = async (req, res) => {
 
     let trainer = await Trainer.findOne({where : {
@@ -80,6 +79,8 @@ const loginTrainer = async (req, res) => {
         res.status(401).send("Incorrect Password")
     }
 }
+
+
 
 
 
