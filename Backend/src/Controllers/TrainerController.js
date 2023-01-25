@@ -66,18 +66,18 @@ const registerTrainer =  (req, res) => {
 
 }
 
-const loginTrainer = (req, res) => {
+const loginTrainer = async (req, res) => {
 
-    let trainer = Trainer.findOne({where : {
+    let trainer = await Trainer.findOne({where : {
         Email: req.body.Email,
         }});
 
     if(!trainer){
-        res.status(404).json({message : 'No User found'})
+        res.status(404).send("No User found")
     }else if(trainer.Password == req.body.Password){
         res.status(200).send("Login Details Valid")
     }else{
-        res.status(401).json({message : 'Incorrect Password'})
+        res.status(401).send("Incorrect Password")
     }
 }
 
