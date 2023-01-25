@@ -57,4 +57,4 @@ const loginClient = async (req, res) => {
 }
 
 
-module.exports = {getAllClients,getAllClientsForTrainer}
+module.exports = {getAllClients,getAllClientsForTrainer,loginClient}
