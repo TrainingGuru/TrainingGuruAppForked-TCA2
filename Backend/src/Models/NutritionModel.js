@@ -1,7 +1,6 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 
-
 const Nutrition = sequelize.define('Nutrition',{
         NutritionID:{
             type: Sequelize.INTEGER,
@@ -50,5 +49,5 @@ const Nutrition = sequelize.define('Nutrition',{
         updatedAt: false
     });
 
-
+// Nutrition.belongsTo(Client, {foreignKey: 'NutritionID'})
 module.exports = Nutrition;
