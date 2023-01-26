@@ -22,11 +22,11 @@ const NutritionHistory = sequelize.define('NutritionHistory',{
         allowNull: false
     },
     CaloriesHit:{
-        type: sequelize.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
     }
 },{
-    tableName: 'Goals',
+    tableName: 'NutritionHistory',
     timestamps: false,
     createdAt: false,
     updatedAt: false

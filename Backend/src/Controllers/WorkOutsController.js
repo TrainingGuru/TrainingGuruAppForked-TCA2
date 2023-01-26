@@ -3,9 +3,11 @@ const TrainerWorkouts = require("../Models/TrainerWorkoutsModel");
 const Exercise = require("../Models/ExerciseModel");
 const ClientWorkOut = require("../Models/ClientWorkout");
 const Goal = require("../Models/GoalsModel");
+const NutritionHistory = require("../Models/NutritionHistory");
+
 
 const Test = async (req,res) =>{
-    let clients = await Goal.findAll()
+    let clients = await NutritionHistory.findAll()
     if(clients.length < 1){
         res.status(404)
         res.end()
