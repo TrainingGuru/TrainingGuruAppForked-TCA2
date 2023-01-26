@@ -23,5 +23,5 @@ const WorkOut = sequelize.define("WorkOut",{
     createdAt: false,
     updatedAt: false
 });
-//WorkOut.hasMany(Exercise,{foreignKey:'ExerciseID'})
+WorkOut.hasMany(Exercise,{foreignKey:'ExerciseID'})
 module.exports = WorkOut;

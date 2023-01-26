@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 const Clients = require('./ClientModel');
-const Workouts = require('./WorkOutModel');
+const TrainerWorkout = require('./TrainerWorkoutsModel');
 
 const ClientWorkout = sequelize.define("ClientWorkout",{
     ClientWorkoutID:{
@@ -18,12 +18,12 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
             key: 'ClientID'
         }
     },
-    WorkoutID:{
+    TrainerWorkoutID:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references:{
-            model: 'Workout',
-            key: 'WorkoutID'
+            model: 'TrainerWorkouts',
+            key: 'id'
         }
     },
     Date: {
@@ -51,5 +51,5 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
 
 
 ClientWorkout.hasMany(Clients,{foreignKey: 'ClientID'})
-ClientWorkout.hasMany(Workouts,{foreignKey: 'WorkoutID'})
+ClientWorkout.belongsTo(TrainerWorkout,{foreignKey: 'TrainerWorkoutID'})
 module.exports = ClientWorkout;

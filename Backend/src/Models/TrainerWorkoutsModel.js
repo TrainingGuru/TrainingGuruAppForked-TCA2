@@ -4,6 +4,12 @@ const Trainer = require("./TrainersModel");
 const Workout = require("./WorkOutModel");
 
 const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
+    id:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     TrainerID:{
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -30,6 +36,6 @@ const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
     createdAt: false,
     updatedAt: false
 });
-//TrainerWorkouts.hasMany(Trainer,{foreignKey: 'TrainerID'})
-//TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
+TrainerWorkouts.belongsTo(Trainer,{foreignKey: 'TrainerID'})
+TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
 module.exports = TrainerWorkouts;
