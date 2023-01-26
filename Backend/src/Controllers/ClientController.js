@@ -68,6 +68,7 @@ const getClientNutrition = async (req,res) => {
         let nutritionValue = await Nutrition.findOne({where : {
                 NutritionID : client.NutritionID
             }});
+
         res.status(200).json(nutritionValue);
     }
     else{
@@ -75,6 +76,8 @@ const getClientNutrition = async (req,res) => {
     }
 
 }
+
+
 
 
 module.exports = {

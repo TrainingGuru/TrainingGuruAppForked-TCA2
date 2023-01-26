@@ -6,7 +6,7 @@ const router = express.Router();
 
 //GetAllTrainers
 router.get("/",trainerController.getAllTrainers)
-router.put("/Register",trainerController.registerTrainer)
+router.post("/Register",trainerController.registerTrainer)
 router.get("/Login",trainerController.loginTrainer)
 router.get("/:id/Clients",trainerController.getAllClientsForTrainer)
 
