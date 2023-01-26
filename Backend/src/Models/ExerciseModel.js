@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 
-const Trainer = sequelize.define('Trainer',{
-    TrainerID:{
+const Exercise = sequelize.define("Exercise",{
+    ExerciseID:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -12,20 +12,27 @@ const Trainer = sequelize.define('Trainer',{
         type: Sequelize.STRING,
         allowNull: false,
     },
-    Email:{
+    Type:{
         type: Sequelize.STRING,
         allowNull: false,
     },
-    Password:{
+    Sets:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    Reps:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    Instructions:{
         type: Sequelize.STRING,
         allowNull: false,
     }
-},
-{
-    tableName: 'Trainer',
+},{
+    tableName: 'Exercise',
     timestamps: false,
     createdAt: false,
     updatedAt: false
 });
 
-module.exports = Trainer;
+module.exports = Exercise;
