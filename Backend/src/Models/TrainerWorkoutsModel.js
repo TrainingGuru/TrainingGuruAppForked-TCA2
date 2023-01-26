@@ -32,6 +32,6 @@ const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
     createdAt: false,
     updatedAt: false
 });
-TrainerWorkouts.hasMany(Trainer,{foreignKey: 'TrainerID'})
-TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
+//TrainerWorkouts.hasMany(Trainer,{foreignKey: 'TrainerID'})
+//TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
 module.exports = TrainerWorkouts;
