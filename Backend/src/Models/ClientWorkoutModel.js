@@ -51,5 +51,5 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
 
 
 ClientWorkout.hasMany(Clients,{foreignKey: 'ClientID'})
-//TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
+ClientWorkout.hasMany(Workouts,{foreignKey: 'WorkoutID'})
 module.exports = ClientWorkout;

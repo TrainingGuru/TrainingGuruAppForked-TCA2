@@ -1,10 +1,6 @@
-const Workout = require("../Models/WorkOutModel");
-const TrainerWorkouts = require("../Models/TrainerWorkoutsModel");
-const Exercise = require("../Models/ExerciseModel");
 const ClientWorkOut = require("../Models/ClientWorkoutModel");
-const Goal = require("../Models/GoalsModel");
-const NutritionHistory = require("../Models/NutritionHistoryModel");
 const PersonalBest = require("../Models/PersonalBestModel");
+const {Sequelize} = require("sequelize");
 
 const Test = async (req,res) =>{
     let clients = await PersonalBest.findAll()
@@ -21,15 +17,22 @@ const Test = async (req,res) =>{
 const WorkOutWeeks = async (req,res) => {
 
 
-
-    let listDate =  await ClientWorkOut.findAll({
+    await ClientWorkOut.findAll({
         where : {
             ClientID : req.params.id
         },
-        attributes:['Week']
+        attributes:[
+            Sequelize.fn('DISTINCT',Sequelize.col('Week')),'Week']
+        // include: [
+        //     {model: Workout}
+        // ]
+    }).then(function (weekList){
+        if(weekList.length <= 0 || weekList == null){
+            res.status(404).json("No Workouts Found");
+        }else{
+            res.status(200).json(weekList);
+        }
     });
-
-    res.status(200).json(listDate);
 }
 
 //Use able Methods in
