@@ -11,10 +11,10 @@ const WorkOut = sequelize.define("WorkOut",{
     ExerciseID:{
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
-            model: 'Exercise',
-            key: 'ExerciseID'
-        }
+        // references:{
+        //     model: 'Exercise',
+        //     key: 'ExerciseID'
+        // }
     }
 },{
     tableName: 'WorkOut',
