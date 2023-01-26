@@ -22,7 +22,7 @@ app.use((_, res, next) => {
 
 app.use("/Client",clientRoute);
 app.use("/Trainer",trainerRoute);
-app.use("/Workout",workoutRoute);
+app.use("/Client",workoutRoute);
 
 
 

@@ -30,6 +30,10 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
         type: Sequelize.DATEONLY,
         allowNull: false,
     },
+    Week:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     Notes:{
         type: Sequelize.STRING,
         allowNull: true,
@@ -47,5 +51,5 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
 
 
 ClientWorkout.hasMany(Clients,{foreignKey: 'ClientID'})
-//TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
+ClientWorkout.hasMany(Workouts,{foreignKey: 'WorkoutID'})
 module.exports = ClientWorkout;
