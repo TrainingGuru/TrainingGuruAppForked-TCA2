@@ -30,6 +30,10 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
         type: Sequelize.DATEONLY,
         allowNull: false,
     },
+    Week:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     Notes:{
         type: Sequelize.STRING,
         allowNull: true,

@@ -17,7 +17,25 @@ const Test = async (req,res) =>{
         res.end();
     }
 }
+
+const WorkOutWeeks = async (req,res) => {
+
+
+
+    let listDate =  await ClientWorkOut.findAll({
+        where : {
+            ClientID : req.params.id
+        },
+        attributes:['Week']
+    });
+
+    res.status(200).json(listDate);
+}
+
+//Use able Methods in
+
 module.exports = {
     Test,
+    WorkOutWeeks
     
 }
