@@ -29,15 +29,16 @@ const PersonalBest = sequelize.define("PersonalBest",{
     },
     Date: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
-    }
+        allowNull: false
+    },
 },{
     tableName: 'PersonalBest',
     timestamps: false,
     createdAt: false,
     updatedAt: false
 });
+
 PersonalBest.hasOne(Clients,{foreignKey: 'ClientID'});
 Clients.hasMany(PersonalBest,{foreignKey: 'ClientID'})
 
-module.export = PersonalBest;
+module.exports = PersonalBest;

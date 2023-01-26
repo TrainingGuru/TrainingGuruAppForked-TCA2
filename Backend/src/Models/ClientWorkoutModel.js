@@ -33,6 +33,10 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
     Notes:{
         type: Sequelize.STRING,
         allowNull: true,
+    },
+    Completed:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false
     }
 },{
     tableName: 'ClientWorkout',
@@ -40,6 +44,8 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
     createdAt: false,
     updatedAt: false
 });
+
+
 ClientWorkout.hasMany(Clients,{foreignKey: 'ClientID'})
 //TrainerWorkouts.hasMany(Workout,{foreignKey: 'WorkoutID'})
 module.exports = ClientWorkout;

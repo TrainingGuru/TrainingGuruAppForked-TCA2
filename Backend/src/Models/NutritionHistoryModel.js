@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 const Clients = require("./ClientModel");
 
-const NutritionHistory = sequelize.define('NutritionHistory',{
+const NutritionHistoryModel = sequelize.define('NutritionHistory',{
     NutritionHistoryID:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -31,6 +31,6 @@ const NutritionHistory = sequelize.define('NutritionHistory',{
     createdAt: false,
     updatedAt: false
 })
-NutritionHistory.belongsTo(Clients,{foreignKey: 'ClientID'});
-Clients.hasMany(NutritionHistory,{foreignKey: 'ClientID'})
-module.exports = NutritionHistory;
+NutritionHistoryModel.belongsTo(Clients,{foreignKey: 'ClientID'});
+Clients.hasMany(NutritionHistoryModel,{foreignKey: 'ClientID'})
+module.exports = NutritionHistoryModel;
