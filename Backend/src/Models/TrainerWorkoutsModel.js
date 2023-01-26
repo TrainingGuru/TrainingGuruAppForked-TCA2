@@ -6,7 +6,6 @@ const Workout = require("./WorkOutModel");
 const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
     TrainerID:{
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
         references:{
             model: 'Trainer',
@@ -15,7 +14,6 @@ const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
     },
     WorkoutID:{
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
         references:{
             model: 'Workout',
@@ -27,7 +25,7 @@ const TrainerWorkouts = sequelize.define("TrainerWorkouts",{
         allowNull: false,
     }
 },{
-    tableName: 'ExerciseModel',
+    tableName: 'TrainerWorkouts',
     timestamps: false,
     createdAt: false,
     updatedAt: false

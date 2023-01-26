@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 
-const ExerciseModel = sequelize.define("WorkOut",{
+const ExerciseModel = sequelize.define("Exercise",{
     ExerciseID:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -29,7 +29,7 @@ const ExerciseModel = sequelize.define("WorkOut",{
         allowNull: false,
     }
 },{
-    tableName: 'ExerciseModel',
+    tableName: 'Exercise',
     timestamps: false,
     createdAt: false,
     updatedAt: false

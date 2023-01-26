@@ -1,7 +1,10 @@
 const Workout = require("../Models/WorkOutModel");
+const TrainerWorkouts = require("../Models/TrainerWorkoutsModel");
+const Exercise = require("../Models/ExerciseModel");
+const ClientWorkOut = require("../Models/ClientWorkout");
 
 const Test = async (req,res) =>{
-    let clients = await Workout.findAll()
+    let clients = await ClientWorkOut.findAll()
     if(clients.length < 1){
         res.status(404)
         res.end()

@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 const Exercise = require('./ExerciseModel')
+
 const WorkOut = sequelize.define("WorkOut",{
     WorkoutID:{
         type: Sequelize.INTEGER,
