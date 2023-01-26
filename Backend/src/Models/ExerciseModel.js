@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
 
-const Exercise = sequelize.define("WorkOut",{
+const ExerciseModel = sequelize.define("WorkOut",{
     ExerciseID:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -29,10 +29,10 @@ const Exercise = sequelize.define("WorkOut",{
         allowNull: false,
     }
 },{
-    tableName: 'Exercise',
+    tableName: 'ExerciseModel',
     timestamps: false,
     createdAt: false,
     updatedAt: false
 });
 
-module.exports = Exercise;
+module.exports = ExerciseModel;
