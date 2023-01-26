@@ -14,7 +14,7 @@ const Client = sequelize.define('Client',{
             type: Sequelize.INTEGER,
             allowNull: false,
             references:{
-                model: 'Trainers',
+                model: 'TrainersModel',
                 key: 'TrainerID'
             }
         },
@@ -34,8 +34,8 @@ const Client = sequelize.define('Client',{
             type: Sequelize.INTEGER,
             allowNull: true,
             references:{
-                model: 'Trainers',
-                key: 'TrainerID'
+                model: 'NutritionModel',
+                key: 'NutritionID'
             }
         }
     },
