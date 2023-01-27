@@ -46,8 +46,9 @@ const ClientWorkout = sequelize.define("ClientWorkout",{
     tableName: 'ClientWorkout',
     timestamps: false,
     createdAt: false,
-    updatedAt: false
-});
+    updatedAt: false,
+}
+);
 
 
 ClientWorkout.hasMany(Clients,{foreignKey: 'ClientID'})
