@@ -79,7 +79,15 @@ const CompleteAWorkOut = async (req,res) =>{
             ClientWorkoutID : req.params.id
         }
     }).then(recordToUpdate => {
+        if(!recordToUpdate)
+            res.status(404).json("No Client Workout Found")
 
+          recordToUpdate.update({
+              Notes : req.body.Notes,
+              Completed : 1
+            })
+
+        res.status(202).json("Workout Completed");
     })
 
 
@@ -91,6 +99,7 @@ module.exports = {
 
     WorkOutWeeks,
     GetWorkOutsForWeek,
-    GetWorkOutDetails
+    GetWorkOutDetails,
+    CompleteAWorkOut
     
 }
