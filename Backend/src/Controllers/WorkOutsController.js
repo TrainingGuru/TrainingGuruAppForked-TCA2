@@ -3,7 +3,7 @@ const {Sequelize} = require("sequelize");
 const ClientWorkOut = require("../Models/ClientWorkoutModel");
 const WorkOuts = require("../Models/TrainerWorkoutsModel");
 const WorkOut = require("../Models/WorkOutModel");
-const Exercises = require("../Models/ExerciseModel")
+const Exercises = require("../Models/ExerciseModel");
 
 
 

@@ -7,6 +7,7 @@ const database = require("./Config/DatabaseConfig.js");
 const trainerRoute = require("./Routes/Trainer.js");
 const clientRoute = require("./Routes/Client.js");
 const workoutRoute = require("./Routes/WorkOuts.js");
+const goalRoute = require("./Routes/Goals.js");
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,6 +24,7 @@ app.use((_, res, next) => {
 app.use("/Client",clientRoute);
 app.use("/Trainer",trainerRoute);
 app.use("/Client",workoutRoute);
+app.use("/Goals",goalRoute);
 
 
 
