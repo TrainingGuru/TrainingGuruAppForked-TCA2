@@ -1,23 +1,11 @@
 const {Sequelize} = require("sequelize");
 
 const ClientWorkOut = require("../Models/ClientWorkoutModel");
-const PersonalBest = require("../Models/PersonalBestModel");
 const WorkOuts = require("../Models/TrainerWorkoutsModel");
 const WorkOut = require("../Models/WorkOutModel");
 const Exercises = require("../Models/ExerciseModel")
 
 
-const Test = async (req,res) =>{
-    let clients = await PersonalBest.findAll()
-    if(clients.length < 1){
-        res.status(404)
-        res.end()
-    }
-    else{
-        res.status(200).send(clients)
-        res.end();
-    }
-}
 
 const WorkOutWeeks = async (req,res) => {
 
@@ -62,12 +50,16 @@ const GetWorkOutsForWeek = async (req,res) => {
 const GetWorkOutDetails = async (req,res) => {
 
     await WorkOut.findAll({
-        include:{
-            model: Exercises
-        },
+
         where : {
             TrainerWorkoutID : req.params.id
         },
+        attributes : ['TrainerWorkoutID'],
+
+        include:{
+            model: Exercises,
+            attributes: {exclude : ['ExerciseID']}
+        }
 
     }).then(function (Workout){
         if(Workout.length <= 0){
@@ -79,10 +71,24 @@ const GetWorkOutDetails = async (req,res) => {
 
 }
 
+//GetWorkoutsForWeek() holds ClientWorkoutID which can be used to update
+const CompleteAWorkOut = async (req,res) =>{
+
+    ClientWorkOut.findOne({
+        where: {
+            ClientWorkoutID : req.params.id
+        }
+    }).then(recordToUpdate => {
+
+    })
+
+
+
+}
 //Use able Methods in
 
 module.exports = {
-    Test,
+
     WorkOutWeeks,
     GetWorkOutsForWeek,
     GetWorkOutDetails
