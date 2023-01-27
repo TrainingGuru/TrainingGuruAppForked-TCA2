@@ -3,18 +3,28 @@ const sequelize = require('../Config/DatabaseConfig');
 const Exercise = require('./ExerciseModel')
 
 const WorkOut = sequelize.define("WorkOut",{
-    WorkoutID:{
+    id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: false,
     },
     ExerciseID:{
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false,
+        foreignKey:true,
         references:{
             model: 'Exercise',
             key: 'ExerciseID'
+        }
+    },
+    TrainerWorkoutID:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references:{
+            model: 'TrainerWorkouts',
+            key: 'id'
         }
     }
 },{
@@ -23,5 +33,8 @@ const WorkOut = sequelize.define("WorkOut",{
     createdAt: false,
     updatedAt: false
 });
-WorkOut.hasMany(Exercise,{foreignKey:'ExerciseID'})
+WorkOut.hasMany(Exercise,{foreignKey: 'ExerciseID'})
+
+//Exercise.belongsToMany(TrainerWorkout,{through : WorkOut, foreignKey : 'TrainerWorkoutID'})
+//WorkOut.hasOne(Exercise,{foreignKey: 'ExerciseID'})
 module.exports = WorkOut;

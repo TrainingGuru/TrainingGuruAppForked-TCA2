@@ -1,5 +1,9 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../Config/DatabaseConfig');
+const TrainerWorkOuts = require("./TrainerWorkoutsModel");
+const Workout = require("./WorkOutModel");
+const Clients = require("./ClientModel");
+const TrainerWorkout = require("./TrainerWorkoutsModel");
 
 const Exercise = sequelize.define("Exercise",{
     ExerciseID:{
@@ -34,5 +38,9 @@ const Exercise = sequelize.define("Exercise",{
     createdAt: false,
     updatedAt: false
 });
+
+//Exercise.belongsTo(Workout)
+
+//Exercise.belongsToMany(TrainerWorkOuts, {through: 'WorkOut', foreignKey: 'ExerciseID'});
 
 module.exports = Exercise;
