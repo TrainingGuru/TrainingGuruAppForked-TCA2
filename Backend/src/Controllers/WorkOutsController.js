@@ -16,9 +16,6 @@ const WorkOutWeeks = async (req,res) => {
         },
         attributes:[
             Sequelize.fn('DISTINCT',Sequelize.col('Week')),'Week']
-        // include: [
-        //     {model: workout}
-        // ]
     }).then(function (weekList){
         if(weekList.length <= 0){
             res.status(404).json("No Workouts Found");
