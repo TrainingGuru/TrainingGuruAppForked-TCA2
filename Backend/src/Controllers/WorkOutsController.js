@@ -82,12 +82,16 @@ const CompleteAWorkOut = async (req,res) =>{
         if(!recordToUpdate)
             res.status(404).json("No Client Workout Found")
 
-          recordToUpdate.update({
-              Notes : req.body.Notes,
-              Completed : 1
-            })
+        if(recordToUpdate.attributes.Completed == 1){
+            res.status(400);
+        }else{
+            recordToUpdate.update({
+                Notes : req.body.Notes,
+                Completed : 1
+            });
+            res.status(201).json("Workout Completed");
+        }
 
-        res.status(202).json("Workout Completed");
     })
 
 
