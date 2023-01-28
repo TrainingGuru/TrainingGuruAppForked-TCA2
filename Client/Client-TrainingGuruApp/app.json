@@ -2,7 +2,7 @@
   "expo": {
     "name": "client-trainingguruapp",
     "slug": "client-trainingguruapp",
-    "version": "1.0.0",
+    "version": "2.2.7",
     "orientation": "portrait",
     "splash": {
       "resizeMode": "contain",
@@ -17,7 +17,15 @@
     "ios": {
       "supportsTablet": true
     },
-    "web": {
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "e6e99bc5-0066-4193-99dd-0967227e8083"
+      }
+    },
+    "android": {
+      "package": "com.TrainngGuru.trainingGuru",
+      "versionCode": 2
     }
   },
   "dependencies": {
