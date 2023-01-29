@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import { View, Text, Image, TouchableOpacity, TextInput , StyleSheet} from 'react-native';
+import {useNavigation} from "@react-navigation/core";
 
-export const LoginScreen = ({ navigation }) => {
+export const LoginScreen = ({  }) => {
+    const navigation = useNavigation();
+
     const [accountType, setAccountType] = useState('client');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,6 +17,7 @@ export const LoginScreen = ({ navigation }) => {
 
 
     const handleSignup = () => {
+
         if (accountType === 'client') {
             // validate client form and create account
         } else {
@@ -117,7 +121,7 @@ export const LoginScreen = ({ navigation }) => {
                 value={password}
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ClientHome')}>
                 <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgotPassword}>

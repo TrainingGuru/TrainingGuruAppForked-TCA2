@@ -1,6 +1,6 @@
 export class NinjaAPI {
     baseUrl = 'https://api.api-ninjas.com/v1/nutrition?';
-    apiKey = 'PpzKdkDkxB6inFeVsTvUvSlOwBq5lR6Kh7Mabjbw';
+    apiKey = 'hQPO0djvtzl4EMx6HrE9NA8DRBA2asZu2eSfzeQt';
 
     async getNutritionInfo(unit, value, foodName) {
         try {
