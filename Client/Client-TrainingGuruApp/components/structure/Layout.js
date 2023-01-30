@@ -4,12 +4,15 @@ import flex from "native-base/src/components/primitives/Flex/index";
 import StyleSheet from 'react-native-media-query';
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import {Dimensions, Image, View, Text, ScrollView} from "react-native";
+import {LoadingDialog} from "../LoadingDialog";
 
-function Layout({children}) {
+function Layout({loading = false, children}) {
 
     let layout = {
         width: Dimensions.get('window').width
     }
+
+
 
     const styles = CreateResponsiveStyle({
         layout: {
@@ -92,8 +95,7 @@ function Layout({children}) {
 // console.log(styles)
 
     return <View style={styles.layout}>
-
-
+        <LoadingDialog loading={loading}/>
         {layout.width > 768 ? <View style={styles.layout.base}>
             <View style={styles.layout.base.navigation}>
                 <NavigationBar/>

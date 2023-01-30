@@ -13,12 +13,11 @@ import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
 
 export const ClientHome = () => {
-
-
     const [unit, setUnit] = useState('grams');
     const [value, setValue] = useState('');
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
+    const [loadingModel, setLoadingModal] = useState(false);
 
     let layout = {
         width: Dimensions.get('window').width
@@ -213,14 +212,22 @@ export const ClientHome = () => {
 
     const handleSubmit = async () => {
         const api = new NinjaAPI();
+
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
+        setLoadingModal(false);
+
+        if(!nutritionInfo || nutritionInfo.length < 1){
+            alert("Error food not found")
+        }
+
 
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
+        setLoadingModal(false);
     }
 
-    return <Layout>
+    return <Layout loading={loadingModel}>
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
             </View>
