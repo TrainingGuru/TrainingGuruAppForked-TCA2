@@ -1,4 +1,4 @@
-import Layout, {setLoadingState} from "../../components/structure/Layout";
+import Layout from "../../components/structure/Layout";
 import {Dimensions, StyleSheet, View, Text, TextInput, TouchableOpacity} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
@@ -17,6 +17,7 @@ export const ClientHome = () => {
     const [value, setValue] = useState('');
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
+    const [loadingModel, setLoadingModal] = useState(false);
 
     let layout = {
         width: Dimensions.get('window').width
@@ -211,16 +212,22 @@ export const ClientHome = () => {
 
     const handleSubmit = async () => {
         const api = new NinjaAPI();
-        setLoadingState(true);
+
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
+        setLoadingModal(false);
+
+        if(!nutritionInfo || nutritionInfo.length < 1){
+            alert("Error food not found")
+        }
+
 
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
-        setLoadingState(false);
+        setLoadingModal(false);
     }
 
-    return <Layout>
+    return <Layout loading={loadingModel}>
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
             </View>

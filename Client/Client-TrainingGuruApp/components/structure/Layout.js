@@ -5,18 +5,13 @@ import StyleSheet from 'react-native-media-query';
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
 import {Dimensions, Image, View, Text, ScrollView} from "react-native";
 import {LoadingDialog} from "../LoadingDialog";
-import {useState} from "react";
 
-function Layout({children}) {
-    const [loading, setLoading] = useState(false);
+function Layout({loading = false, children}) {
 
     let layout = {
         width: Dimensions.get('window').width
     }
 
-     const setLoadingState = (value) => {
-        setLoading(value)
-    }
 
 
     const styles = CreateResponsiveStyle({
