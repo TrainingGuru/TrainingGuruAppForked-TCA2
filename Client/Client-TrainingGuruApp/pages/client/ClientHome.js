@@ -1,4 +1,4 @@
-import Layout from "../../components/structure/Layout";
+import Layout, {setLoadingState} from "../../components/structure/Layout";
 import {Dimensions, StyleSheet, View, Text, TextInput, TouchableOpacity} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import CreateResponsiveStyle from "../../utils/responsiveStyle";
@@ -13,8 +13,6 @@ import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
 
 export const ClientHome = () => {
-
-
     const [unit, setUnit] = useState('grams');
     const [value, setValue] = useState('');
     const [foodName, setFoodName] = useState('');
@@ -213,11 +211,13 @@ export const ClientHome = () => {
 
     const handleSubmit = async () => {
         const api = new NinjaAPI();
+        setLoadingState(true);
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
 
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
+        setLoadingState(false);
     }
 
     return <Layout>
