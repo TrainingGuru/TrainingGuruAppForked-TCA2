@@ -214,12 +214,11 @@ export const ClientHome = () => {
         const api = new NinjaAPI();
 
         const nutritionInfo = await api.getNutritionInfo(unit, value, foodName);
-        setLoadingModal(false);
+        setLoadingModal(true);
 
         if(!nutritionInfo || nutritionInfo.length < 1){
             alert("Error food not found")
         }
-
 
         let temp = shoppingList.concat(nutritionInfo)
 

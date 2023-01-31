@@ -71,7 +71,7 @@ function Layout({loading = false, children}) {
                     right: 0,
                     flexDirection: 'row',
                     alignItems: 'center',
-                    backgroundColor: 'grey',
+                    backgroundColor: 'white',
                     padding: 20,
                     zIndex: 1,
                     justifyContent: "space-around",
