@@ -86,11 +86,11 @@ function NavigationBar() {
                 {Platform.OS !== 'web' || size < 767  ? <TouchableOpacity onPress={() => navigation.navigate('ClientHome')}>
                         <FontAwesomeIcon icon={faHouseChimney}
                                          size={Platform.OS !== 'web' && size < 768 && 35}
-                                         color={activeRoute === 'ClientHome' ? '#a6a3a3' : '#000000'}
+                                         color={activeRoute === 'ClientHome' ? '#000000' : '#a6a3a3'}
                         />
                     </TouchableOpacity>
                  : <FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}
-                                      color={activeRoute === 'ClientHome' ? '#a6a3a3' : '#000000'}
+                                      color={activeRoute === 'ClientHome' ? '#000000' : '#a6a3a3'}
                                       onPress={() => navigation.navigate('ClientHome')}
                 />}
             </View>
@@ -99,12 +99,12 @@ function NavigationBar() {
                 {Platform.OS !== 'web' || size < 767 ?
                     <TouchableOpacity onPress={() => navigation.navigate('Workouts')}>
                     <FontAwesomeIcon icon={faDumbbell} size={Platform.OS !== 'web' && size < 768 && 47}
-                                     color={activeRoute === 'Workouts' ? '#a6a3a3' : '#000000'}
+                                     color={activeRoute === 'Workouts' ?'#000000' : '#a6a3a3'}
                                      />
                     </TouchableOpacity>
                    : <FontAwesomeIcon style={{...styles.listNav.icon, ...styles.listNav.icon.people}}
                                           icon={faPeopleGroup}
-                                          color={activeRoute === 'Workouts' ? '#a6a3a3' : '#000000'}
+                                          color={activeRoute === 'Workouts' ? '#000000' : '#a6a3a3'}
                                           onPress={() => navigation.navigate('Workouts')}
                     />}
             </View>
@@ -113,11 +113,11 @@ function NavigationBar() {
                     <TouchableOpacity onPress={() => navigation.navigate('ClientProfile')}>
                         <FontAwesomeIcon size={size < 768 && 35}
                                                           icon={faUser}
-                                                          color={activeRoute === 'ClientProfile' ? '#a6a3a3' : '#000000'}/>
+                                                          color={activeRoute === 'ClientProfile' ? '#000000' : '#a6a3a3'}/>
                     </TouchableOpacity>
                         : <FontAwesomeIcon style={styles.listNav.icon}
                                       icon={faUser}
-                                      color={activeRoute === 'ClientProfile' ? '#a6a3a3' : '#000000'}
+                                      color={activeRoute === 'ClientProfile' ? '#000000' : '#a6a3a3'}
                                       onPress={() => navigation.navigate('ClientProfile')}
                 />}
             </View>
@@ -125,10 +125,10 @@ function NavigationBar() {
             <View>
                 {Platform.OS !== 'web' ? <FontAwesomeIcon icon={faHouseChimney}
                                                           size={Platform.OS !== 'web' && size < 768 && 35}
-                                                          color={activeRoute === 'ClientHome' ? '#a6a3a3' : '#000000'}
+                                                          color={activeRoute === 'ClientHome' ? '#000000' : '#a6a3a3'}
                                                           onPress={() => navigation.navigate('ClientHome')}
                 /> : <FontAwesomeIcon style={styles.listNav.icon} icon={faHouseChimney}
-                                      color={activeRoute === 'ClientHome' ? '#a6a3a3' : '#000000'}
+                                      color={activeRoute === 'ClientHome' ? '#000000' : '#a6a3a3'}
                                       onPress={() => navigation.navigate('ClientHome')}
                 />}
                 {size > 768 && <Text>Home</Text>}
