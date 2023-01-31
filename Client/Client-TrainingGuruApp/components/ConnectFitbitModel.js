@@ -1,7 +1,7 @@
 import {ActivityIndicator, Alert, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 
-export const connectFitbitModel = () => {
+export const ConnectFitbitModel = ({open, isOpen}) => {
     const styles = StyleSheet.create({
         exerciseNameContainer: {
             alignItems: 'center',
@@ -132,7 +132,7 @@ export const connectFitbitModel = () => {
     return      <Modal
         animationType="slide"
         transparent={true}
-        visible={true}
+        visible={open}
         onRequestClose={() => {
             Alert.alert("Modal has been closed.");
         }}
@@ -141,17 +141,19 @@ export const connectFitbitModel = () => {
             <View style={styles.modalInnerContainer}>
                 {/*<Text style={styles.modalTitle}>Notes for your Coach</Text>*/}
                 <Text style={{ marginTop: 10 }}>Connect Fitbit </Text>
-                <TextInput style={}>
-
-                </TextInput>
+                <TextInput
+                    placeholder="Enter your notes here"
+                    style={styles.notesInput}
+                    multiline={true}
+                />
                 <View style={styles.modalButtonsContainer}>
-                    {/*<TouchableOpacity*/}
-                    {/*    style={styles.modalCancelButton}*/}
-                    {/*    onPress={() => {*/}
-                    {/*        setModalVisible(!modalVisible);*/}
-                    {/*    }}>*/}
-                    {/*    <Text style={styles.modalButtonText}>Cancel</Text>*/}
-                    {/*</TouchableOpacity>*/}
+                    <TouchableOpacity
+                        style={styles.modalCancelButton}
+                        onPress={() => {
+                            isOpen(!open);
+                        }}>
+                        <Text style={styles.modalButtonText}>Cancel</Text>
+                    </TouchableOpacity>
                     {/*<TouchableOpacity*/}
                     {/*    style={styles.modalSubmitButton}*/}
                     {/*    onPress={submitNotes}*/}
