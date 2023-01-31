@@ -18,7 +18,7 @@ export const ClientHome = () => {
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
     const [loadingModel, setLoadingModal] = useState(false);
-
+    const [calorieGoals, setCalorieGoals] = useState();
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -231,7 +231,8 @@ export const ClientHome = () => {
             <View style={styles.clientHome.title}>
             </View>
             <CardLayout>
-                <CalorieBrokenDown/>
+                {calorieGoals ?  <CalorieBrokenDown/> :
+                    <View stye={{paddingHorizontal: 140, fontWeight: "bolder"}}><Text>Coach has not added calorie goals for you yet</Text></View>}
             </CardLayout>
 
             <View style={styles.clientHome.first}>
