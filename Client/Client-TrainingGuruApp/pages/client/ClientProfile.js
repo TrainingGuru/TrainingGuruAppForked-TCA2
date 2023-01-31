@@ -35,14 +35,20 @@ function ClientProfile() {
     }
 
     const handleConnectFitbit = () => {
-
         setFitbitModelOpen(true)
         // setFitbitConnected(!fitbitConnected);
     }
 
+    const [loading, setLoading] = useState();
+
+    const connectFunction = () => {
+        setLoading(true);
+    }
+
     return (
-        <Layout><View>
-            <ConnectFitbitModel open={fitbitModelOpen} isOpen={setFitbitModelOpen}/>
+        <Layout loading={loading}>
+            <View>
+            <ConnectFitbitModel open={fitbitModelOpen} setOpen={setFitbitModelOpen} connectFunction={connectFunction}/>
             <View style={styles.topRowContainer}>
                 <CardLayout  style={{...styles.cardContainer, width: "40%"}}>
                     <TouchableOpacity onPress={() => {

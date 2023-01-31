@@ -1,167 +1,130 @@
-import {ActivityIndicator, Alert, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import {
+    ActivityIndicator,
+    Alert,
+    Modal,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 
-export const ConnectFitbitModel = ({open, isOpen}) => {
+export const ConnectFitbitModel = ({ open, setOpen, connectFunction }) => {
+    const [fitbitCode, setFitbitCode] = useState("");
+    const [isConnected, setIsConnected] = useState(false);
+
     const styles = StyleSheet.create({
-        exerciseNameContainer: {
-            alignItems: 'center',
-            justifyContent: 'center',
+        input: {
+            backgroundColor: "#f5f5f5",
+            borderRadius: 10,
+            padding: 10,
+            marginTop: 10,
+            fontSize: 14,
+            color: "#555",
         },
-        weightContainer: {
-            flexDirection: "row-reverse",
+        submitButton: {
+            backgroundColor: "#4CAF50",
+            padding: 10,
+            margin: 15,
+            height: 40,
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: 10
+            borderRadius: 10,
+        },
+        cancelButton: {
+            backgroundColor: "#f8032d",
+            padding: 10,
+            margin: 15,
+            height: 40,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 10,
+        },
+        submitButtonText: {
+            color: "white",
         },
         container: {
             padding: 10,
-            width: "100%"
-        },
-        name: {
-            fontSize: 24,
-            fontWeight: "bold",
-            marginBottom: 20,
-            textAlign: 'center',
-            color: '#333'
-        },
-        exerciseRow: {
-            flexDirection: "column",
-            alignItems: "center",
-            marginVertical: 10,
             width: "100%",
-            backgroundColor: '#fff',
-            padding: 10,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-        },
-        exerciseName: {
-            fontWeight: "bold",
-            textAlign: "center",
-            fontSize: 18,
-            color: '#333',
-            marginBottom: 10
-        },
-        reps: {
-            marginHorizontal: 10,
-            fontSize: 14,
-            color: '#555',
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center"
+            alignItems: "center",
+            justifyContent: "center",
         },
         modalContainer: {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "rgba(0, 0, 0, 0.5)"
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
         },
         modalInnerContainer: {
-            width: "50%",
-            height: "20%",
+            width: "80%",
+            height: "40%",
             backgroundColor: "#fff",
             padding: 20,
             alignItems: "center",
-            justifyContent: "center"
-        },
-        modalTitle: {
-            fontSize: 20,
-            marginBottom: 20
-        },
-        notesInput: {
-            width: "100%",
-            height: "60%",
-            borderWidth: 1,
-            borderColor: "#ccc",
-            padding: 10,
-            marginBottom: 20,
-            textAlignVertical: "top"
-        },
-        modalButtonsContainer: {
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between"
-        },
-        modalCancelButton: {
-            backgroundColor: "#ccc",
-            padding: 10,
-            width: "40%"
-        },
-        modalSubmitButton: {
-            backgroundColor: "#33cc33",
-            padding: 10,
-            width: "40%"
-        },
-        modalButtonText: {
-            textAlign: "center",
-            color: "#fff"
-        },
-        weight: {
-            fontSize: 14,
-            color: '#555',
-            width: "40%"
-        },
-
-        input: {
-            backgroundColor: '#f5f5f5',
+            justifyContent: "center",
             borderRadius: 10,
-            padding: 10,
-            marginTop: 10,
-            fontSize: 14,
-            color: '#555',
         },
-        submitButton: {
-            backgroundColor: '#4CAF50',
-            padding: 10,
-            margin: 15,
-            height: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
+        title: {
+            fontSize: 20,
+            marginBottom: 20,
+            fontWeight: "bold",
+            color: "#333",
         },
-        submitButtonText:{
-            color: 'white',
+        resultText: {
+            fontSize: 16,
+            marginTop: 20,
+            fontWeight: "bold",
+            color: "#333",
+            textAlign: "center",
         },
     });
 
-    return      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={open}
-        onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-        }}
-    >
-        <View style={styles.modalContainer}>
-            <View style={styles.modalInnerContainer}>
-                {/*<Text style={styles.modalTitle}>Notes for your Coach</Text>*/}
-                <Text style={{ marginTop: 10 }}>Connect Fitbit </Text>
-                <TextInput
-                    placeholder="Enter your notes here"
-                    style={styles.notesInput}
-                    multiline={true}
-                />
-                <View style={styles.modalButtonsContainer}>
+    const handleConnect = () => {
+        setOpen(false);
+        connectFunction();
+    };
+
+    return (
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={open}
+            onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+            }}
+        >
+            <View style={styles.modalContainer}>
+                <View style={styles.modalInnerContainer}>
+                    <Text style={styles.title}>Connect Fitbit</Text>
+                    <TextInput
+                        placeholder="Enter 5 digit code"
+                        style={styles.input}
+                        keyboardType="number-pad"
+                        maxLength={5}
+                        onChangeText={(text) => setFitbitCode(text)}
+                        value={fitbitCode}
+                    />
                     <TouchableOpacity
-                        style={styles.modalCancelButton}
+                        style={styles.submitButton}
+                        onPress={handleConnect}
+                        disabled={fitbitCode.length !== 5}
+                    >
+                        {isConnected ? (
+                            <Text style={styles.submitButtonText}>Connected</Text>
+                        ) : (
+                            <Text style={styles.submitButtonText}>Connect</Text>
+                        )}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.cancelButton}
                         onPress={() => {
-                            isOpen(!open);
+                            setOpen(!open)
                         }}>
                         <Text style={styles.modalButtonText}>Cancel</Text>
                     </TouchableOpacity>
-                    {/*<TouchableOpacity*/}
-                    {/*    style={styles.modalSubmitButton}*/}
-                    {/*    onPress={submitNotes}*/}
-                    {/*>*/}
-                    {/*    <Text style={styles.modalButtonText}>Submit</Text>*/}
-                    {/*</TouchableOpacity>*/}
                 </View>
             </View>
-        </View>
-    </Modal>
-}
+        </Modal>
+    );
+};
