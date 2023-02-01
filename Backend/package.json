@@ -4,7 +4,8 @@
   "description": "Backend Server for TrainingGuru mobile app",
   "main": "src/index.js",
   "scripts": {
-    "start:backend": "nodemon src/index.js"
+    "start:backend": "node src/index.js",
+    "watch": "nodemon src/index.js"
   },
   "author": "Sean McAvoy",
   "license": "ISC",
