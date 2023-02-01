@@ -21,6 +21,15 @@ const CreateGoalForClient = async (req,res) => {
 
 }
 
+const UpdateGoalForClient = async (req,res) => {
+
+}
+
+const DeleteGoalForClient = async (req,res) => {
+
+}
+
+
 
 module.exports = {
 
