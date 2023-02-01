@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
+import api, {APIClient} from "../../services/client-api";
+import {LoadingDialog} from "../../components/LoadingDialog";
 
 export const CreateClientPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -10,6 +12,8 @@ export const CreateClientPage = () => {
     const [coachCode, setCoachCode] = useState('');
     const [goals, setGoals] = useState([]);
     const [isGoalsVisible, setIsGoalsVisible] = useState(false);
+    const [isLoading, setLoading] = useState(fals)
+
 
     const slideAnim = useRef(new Animated.Value(0)).current;
 
@@ -35,7 +39,20 @@ export const CreateClientPage = () => {
     }
 
     const handleCreateClient = () => {
-        // validate form and create client account
+        const trainerId = coachCode;
+        const name = firstName + " " + lastName;
+
+        APIClient.registerClient(trainerId, name, email, password)
+            .then((success) => {
+                if (success) {
+                    // handle success
+                } else {
+                    // handle error
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     const handleToggleGoals = () => {
@@ -124,6 +141,7 @@ export const CreateClientPage = () => {
 
     return (
         <ScrollView>
+            <LoadingDialog loading={lo}
         <View style={styles.container}>
                 <TextInput
                     style={styles.input}

@@ -17,6 +17,7 @@ export class Fitbit {
         return fetch(`https://api.fitbit.com/oauth2/token?grant_type=refresh_token&refresh_token=${refreshToken}`, requestOptions)
             .then(response => response.text())
             .catch(error => console.log("error", error));
+
     }
 
     getActivities(date) {
@@ -26,7 +27,7 @@ export class Fitbit {
             redirect: "follow"
         };
 
-        return fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, requestOptions)
+        return fetch(`https://api.fitbit.com/1/user/23994L/activities/date/${date}.json`, requestOptions)
             .then(response => response.text())
             .catch(error => console.log("error", error));
     }

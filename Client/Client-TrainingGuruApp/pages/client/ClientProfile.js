@@ -3,6 +3,8 @@ import {View, Text, Image, TouchableOpacity, TextInput, ScrollView, FlatList} fr
 import CardLayout from "../../components/reusable/CardLayout";
 import Layout from "../../components/structure/Layout";
 import {ConnectFitbitModel} from "../../components/ConnectFitbitModel";
+import {Fitbit} from "../../services/fitbit-service";
+import {NinjaAPI} from "../../services/nutrition-service";
 
 function ClientProfile() {
     const [userName, setUserName] = useState("Josh Mitvh");
@@ -36,13 +38,17 @@ function ClientProfile() {
 
     const handleConnectFitbit = () => {
         setFitbitModelOpen(true)
+
         // setFitbitConnected(!fitbitConnected);
     }
 
     const [loading, setLoading] = useState();
 
-    const connectFunction = () => {
-        setLoading(true);
+    const connectFunction = async () => {
+        // setLoading(true);
+        const api = new Fitbit();
+        console.log(await api.refreshToken())
+
     }
 
     return (
