@@ -20,12 +20,15 @@ export const APIClient = {
         };
 
         const response = await fetch(`${API_URL}Register`, requestOptions);
+        const responseJson = await response.json();
+
         if (response.status === 201) {
-            return true;
+            return {value: true, message: responseJson};
         } else {
-            return false;
+            return {value: false, message: responseJson};
         }
     },
+
     loginClient: async (email, password) => {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -43,12 +46,13 @@ export const APIClient = {
         };
 
         const response = await fetch(`${API_URL}Login`, requestOptions);
+        const responseJson = await response.json();
         if (response.status === 200) {
-            return true;
+            return {value: true, message: responseJson};
         } else {
-            return false;
+            return {value: false, message: responseJson};
         }
     }
 };
 
-export default api;
+export default APIClient;

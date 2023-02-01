@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
+import {Alert, FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
 import api, {APIClient} from "../../services/client-api";
 import {LoadingDialog} from "../../components/LoadingDialog";
@@ -41,15 +41,42 @@ export const CreateClientPage = () => {
     const handleCreateClient = () => {
         const trainerId = coachCode;
         const name = firstName + " " + lastName;
-
+        setLoading(true)
         APIClient.registerClient(trainerId, name, email, password)
             .then((success) => {
-                if (success) {
+                if (success.value) {
+                    Alert.alert(
+                        "Success"
+                        ,
+                        [
+                            {
+                                text: success.message,
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel"
+                            },
+
+                        ],
+                        { cancelable: false }
+                    );
                     // handle success
                 } else {
+                    Alert.alert(
+                        "Error",
+                        [
+                            {
+                                text: success.message,
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel"
+                            },
+
+                        ],
+                        {cancelable: false}
+                    );
                     // handle error
                 }
             })
+
+            setLoading(false)
             .catch((error) => {
                 console.error(error);
             });
@@ -141,7 +168,7 @@ export const CreateClientPage = () => {
 
     return (
         <ScrollView>
-            <LoadingDialog loading={lo}
+            <LoadingDialog loading={isLoading}/>
         <View style={styles.container}>
                 <TextInput
                     style={styles.input}
