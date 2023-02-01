@@ -12,7 +12,7 @@ export const CreateClientPage = () => {
     const [coachCode, setCoachCode] = useState('');
     const [goals, setGoals] = useState([]);
     const [isGoalsVisible, setIsGoalsVisible] = useState(false);
-    const [isLoading, setLoading] = useState(fals)
+    const [isLoading, setLoading] = useState(false)
 
 
     const slideAnim = useRef(new Animated.Value(0)).current;
@@ -39,41 +39,22 @@ export const CreateClientPage = () => {
     }
 
     const handleCreateClient = () => {
+        alert("1")
         const trainerId = coachCode;
         const name = firstName + " " + lastName;
         setLoading(true)
         APIClient.registerClient(trainerId, name, email, password)
             .then((success) => {
                 if (success.value) {
-                    Alert.alert(
-                        "Success"
-                        ,
-                        [
-                            {
-                                text: success.message,
-                                onPress: () => console.log("Cancel Pressed"),
-                                style: "cancel"
-                            },
-
-                        ],
-                        { cancelable: false }
-                    );
-                    // handle success
+                    Alert.alert("Success",   "The client has been created successfully", [
+                        { text:  "OK", onPress: () => console.log("OK Pressed") }
+                    ], { cancelable: false });
                 } else {
-                    Alert.alert(
-                        "Error",
-                        [
-                            {
-                                text: success.message,
-                                onPress: () => console.log("Cancel Pressed"),
-                                style: "cancel"
-                            },
-
-                        ],
-                        {cancelable: false}
-                    );
-                    // handle error
+                    Alert.alert("Problem", success.message || "The client has not been created successfully", [
+                        { text:  "ok", onPress: () => console.log("OK Pressed") }
+                    ], { cancelable: false });
                 }
+                console.log(success)
             })
             .catch((error) => {
                 console.error(error);
