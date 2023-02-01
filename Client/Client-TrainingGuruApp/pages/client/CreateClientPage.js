@@ -75,11 +75,10 @@ export const CreateClientPage = () => {
                     // handle error
                 }
             })
-
-            setLoading(false)
             .catch((error) => {
                 console.error(error);
             });
+        setLoading(false)
     }
 
     const handleToggleGoals = () => {
