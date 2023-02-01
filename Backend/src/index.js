@@ -20,6 +20,9 @@ app.use((_, res, next) => {
     next();
 });
 
+app.get('/', function(req, res) {
+    res.json({message: 'alive'});
+});
 
 app.use("/Client",clientRoute);
 app.use("/Trainer",trainerRoute);
@@ -38,9 +41,8 @@ async function testConection(){
         console.error('Unable to connect to the database:', error);
     }
 }
+
 testConection();
-
-
 
 database.sync({ force: false })
     .then(() => {
