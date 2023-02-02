@@ -63,8 +63,10 @@ export const APIClient = {
         if (response.status === 200) {
             let weeks = responseJson.map((item) => item.Week)
             let arr = []
-            for(const week in weeks){
-                const value = await this.GetWorkoutsForWeeks(clientId, week);
+
+            for(const week of weeks){
+                console.log(week)
+                const value = await APIClient.GetWorkoutsForWeeks(clientId, week);
                 if(value.value && value.workouts && value.workouts.length > 0){
                     arr.push(value.workouts[0].Date)
                 }
@@ -76,7 +78,7 @@ export const APIClient = {
 
     GetWorkoutsForWeeks : async  (clientId, workoutWeekId) => {
         var myHeaders = new Headers();
-
+    console.log("here")
         const requestOptions = {
             method: 'GET',
             headers: myHeaders,
