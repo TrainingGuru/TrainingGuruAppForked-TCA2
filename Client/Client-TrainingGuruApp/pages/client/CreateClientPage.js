@@ -149,7 +149,6 @@ export const CreateClientPage = () => {
             fontWeight: 'bold',
         },
     });
-    console.log("fsdfsdf")
 
     return (
         <ScrollView>
