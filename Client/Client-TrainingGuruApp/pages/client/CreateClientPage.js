@@ -39,7 +39,7 @@ export const CreateClientPage = () => {
     }
 
     const handleCreateClient = () => {
-        alert("1")
+        console.log("sdsff")
         const trainerId = coachCode;
         const name = firstName + " " + lastName;
         setLoading(true)
@@ -145,6 +145,7 @@ export const CreateClientPage = () => {
             fontWeight: 'bold',
         },
     });
+    console.log("fsdfsdf")
 
     return (
         <ScrollView>
