@@ -20,6 +20,7 @@ export const LoginScreen = ({  }) => {
 
 
     const handleLogin = () => {
+        navigation.navigate("ClientHome")
         setLoading(true) // Add this line
         APIClient.loginClient(email, password).then(r => {
             console.log(r)

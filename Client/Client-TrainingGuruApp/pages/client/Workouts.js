@@ -3,10 +3,24 @@ import {Text, TouchableOpacity, View, StyleSheet, ScrollView} from "react-native
 import WorkoutCard from "../../components/workout/WorkoutCard";
 import Layout from "../../components/structure/Layout";
 import {useNavigation} from "@react-navigation/core";
+import APIClient from "../../services/client-api";
 
 
 const Workouts = () => {
         const navigation = useNavigation();
+        const [loading, setLoading] = useState(false);
+
+
+        useEffect(() => {
+            setLoading(true)
+            APIClient.WorkoutWeeks("3").then(r => {
+                setLoading(false)
+            })
+
+
+
+
+        }, [])
 
     const handleWorkoutPress = (workout) => {
         if (workout && workout.exercises && workout.exercises.length > 0) {
@@ -274,7 +288,7 @@ const Workouts = () => {
     }
 
     return (
-        <Layout>
+        <Layout loading={loading}>
             <View style={styles.container}>
                 {/*display the weeks at the bottom of the screen*/}
                 {weeks.map((week, index) => {

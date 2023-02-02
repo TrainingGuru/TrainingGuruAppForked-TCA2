@@ -43,6 +43,55 @@ export const APIClient = {
             .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+    },
+
+
+    WorkoutWeeks: async  (clientId) => {
+        var myHeaders = new Headers();
+
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+            console.log(`${API_URL}${clientId}/WorkoutWeeks`)
+        const response = await fetch(`${API_URL}${clientId}/WorkoutWeeks`, requestOptions);
+            console.log(response)
+        const responseJson = await response.json();
+        console.log(responseJson)
+        if (response.status === 200) {
+            let weeks = responseJson.map((item) => item.Week)
+            let arr = []
+            for(const week in weeks){
+                const value = await this.GetWorkoutsForWeeks(clientId, week);
+                if(value.value && value.workouts && value.workouts.length > 0){
+                    arr.push(value.workouts[0].Date)
+                }
+            }
+            console.log(arr)
+        }
+
+    },
+
+    GetWorkoutsForWeeks : async  (clientId, workoutWeekId) => {
+        var myHeaders = new Headers();
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(`${API_URL}${clientId}/Workouts/${workoutWeekId}`, requestOptions);
+
+        if (response.status === 200) {
+            const responseJson = await response.json();
+            return {value: true, workouts: responseJson};
+        }
+        else {
+            return {value: false}
+        }
     }
 };
 
