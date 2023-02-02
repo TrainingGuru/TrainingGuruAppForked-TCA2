@@ -30,28 +30,19 @@ export const APIClient = {
     },
 
     loginClient: async (email, password) => {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        var myHeaders = new Headers();
 
-        const raw = JSON.stringify({
-            Email: email,
-            Password: password
-        });
 
         const requestOptions = {
             method: 'GET',
             headers: myHeaders,
-            body: raw,
             redirect: 'follow'
         };
 
-        const response = await fetch(`${API_URL}Login`, requestOptions);
-        const responseJson = await response.json();
-        if (response.status === 200) {
-            return {value: true, message: responseJson};
-        } else {
-            return {value: false, message: responseJson};
-        }
+        fetch(`https://traininggurubackend.onrender.com/Client/Login?Email=seanmc@hotmail.com&Password=1236`, requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 };
 

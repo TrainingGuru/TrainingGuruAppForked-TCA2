@@ -16,12 +16,13 @@ export const LoginScreen = ({  }) => {
     const [goals, setGoals] = useState([]);
     const [coachCode, setCoachCode] = useState('');
     const [image, setImage] = useState(null);
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false);
 
 
     const handleLogin = () => {
         setLoading(true) // Add this line
         APIClient.loginClient(email, password).then(r => {
+            console.log(r)
             if(r.value){
                 Alert.alert("Success",   "successfully logged in", [
                     { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
@@ -138,7 +139,7 @@ export const LoginScreen = ({  }) => {
                 value={password}
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ClientHome')}>
+            <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
                 <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgotPassword}>
