@@ -123,24 +123,25 @@ const styles = StyleSheet.create({
 
 const WorkoutCards = ({workout}) => {
     const dayOfWeek = new Date(workout.date).toLocaleString('en-us', { weekday: 'short' });
-
+    console.log("inside")
+    console.log(workout)
     return (
         <View style={styles.workoutCard} >
-                <Image
-                    source={{ uri: workout.image }}
-                    style={styles.workoutCardImage}
-                />
+                {/*<Image*/}
+                {/*    source={{ uri: workout.image }}*/}
+                {/*    style={styles.workoutCardImage}*/}
+                {/*/>*/}
             <View style={styles.imageOverlay}>
-                <Text style={styles.overlayText}>{dayOfWeek.toUpperCase()} - {workout.name.toUpperCase()}</Text>
+                <Text style={styles.overlayText}>{dayOfWeek.toUpperCase()} - {workout.TrainerWorkout.WorkoutName.toUpperCase()}</Text>
             </View>
             <View style={styles.circlesContainer}>
                 <View style={styles.circle}>
                     <View style={styles.circleInner}>
-                        <Text style={styles.circleText}>{workout.time}</Text>
+                        <Text style={styles.circleText}>{"30 minutes"}</Text>
                     </View>
                 </View>
                 <View style={styles.circle}>
-                    {workout.completed ? (
+                    {workout.Completed ? (
                         <MaterialCommunityIcons name="check" size={20} color="green" />
                     ) : (
                         <View />

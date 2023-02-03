@@ -13,10 +13,88 @@ const Workouts = () => {
 
         useEffect(() => {
             setLoading(true)
-            APIClient.WorkoutWeeks("3").then(r => {
-                setLoading(false)
+            // APIClient.WorkoutWeeks("3").then(r => {
+let r = {
+                value : true,
+   "weeksDate" :[
+        {
 
-                if(r.value){
+            "date": "2023-01-26",
+            "weekId": 1,
+            "workouts": [
+                {
+                    "ClientWorkoutID": 1,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 2,
+                    "Date": "2023-01-26",
+                    "Week": 1,
+                    "Notes": "Competed and Ticked off through Post man Test",
+                    "Completed": true,
+                    "TrainerWorkout": {
+                        "id": 2,
+                        "TrainerID": 1,
+                        "WorkoutName": "Chest and Arms Workout"
+                    }
+                },
+                {
+                    "ClientWorkoutID": 2,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 1,
+                    "Date": "2023-01-28",
+                    "Week": 1,
+                    "Notes": null,
+                    "Completed": false,
+                    "TrainerWorkout": {
+                        "id": 1,
+                        "TrainerID": 1,
+                        "WorkoutName": "Legs Work"
+                    }
+                },
+                {
+                    "ClientWorkoutID": 4,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 1,
+                    "Date": "2023-01-27",
+                    "Week": 1,
+                    "Notes": null,
+                    "Completed": false,
+                    "TrainerWorkout": {
+                        "id": 1,
+                        "TrainerID": 1,
+                        "WorkoutName": "Legs Work"
+                    }
+                }
+            ]
+        },
+            {
+                "date"
+            :
+                "2023-02-06",
+                    "weekId"
+            :
+                3,
+                    "workouts"
+            :
+                [
+                    {
+                        "ClientWorkoutID": 3,
+                        "ClientID": 3,
+                        "TrainerWorkoutID": 1,
+                        "Date": "2023-02-06",
+                        "Week": 3,
+                        "Notes": null,
+                        "Completed": false,
+                        "TrainerWorkout": {
+                            "id": 1,
+                            "TrainerID": 1,
+                            "WorkoutName": "Legs Work"
+                        }
+                    }
+                ]
+            }
+        ]
+        }
+                 if(r.value){
                     let map = {}
                     console.log("sddsdf")
                     console.log(r.weeksDate)
@@ -28,6 +106,7 @@ const Workouts = () => {
                         console.log("!dfds")
                         console.log(date.date)
                         console.log(date.workouts)
+                        console.log(JSON.stringify(date.workouts))
                         console.log(date.weekId)
 
                         weekMap[startWeek] = {weekId : date.weekId, workouts: date.workouts};
@@ -42,12 +121,13 @@ const Workouts = () => {
                 else {
 
                 }
-            })
+                setLoading(false)
+            // })
         }, [])
 
 
-    console.log("week")
-    console.log(weekMap)
+    // console.log("week")
+    // console.log(weekMap)
 
     const handleWorkoutPress = (workout) => {
         if (workout && workout.exercises && workout.exercises.length > 0) {
@@ -332,12 +412,15 @@ const Workouts = () => {
 
 
                                         <View style={styles.workoutCardsContainer}>
-                                            {workouts.map(workout => {
-                                                if (isInWeekRange(new Date(workout.date), currentWeek)) {
+                                            {weekMap[currentWeek].workouts.map((workout, index) => {
+                                                console.log("sdssdf32434234")
+                                                console.log(weekMap[currentWeek].workouts)
                                                     return (
-                                                        <View key={workout.id}><WorkoutCard workout={workout}/></View>
+                                                        <View key={index}>
+                                                            <WorkoutCard workout={workout}/>
+                                                        </View>
                                                     );
-                                                }
+                                                })
                                             })}
                                         </View>
 
