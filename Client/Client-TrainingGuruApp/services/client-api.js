@@ -68,7 +68,7 @@ export const APIClient = {
                 console.log(week)
                 const value = await APIClient.GetWorkoutsForWeeks(clientId, week);
                 if(value.value && value.workouts && value.workouts.length > 0){
-                    arr.push({date: value.workouts[0].Date, weekId: week})
+                    arr.push({date: value.workouts[0].Date, weekId: week, workouts: value.workouts})
                 }
 
 

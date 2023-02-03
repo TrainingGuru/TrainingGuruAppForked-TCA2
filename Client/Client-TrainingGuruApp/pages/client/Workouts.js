@@ -27,8 +27,10 @@ const Workouts = () => {
                         console.log(startWeek)
                         console.log("!dfds")
                         console.log(date.date)
+                        console.log(date.workouts)
                         console.log(date.weekId)
-                        weekMap[startWeek] = date.weekId;
+
+                        weekMap[startWeek] = {weekId : date.weekId, workouts: date.workouts};
                         if (!map[startWeek]) {
                             map[startWeek] = 1
                             setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
@@ -41,17 +43,8 @@ const Workouts = () => {
 
                 }
             })
-
-
-
-
         }, [])
 
-
-    const getWorkoutsForThatWeek = (date) => {
-            const week = weekMap[date];
-            console.log("selected week is" + week)
-    }
 
     console.log("week")
     console.log(weekMap)
