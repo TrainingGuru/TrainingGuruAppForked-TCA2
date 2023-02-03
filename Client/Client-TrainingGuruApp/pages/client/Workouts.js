@@ -9,7 +9,7 @@ import APIClient from "../../services/client-api";
 const Workouts = () => {
         const navigation = useNavigation();
         const [loading, setLoading] = useState(false);
-        const [weekMap, setWeekMap] = useState()
+        const [weekMap, setWeekMap] = useState({})
 
         useEffect(() => {
             setLoading(true)
@@ -17,7 +17,6 @@ const Workouts = () => {
                 setLoading(false)
 
                 if(r.value){
-                    alert("!")
                     let map = {}
                     console.log("sddsdf")
                     console.log(r.weeksDate)
@@ -27,12 +26,14 @@ const Workouts = () => {
                         const startWeek = getWeekStartDate(new Date(date.date));
                         console.log(startWeek)
                         console.log("!dfds")
+                        console.log(date.date)
+                        console.log(date.weekId)
                         weekMap[startWeek] = date.weekId;
-                        if (!map[startWeek]) {
-                            map[startWeek] = 1
-                            setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
-                        }
-                        setCurrentWeek(startWeek)
+                        // if (!map[startWeek]) {
+                        //     map[startWeek] = 1
+                        //     setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
+                        // }
+                        // setCurrentWeek(startWeek)
                     });
 
                 }
@@ -47,7 +48,7 @@ const Workouts = () => {
         }, [])
 
     console.log("week")
-    console.log(weekmap)
+    console.log(weekMap)
 
     const handleWorkoutPress = (workout) => {
         if (workout && workout.exercises && workout.exercises.length > 0) {
@@ -318,7 +319,7 @@ const Workouts = () => {
         <Layout loading={loading}>
             <View style={styles.container}>
                 {/*display the weeks at the bottom of the screen*/}
-                {weeks.map((week, index) => {
+                {weeks && weeks.length ? weeks.map((week, index) => {
                     // console.log(weeks)
 
 
@@ -360,7 +361,7 @@ const Workouts = () => {
 
 
                         </View>
-                })}
+                }) : <Text style={{textAlign: "center", fontSize: 50}}> You have no workout weeks</Text> }
             </View>
         </Layout>
     );
