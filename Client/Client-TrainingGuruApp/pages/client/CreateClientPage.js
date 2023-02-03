@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
-import {FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
+import {Alert, FlatList, Text, TextInput, TouchableOpacity, View, Animated, Easing, StyleSheet,  ScrollView} from "react-native";
 import CardLayout from "../../components/reusable/CardLayout";
+import api, {APIClient} from "../../services/client-api";
+import {LoadingDialog} from "../../components/LoadingDialog";
+import {useNavigation} from "@react-navigation/core";
 
 export const CreateClientPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -10,8 +13,11 @@ export const CreateClientPage = () => {
     const [coachCode, setCoachCode] = useState('');
     const [goals, setGoals] = useState([]);
     const [isGoalsVisible, setIsGoalsVisible] = useState(false);
+    const [isLoading, setLoading] = useState(false)
 
     const slideAnim = useRef(new Animated.Value(0)).current;
+
+    const navigation = useNavigation();
 
     const handleAddGoal = () => {
         if (goals.length < 4) {
@@ -35,8 +41,30 @@ export const CreateClientPage = () => {
     }
 
     const handleCreateClient = () => {
-        // validate form and create client account
-    }
+        console.log("sdsff")
+        const trainerId = coachCode;
+        const name = firstName + " " + lastName;
+        setLoading(true) // Add this line
+        APIClient.registerClient(trainerId, name, email, password)
+            .then((success) => {
+                if (success.value) {
+                    Alert.alert("Success",   "The client has been created successfully", [
+                        { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
+                    ], { cancelable: false });
+                } else {
+                    Alert.alert("Problem", success.message || "The client has not been created successfully", [
+                        { text:  "ok", onPress: () =>  console.log("closed")}
+                    ], { cancelable: false });
+
+                }
+                setLoading(false) // Add this line
+                console.log(success)
+            })
+            .catch((error) => {
+                console.error(error);
+                setLoading(false) // Add this line
+            });
+    };
 
     const handleToggleGoals = () => {
         if (isGoalsVisible) {
@@ -124,6 +152,8 @@ export const CreateClientPage = () => {
 
     return (
         <ScrollView>
+            {isLoading && <View><LoadingDialog loading={true}/></View>}
+
         <View style={styles.container}>
                 <TextInput
                     style={styles.input}

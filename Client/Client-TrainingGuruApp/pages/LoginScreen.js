@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
-import { View, Text, Image, TouchableOpacity, TextInput , StyleSheet} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
+import APIClient from "../services/client-api";
+import {LoadingDialog} from "../components/LoadingDialog";
 
 export const LoginScreen = ({  }) => {
     const navigation = useNavigation();
@@ -14,15 +16,31 @@ export const LoginScreen = ({  }) => {
     const [goals, setGoals] = useState([]);
     const [coachCode, setCoachCode] = useState('');
     const [image, setImage] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
 
-    const handleSignup = () => {
+    const handleLogin = () => {
+        navigation.navigate("ClientHome")
+        setLoading(true) // Add this line
+        APIClient.loginClient(email, password).then(r => {
+            console.log(r)
+            if(r.value){
+                Alert.alert("Success",   "successfully logged in", [
+                    { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
+                ], { cancelable: false });
+            }else{
+                Alert.alert("Not Success", "Not logged in", [
+                    { text:  "ok", onPress: () =>  console.log("closed")}
+                ], { cancelable: false });
+            }
+            setLoading(false) // Add this line
+        }).catch((error) => {
+            console.error(error);
+            setLoading(false) // Add this line
+        });
 
-        if (accountType === 'client') {
-            // validate client form and create account
-        } else {
-            // validate coach form and create account
-        }
+
+
     };
 
     const styles = StyleSheet.create({
@@ -107,6 +125,7 @@ export const LoginScreen = ({  }) => {
 
     return (
         <View style={styles.container}>
+            {isLoading && <View><LoadingDialog loading={true}/></View>}
             <Image source={{uri: "https://assets.api.uizard.io/api/cdn/stream/9789bb7f-8141-48f9-87dd-f2ebdadcbec6.png"}} style={styles.logo} />
             <TextInput
                 style={styles.input}
@@ -121,7 +140,7 @@ export const LoginScreen = ({  }) => {
                 value={password}
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ClientHome')}>
+            <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
                 <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgotPassword}>

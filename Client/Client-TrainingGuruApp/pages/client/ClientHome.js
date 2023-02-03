@@ -18,7 +18,10 @@ export const ClientHome = () => {
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
     const [loadingModel, setLoadingModal] = useState(false);
-
+    const [calorieGoals, setCalorieGoals] = useState();
+    const [stepGoals, setStepGoals] = useState();
+    const [sleepGoal, setSleepGoals] = useState()
+    const [rateGoals, setRateGoal] = useState();
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -227,32 +230,40 @@ export const ClientHome = () => {
     }
 
     return <Layout loading={loadingModel}>
+        {loadingModel && <Text>fewef</Text>}
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
             </View>
             <CardLayout>
-                <CalorieBrokenDown/>
+                {calorieGoals ?  <CalorieBrokenDown/> :
+                    <View stye={{paddingHorizontal: 140, fontWeight: "bolder"}}><Text>Coach has not added calorie goals for you yet</Text></View>}
             </CardLayout>
 
             <View style={styles.clientHome.first}>
-                <CardLayout style={{...styles.clientHome.first.steps}}>
+                {stepGoals ? <CardLayout style={{...styles.clientHome.first.steps}}>
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faShoePrints}/>
                     <Text style={styles.clientHome.first.steps.title}>13400/16000</Text>
-                </CardLayout>
-                <CardLayout style={styles.clientHome.first.steps}>
+                </CardLayout> : <CardLayout style={styles.clientHome.first.steps}>
+                    <Text>Need to connect Fitbit</Text>
+                </CardLayout>}
+                {sleepGoal ? <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faBed}/>
                     <Text style={styles.clientHome.first.steps.title}>Good</Text>
-                </CardLayout>
-                <CardLayout style={styles.clientHome.first.steps}>
+                </CardLayout> : <CardLayout style={styles.clientHome.first.steps}>
+                    <Text>Need to connect Fitbit </Text>
+                    </CardLayout>}
+                {rateGoals ? <CardLayout style={styles.clientHome.first.steps}>
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faHeartPulse} color={"red"}/>
                     <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
-                </CardLayout>
+                </CardLayout>: <CardLayout style={styles.clientHome.first.steps}>
+                    <Text>Need to connect Fitbit</Text>
+                    </CardLayout>}
             </View>
 
             <CardLayout>

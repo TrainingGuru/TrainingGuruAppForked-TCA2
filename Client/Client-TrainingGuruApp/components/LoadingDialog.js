@@ -129,7 +129,9 @@ export const LoadingDialog = ({loading}) => {
         },
     });
 
-    return      <Modal
+    return <View>
+        {/*<Text>{loading.toString()}</Text>*/}
+        <Modal
         animationType="slide"
         transparent={true}
         visible={loading}
@@ -137,11 +139,13 @@ export const LoadingDialog = ({loading}) => {
             Alert.alert("Modal has been closed.");
         }}
     >
+
         <View style={styles.modalContainer}>
+            {/*<Text>dfsdfsdf</Text>*/}
             <View style={styles.modalInnerContainer}>
                 {/*<Text style={styles.modalTitle}>Notes for your Coach</Text>*/}
-                <ActivityIndicator size="large" color="#0000ff" />
-                <Text style={{ marginTop: 10 }}>Loading...</Text>
+                <ActivityIndicator size="large" color="#0000ff"/>
+                <Text style={{marginTop: 10}}>Loading...</Text>
                 <View style={styles.modalButtonsContainer}>
                     {/*<TouchableOpacity*/}
                     {/*    style={styles.modalCancelButton}*/}
@@ -159,5 +163,5 @@ export const LoadingDialog = ({loading}) => {
                 </View>
             </View>
         </View>
-    </Modal>
+    </Modal></View>
 }

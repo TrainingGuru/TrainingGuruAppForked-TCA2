@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity, TextInput, ScrollView, FlatList} from 'react-native';
 import CardLayout from "../../components/reusable/CardLayout";
 import Layout from "../../components/structure/Layout";
+import {ConnectFitbitModel} from "../../components/ConnectFitbitModel";
+import {Fitbit} from "../../services/fitbit-service";
+import {NinjaAPI} from "../../services/nutrition-service";
 
 function ClientProfile() {
     const [userName, setUserName] = useState("Josh Mitvh");
@@ -9,6 +12,7 @@ function ClientProfile() {
     const [coachName, setCoachName] = useState("Frsny Pis");
     const [coachImage, setCoachImage] = useState("https://images.unsplash.com/photo-1556623695-bc86a6edb75a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZHVkZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
     const [goals, setGoals] = useState([]);
+    const [fitbitModelOpen, setFitbitModelOpen] = useState(false)
     const [fitbitConnected, setFitbitConnected] = useState(false);
 
     const handleAddGoal = () => {
@@ -33,11 +37,24 @@ function ClientProfile() {
     }
 
     const handleConnectFitbit = () => {
-        setFitbitConnected(!fitbitConnected);
+        setFitbitModelOpen(true)
+
+        // setFitbitConnected(!fitbitConnected);
+    }
+
+    const [loading, setLoading] = useState();
+
+    const connectFunction = async () => {
+        // setLoading(true);
+        const api = new Fitbit();
+        console.log(await api.refreshToken())
+
     }
 
     return (
-        <Layout><View>
+        <Layout loading={loading}>
+            <View>
+            <ConnectFitbitModel open={fitbitModelOpen} setOpen={setFitbitModelOpen} connectFunction={connectFunction}/>
             <View style={styles.topRowContainer}>
                 <CardLayout  style={{...styles.cardContainer, width: "40%"}}>
                     <TouchableOpacity onPress={() => {

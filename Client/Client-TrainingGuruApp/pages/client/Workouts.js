@@ -3,10 +3,136 @@ import {Text, TouchableOpacity, View, StyleSheet, ScrollView} from "react-native
 import WorkoutCard from "../../components/workout/WorkoutCard";
 import Layout from "../../components/structure/Layout";
 import {useNavigation} from "@react-navigation/core";
+import APIClient from "../../services/client-api";
 
 
 const Workouts = () => {
         const navigation = useNavigation();
+        const [loading, setLoading] = useState(false);
+        const [weekMap, setWeekMap] = useState({})
+
+        useEffect(() => {
+            setLoading(true)
+            // APIClient.WorkoutWeeks("3").then(r => {
+let r = {
+                value : true,
+   "weeksDate" :[
+        {
+
+            "date": "2023-01-26",
+            "weekId": 1,
+            "workouts": [
+                {
+                    "ClientWorkoutID": 1,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 2,
+                    "Date": "2023-01-26",
+                    "Week": 1,
+                    "Notes": "Competed and Ticked off through Post man Test",
+                    "Completed": true,
+                    "TrainerWorkout": {
+                        "id": 2,
+                        "TrainerID": 1,
+                        "WorkoutName": "Chest and Arms Workout"
+                    }
+                },
+                {
+                    "ClientWorkoutID": 2,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 1,
+                    "Date": "2023-01-28",
+                    "Week": 1,
+                    "Notes": null,
+                    "Completed": false,
+                    "TrainerWorkout": {
+                        "id": 1,
+                        "TrainerID": 1,
+                        "WorkoutName": "Legs Work"
+                    }
+                },
+                {
+                    "ClientWorkoutID": 4,
+                    "ClientID": 3,
+                    "TrainerWorkoutID": 1,
+                    "Date": "2023-01-27",
+                    "Week": 1,
+                    "Notes": null,
+                    "Completed": false,
+                    "TrainerWorkout": {
+                        "id": 1,
+                        "TrainerID": 1,
+                        "WorkoutName": "Legs Work"
+                    }
+                }
+            ]
+        },
+            {
+                "date"
+            :
+                "2023-02-06",
+                    "weekId"
+            :
+                3,
+                    "workouts"
+            :
+                [
+                    {
+                        "ClientWorkoutID": 3,
+                        "ClientID": 3,
+                        "TrainerWorkoutID": 1,
+                        "Date": "2023-02-06",
+                        "Week": 3,
+                        "Notes": null,
+                        "Completed": false,
+                        "TrainerWorkout": {
+                            "id": 1,
+                            "TrainerID": 1,
+                            "WorkoutName": "Legs Work"
+                        }
+                    }
+                ]
+            }
+        ]
+        }
+                 if(r.value){
+                    let map = {}
+                    console.log("sddsdf")
+                    console.log(r.weeksDate)
+                    r.weeksDate.map((date) => {
+                        console.log("date " + date
+                        )
+                        const startWeek = getWeekStartDate(new Date(date.date));
+                        console.log(startWeek)
+                        console.log("!dfds")
+                        console.log(date.date)
+                        console.log(date.workouts)
+                        console.log(JSON.stringify(date.workouts))
+                        console.log(date.weekId)
+
+                        weekMap[startWeek] = {weekId : date.weekId, workouts: date.workouts};
+                        console.log("week")
+                        console.log( weekMap[startWeek])
+                        if (!map[startWeek]) {
+                            map[startWeek] = 1
+                            setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
+                        }
+
+                        setCurrentWeek(startWeek)
+                    });
+
+                }
+                else {
+
+                }
+                setLoading(false)
+            // })
+
+        }, [])
+
+    console.log("dfsddfsd")
+    alert(currentWeek)
+    // console.log("week")
+    // console.log(weekMap)
 
     const handleWorkoutPress = (workout) => {
         if (workout && workout.exercises && workout.exercises.length > 0) {
@@ -93,163 +219,23 @@ const Workouts = () => {
 
     // use state to keep track of which week is currently open
     const [currentWeek, setCurrentWeek] = useState(new Date());
-    const [workouts, setWorkouts] = useState([
-        {
-            id: 1,
-            date: 'Jan 15, 2022',
-            name: 'Full body workout',
-            image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            time: '20 mins',
-            exercises: [
-                {
-                    id: 1,
-                    name: 'Squats',
-                    reps: 8,
-                    previousWeight: 20,
-                    previousDate: 'Jan 10, 2022',
-                    completed: false,
-                },
-                {
-                    id: 2,
-                    name: 'Push ups',
-                    reps: 12,
-                    previousDate: null,
-                    completed: false
-                },
-            ]
-        },
-        {
-            id: 233,
-            date: 'March 2, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 22,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
 
-        {
-            id: 222222,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 22224,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 23,
-            date: 'Jan 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 231,
-            date: 'Jan 4, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 232,
-            date: 'Jan 5, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 233,
-            date: 'Jan 9, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 234,
-            date: 'Dec 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 235,
-            date: 'Jan 3, 2021',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 236,
-            date: 'Jun 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 237,
-            date: 'Nov 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 238,
-            date: 'May 9, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 239,
-            date: 'Aug 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        // ... more workouts
-    ]);
 
-    let weekMap = {};
 
     // use useEffect to set the state of current week as the week that has today's date
-    useEffect(() => {
-        let map = {}
-        workouts.map((workout) => {
-            const startWeek = getWeekStartDate(new Date(workout.date));
-            if (!map[startWeek]) {
-                map[startWeek] = 1
-                setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
-            }
-            setCurrentWeek(startWeek)
-        });
-
-
-    }, [workouts]);
+    // useEffect(() => {
+    //     let map = {}
+    //     workouts.map((workout) => {
+    //         const startWeek = getWeekStartDate(new Date(workout.date));
+    //         if (!map[startWeek]) {
+    //             map[startWeek] = 1
+    //             setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
+    //         }
+    //         setCurrentWeek(startWeek)
+    //     });
+    //
+    //
+    // }, [workouts]);
 
     const getWeekStartDate = (date) => {
         const currentYear = date.getFullYear();
@@ -274,10 +260,10 @@ const Workouts = () => {
     }
 
     return (
-        <Layout>
+        <Layout loading={loading}>
             <View style={styles.container}>
                 {/*display the weeks at the bottom of the screen*/}
-                {weeks.map((week, index) => {
+                {weeks && weeks.length ? weeks.map((week, index) => {
                     // console.log(weeks)
 
 
@@ -291,12 +277,17 @@ const Workouts = () => {
 
 
                                         <View style={styles.workoutCardsContainer}>
-                                            {workouts.map(workout => {
-                                                if (isInWeekRange(new Date(workout.date), currentWeek)) {
+                                            {weekMap[currentWeek].workouts.map((workout, index) => {
+                                                console.log("sdssdf32434234")
+                                                console.log(weekMap[currentWeek].workouts)
+                                                console.log(workout)
+                                                alert(workout.Week)
                                                     return (
-                                                        <View key={workout.id}><WorkoutCard workout={workout}/></View>
+                                                        <View key={index}>
+                                                            {/*<WorkoutCard workout={workout}/>*/}
+                                                        </View>
                                                     );
-                                                }
+                                                })
                                             })}
                                         </View>
 
@@ -306,20 +297,45 @@ const Workouts = () => {
 
                                 <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
 
-                                    <View style={styles.workoutCardsContainer}>
-                                        {workouts.map(workout => {
-                                            if (isInWeekRange(new Date(workout.date), currentWeek)) {
-                                                return (
-                                                    <TouchableOpacity key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
-                                                );
-                                            }
-                                        })}
-                                    </View>
+                                <View style={styles.workoutCardsContainer}>
+                                    {weekMap[currentWeek] && weekMap[currentWeek].workouts && (
+
+                                        <View style={{ width: "100%"}}>
+                                            {weekMap[currentWeek].workouts.sort((a, b) => {
+                                                return  new Date(a.Date) - new Date(b.Date)
+                                            }).map((workout) => {
+                                                return  <TouchableOpacity style={{ width: "100%"}} key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
+                                            })}
+                                        </View>
+
+                                        )}
+
+
+
+                                    {/*{weekMap[currentWeek] && weekMap[currentWeek].workouts && weekMap[currentWeek].workouts  ? <View> {Object.entries(weekMap[currentWeek].workouts).map((workout, index) => (*/}
+                                    {/*    <View key={index.toString()}>*/}
+                                    {/*        <Text>{workout[1].Date.toString()}</Text>*/}
+                                    {/*    </View> ))}*/}
+                                    {/*</View>: <Text> current {currentWeek.toDateString()}</Text>}*/}
+
+
+
+                                    {/*{ weekMap[currentWeek] && weekMap[currentWeek].workouts && weekMap[currentWeek].workouts.map((workout, index) => {*/}
+                                    {/*    console.log("sdssdf32434234")*/}
+                                    {/*    console.log(weekMap[currentWeek].workouts)*/}
+                                    {/*    console.log(workout)*/}
+                                    {/*    alert(workout.Week)*/}
+
+                                    {/*    return <Text key={workout.date}>fsdsdf</Text>*/}
+
+                                    {/*})*/}
+                                    {/*})}*/}
+                                </View>
                             </View>
 
 
                         </View>
-                })}
+                }) : <Text style={{textAlign: "center", fontSize: 50}}> You have no workout weeks</Text> }
             </View>
         </Layout>
     );
