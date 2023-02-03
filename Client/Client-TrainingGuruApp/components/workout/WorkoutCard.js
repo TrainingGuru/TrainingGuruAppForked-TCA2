@@ -125,9 +125,11 @@ const styles = StyleSheet.create({
 });
 
 const WorkoutCards = ({workout}) => {
-    const dayOfWeek = new Date(workout.Date).toLocaleDateString('en-US', {weekday: 'short'});
-    const workoutImages = [
-        "https://images.unsplash.com/photo-1591227174835-d3705c881c90?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const date = new Date(workout.Date);
+    const dayOfWeek = daysOfWeek[date.getDay()];
+const workoutImages = [
+    "https://images.unsplash.com/photo-1591227174835-d3705c881c90?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
         "https://images.unsplash.com/photo-1571388183795-1faa7cf91154?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
         "https://images.unsplash.com/photo-1494178270175-e96de2971df9?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
         'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
