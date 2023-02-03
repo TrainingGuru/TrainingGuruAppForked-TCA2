@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     workoutCardImage: {
-    width: 300,
+    width: "100%",
         height: "60%"
     },
     workoutCardHeader: {
@@ -98,15 +98,18 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     imageOverlay: {
-        left: 10,
-        margin: 'auto',
-        padding: 10
+        display: "flex",
+        height: "40%",
+        width:"100%",
+        justifyContent: "center",
+        textAlign: "center"
     },
     overlayText: {
         color: '#1e1c1c',
         fontWeight: 'bold',
         fontSize: 18,
         textAlign: "center",
+        marginHorizontal: "auto"
     },
     circleInner: {
         alignItems: 'center',
@@ -122,15 +125,31 @@ const styles = StyleSheet.create({
 });
 
 const WorkoutCards = ({workout}) => {
-    const dayOfWeek = new Date(workout.date).toLocaleString('en-us', { weekday: 'short' });
+    const dayOfWeek = new Date(workout.Date).toLocaleDateString('en-US', {weekday: 'short'});
+    const workoutImages = [
+        "https://images.unsplash.com/photo-1591227174835-d3705c881c90?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
+        "https://images.unsplash.com/photo-1571388183795-1faa7cf91154?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
+        "https://images.unsplash.com/photo-1494178270175-e96de2971df9?ixlib=rb-4.0.3&dpr=1&auto=format&fit=crop&w=480&h=80&q=60",
+        'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+        'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+        "https://images.unsplash.com/photo-1580261450046-d0a30080dc9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGd5bXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGd5bXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1553531889-65d9c41c2609?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8Z3ltfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Z3ltfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Z3ltfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z3ltfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        "https://images.unsplash.com/photo-1553531580-a000ac8df244?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8Z3ltfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    ];
     console.log("inside")
     console.log(workout)
+    let randomIndex = Math.floor(Math.random() * workoutImages.length);
+    const randomImm = workoutImages[randomIndex];
     return (
         <View style={styles.workoutCard} >
-                {/*<Image*/}
-                {/*    source={{ uri: workout.image }}*/}
-                {/*    style={styles.workoutCardImage}*/}
-                {/*/>*/}
+                <Image
+                    source={{ uri: randomImm }}
+                    style={styles.workoutCardImage}
+                />
             <View style={styles.imageOverlay}>
                 <Text style={styles.overlayText}>{dayOfWeek.toUpperCase()} - {workout.TrainerWorkout.WorkoutName.toUpperCase()}</Text>
             </View>

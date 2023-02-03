@@ -110,10 +110,13 @@ let r = {
                         console.log(date.weekId)
 
                         weekMap[startWeek] = {weekId : date.weekId, workouts: date.workouts};
+                        console.log("week")
+                        console.log( weekMap[startWeek])
                         if (!map[startWeek]) {
                             map[startWeek] = 1
                             setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
                         }
+
                         setCurrentWeek(startWeek)
                     });
 
@@ -123,9 +126,11 @@ let r = {
                 }
                 setLoading(false)
             // })
+
         }, [])
 
-
+    console.log("dfsddfsd")
+    alert(currentWeek)
     // console.log("week")
     // console.log(weekMap)
 
@@ -214,146 +219,6 @@ let r = {
 
     // use state to keep track of which week is currently open
     const [currentWeek, setCurrentWeek] = useState(new Date());
-    const [workouts, setWorkouts] = useState([
-        {
-            id: 1,
-            date: 'Jan 15, 2022',
-            name: 'Full body workout',
-            image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGVncyUyMHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            time: '20 mins',
-            exercises: [
-                {
-                    id: 1,
-                    name: 'Squats',
-                    reps: 8,
-                    previousWeight: 20,
-                    previousDate: 'Jan 10, 2022',
-                    completed: false,
-                },
-                {
-                    id: 2,
-                    name: 'Push ups',
-                    reps: 12,
-                    previousDate: null,
-                    completed: false
-                },
-            ]
-        },
-        {
-            id: 233,
-            date: 'March 2, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 22,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-
-        {
-            id: 222222,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 22224,
-            date: 'March 3, 2022',
-            name: 'Abs workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '15 mins',
-            completed: false
-        },
-        {
-            id: 23,
-            date: 'Jan 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 231,
-            date: 'Jan 4, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 232,
-            date: 'Jan 5, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 233,
-            date: 'Jan 9, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 234,
-            date: 'Dec 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 235,
-            date: 'Jan 3, 2021',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 236,
-            date: 'Jun 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 237,
-            date: 'Nov 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 238,
-            date: 'May 9, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        {
-            id: 239,
-            date: 'Aug 3, 2022',
-            name: 'Cardio workout',
-            image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hlc3QlMjB3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            time: '30 mins',
-            completed: true
-        },
-        // ... more workouts
-    ]);
 
 
 
@@ -415,9 +280,11 @@ let r = {
                                             {weekMap[currentWeek].workouts.map((workout, index) => {
                                                 console.log("sdssdf32434234")
                                                 console.log(weekMap[currentWeek].workouts)
+                                                console.log(workout)
+                                                alert(workout.Week)
                                                     return (
                                                         <View key={index}>
-                                                            <WorkoutCard workout={workout}/>
+                                                            {/*<WorkoutCard workout={workout}/>*/}
                                                         </View>
                                                     );
                                                 })
@@ -430,15 +297,40 @@ let r = {
 
                                 <Text style={styles.selectedWeek}>Week {week.toDateString()}</Text>
 
-                                    <View style={styles.workoutCardsContainer}>
-                                        {workouts.map(workout => {
-                                            if (isInWeekRange(new Date(workout.date), currentWeek)) {
-                                                return (
-                                                    <TouchableOpacity key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
-                                                );
-                                            }
-                                        })}
-                                    </View>
+                                <View style={styles.workoutCardsContainer}>
+                                    {weekMap[currentWeek] && weekMap[currentWeek].workouts && (
+
+                                        <View style={{ width: "100%"}}>
+                                            {weekMap[currentWeek].workouts.sort((a, b) => {
+                                                return  new Date(a.Date) - new Date(b.Date)
+                                            }).map((workout) => {
+                                                return  <TouchableOpacity style={{ width: "100%"}} key={week.id} onPress={() => handleWorkoutPress(workout)}><WorkoutCard workout={workout}/></TouchableOpacity>
+                                            })}
+                                        </View>
+
+                                        )}
+
+
+
+                                    {/*{weekMap[currentWeek] && weekMap[currentWeek].workouts && weekMap[currentWeek].workouts  ? <View> {Object.entries(weekMap[currentWeek].workouts).map((workout, index) => (*/}
+                                    {/*    <View key={index.toString()}>*/}
+                                    {/*        <Text>{workout[1].Date.toString()}</Text>*/}
+                                    {/*    </View> ))}*/}
+                                    {/*</View>: <Text> current {currentWeek.toDateString()}</Text>}*/}
+
+
+
+                                    {/*{ weekMap[currentWeek] && weekMap[currentWeek].workouts && weekMap[currentWeek].workouts.map((workout, index) => {*/}
+                                    {/*    console.log("sdssdf32434234")*/}
+                                    {/*    console.log(weekMap[currentWeek].workouts)*/}
+                                    {/*    console.log(workout)*/}
+                                    {/*    alert(workout.Week)*/}
+
+                                    {/*    return <Text key={workout.date}>fsdsdf</Text>*/}
+
+                                    {/*})*/}
+                                    {/*})}*/}
+                                </View>
                             </View>
 
 
