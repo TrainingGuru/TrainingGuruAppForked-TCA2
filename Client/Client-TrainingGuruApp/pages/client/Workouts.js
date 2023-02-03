@@ -9,7 +9,7 @@ import APIClient from "../../services/client-api";
 const Workouts = () => {
         const navigation = useNavigation();
         const [loading, setLoading] = useState(false);
-
+        const [weekMap, setWeekMap] = useState()
 
         useEffect(() => {
             setLoading(true)
@@ -24,9 +24,10 @@ const Workouts = () => {
                     r.weeksDate.map((date) => {
                         console.log("date " + date
                         )
-                        const startWeek = getWeekStartDate(new Date(date));
+                        const startWeek = getWeekStartDate(new Date(date.date));
                         console.log(startWeek)
                         console.log("!dfds")
+                        weekMap[startWeek] = date.weekId;
                         if (!map[startWeek]) {
                             map[startWeek] = 1
                             setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
@@ -44,6 +45,9 @@ const Workouts = () => {
 
 
         }, [])
+
+    console.log("week")
+    console.log(weekmap)
 
     const handleWorkoutPress = (workout) => {
         if (workout && workout.exercises && workout.exercises.length > 0) {
@@ -271,7 +275,7 @@ const Workouts = () => {
         // ... more workouts
     ]);
 
-    let weekMap = {};
+
 
     // use useEffect to set the state of current week as the week that has today's date
     // useEffect(() => {
