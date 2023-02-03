@@ -15,6 +15,29 @@ const Workouts = () => {
             setLoading(true)
             APIClient.WorkoutWeeks("3").then(r => {
                 setLoading(false)
+
+                if(r.value){
+                    alert("!")
+                    let map = {}
+                    console.log("sddsdf")
+                    console.log(r.weeksDate)
+                    r.weeksDate.map((date) => {
+                        console.log("date " + date
+                        )
+                        const startWeek = getWeekStartDate(new Date(date));
+                        console.log(startWeek)
+                        console.log("!dfds")
+                        if (!map[startWeek]) {
+                            map[startWeek] = 1
+                            setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
+                        }
+                        setCurrentWeek(startWeek)
+                    });
+
+                }
+                else {
+
+                }
             })
 
 
@@ -251,19 +274,19 @@ const Workouts = () => {
     let weekMap = {};
 
     // use useEffect to set the state of current week as the week that has today's date
-    useEffect(() => {
-        let map = {}
-        workouts.map((workout) => {
-            const startWeek = getWeekStartDate(new Date(workout.date));
-            if (!map[startWeek]) {
-                map[startWeek] = 1
-                setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
-            }
-            setCurrentWeek(startWeek)
-        });
-
-
-    }, [workouts]);
+    // useEffect(() => {
+    //     let map = {}
+    //     workouts.map((workout) => {
+    //         const startWeek = getWeekStartDate(new Date(workout.date));
+    //         if (!map[startWeek]) {
+    //             map[startWeek] = 1
+    //             setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
+    //         }
+    //         setCurrentWeek(startWeek)
+    //     });
+    //
+    //
+    // }, [workouts]);
 
     const getWeekStartDate = (date) => {
         const currentYear = date.getFullYear();

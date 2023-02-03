@@ -73,8 +73,6 @@ export const APIClient = {
 
 
             }
-            console.log("gdfdfg")
-            console.log(arr)
             return {value: true, weeksDate: arr};
         }
 
