@@ -12,7 +12,14 @@ const WorkoutDetails = ({route}) => {
     // console.log(workout)
     // // rest of your component code
 
-    const [exercises, setExercises] = useState(workout.exercises.map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
+    const [exercises, setExercises] = useState(workout.map((workout, index) => ({
+        id: index + 1,
+        name: workout.Exercises[0].Name,
+        reps: workout.Exercises[0].Reps,
+        previousWeight: null,
+        previousDate: null,
+        completed: false,
+    })).map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
     useEffect(() => {
         Animated.timing(animationValue, {
             toValue: 1,

@@ -134,9 +134,19 @@ let r = {
     // console.log("week")
     // console.log(weekMap)
 
-    const handleWorkoutPress = (workout) => {
+    const handleWorkoutPress = async (workout) => {
+        console.log(workout)
+        setLoading(true);
+       const response = await APIClient.GetWorkoutDetails(workout.ClientWorkoutID)
+        setLoading(false)
+        if(response.value){
+            workout = response.workout;
+            navigation.navigate('WorkoutDetails', {workout});
+        }
+
+
         if (workout && workout.exercises && workout.exercises.length > 0) {
-            navigation.navigate('WorkoutDetails', { workout });
+            navigation.navigate('WorkoutDetails', {workout});
         }
     };
 
