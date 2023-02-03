@@ -70,10 +70,12 @@ export const APIClient = {
                 if(value.value && value.workouts && value.workouts.length > 0){
                     arr.push(value.workouts[0].Date)
                 }
-                return {value: true, weeksDate: arr};
+
 
             }
+            console.log("gdfdfg")
             console.log(arr)
+            return {value: true, weeksDate: arr};
         }
 
     },
