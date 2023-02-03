@@ -29,11 +29,11 @@ const Workouts = () => {
                         console.log(date.date)
                         console.log(date.weekId)
                         weekMap[startWeek] = date.weekId;
-                        // if (!map[startWeek]) {
-                        //     map[startWeek] = 1
-                        //     setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => b - a));
-                        // }
-                        // setCurrentWeek(startWeek)
+                        if (!map[startWeek]) {
+                            map[startWeek] = 1
+                            setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
+                        }
+                        setCurrentWeek(startWeek)
                     });
 
                 }
@@ -46,6 +46,12 @@ const Workouts = () => {
 
 
         }, [])
+
+
+    const getWorkoutsForThatWeek = (date) => {
+            const week = weekMap[date];
+            console.log("selected week is" + week)
+    }
 
     console.log("week")
     console.log(weekMap)
