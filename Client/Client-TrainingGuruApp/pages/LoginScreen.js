@@ -21,23 +21,23 @@ export const LoginScreen = ({  }) => {
 
     const handleLogin = () => {
         navigation.navigate("ClientHome")
-        setLoading(true) // Add this line
-        APIClient.loginClient(email, password).then(r => {
-            console.log(r)
-            if(r.value){
-                Alert.alert("Success",   "successfully logged in", [
-                    { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
-                ], { cancelable: false });
-            }else{
-                Alert.alert("Not Success", "Not logged in", [
-                    { text:  "ok", onPress: () =>  console.log("closed")}
-                ], { cancelable: false });
-            }
-            setLoading(false) // Add this line
-        }).catch((error) => {
-            console.error(error);
-            setLoading(false) // Add this line
-        });
+        // setLoading(true) // Add this line
+        // APIClient.loginClient(email, password).then(r => {
+        //     console.log(r)
+        //     if(r.value){
+        //         Alert.alert("Success",   "successfully logged in", [
+        //             { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
+        //         ], { cancelable: false });
+        //     }else{
+        //         Alert.alert("Not Success", "Not logged in", [
+        //             { text:  "ok", onPress: () =>  console.log("closed")}
+        //         ], { cancelable: false });
+        //     }
+        //     setLoading(false) // Add this line
+        // }).catch((error) => {
+        //     console.error(error);
+        //     setLoading(false) // Add this line
+        // });
 
 
 

@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated,Modal, Alert} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, TextInput, Animated, Modal, Alert, ScrollView} from "react-native";
 import {Checkbox} from "react-native-paper";
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,11 +12,12 @@ const WorkoutDetails = ({route}) => {
     // console.log(workout)
     // // rest of your component code
 
+
     const [exercises, setExercises] = useState(workout.map((workout, index) => ({
         id: index + 1,
         name: workout.Exercises[0].Name,
         reps: workout.Exercises[0].Reps,
-        previousWeight: null,
+        previousWeight: workout.Exercises[0].Type === "Weights" ? 10: null,
         previousDate: null,
         completed: false,
     })).map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
@@ -118,7 +119,7 @@ const WorkoutDetails = ({route}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -156,8 +157,8 @@ const WorkoutDetails = ({route}) => {
                 </View>
             </Modal>
 
-            <Animated.View style={{opacity: animationValue, alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.name}>{workout.name}</Text>
+            <Animated.View style={{opacity: animationValue, }}>
+                <Text style={styles.name}>{workout.WorkoutName}</Text>
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
@@ -192,7 +193,7 @@ const WorkoutDetails = ({route}) => {
                     </TouchableOpacity>
 
             </Animated.View>
-        </View>
+        </ScrollView>
 
     );
 };
@@ -210,19 +211,20 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 20,
-        width: "100%"
+        width: "100%",
+        height: "100%",
     },
     name: {
         fontSize: 24,
         fontWeight: "bold",
-        marginBottom: 20,
+        marginBottom: 10,
         textAlign: 'center',
         color: '#333'
     },
     exerciseRow: {
         flexDirection: "column",
         alignItems: "center",
-        marginVertical: 10,
+        marginVertical: 1,
         width: "100%",
         backgroundColor: '#fff',
         padding: 10,
