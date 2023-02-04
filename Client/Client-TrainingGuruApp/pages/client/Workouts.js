@@ -10,7 +10,7 @@ const Workouts = () => {
         const navigation = useNavigation();
         const [loading, setLoading] = useState(false);
         const [weekMap, setWeekMap] = useState({})
-
+    const [words, setWordss] = useState();
         useEffect(() => {
             setLoading(true)
             // APIClient.WorkoutWeeks("3").then(r => {
@@ -202,27 +202,26 @@ let r = {
             workout = response.workout;
             workout.WorkoutName = name
             workout.Id = workoutId;
-            workout.notes = `User Notes: Hello
+            workout.notes = `User Notes: Done
 
-            Workout: Legs Work
+Workout: Legs Work
 
-            Exercise: Bench Press
-            Completed: Yes
-            Weight Used: 10kg/lbs
+Exercise: Bench Press
+Completed: Yes
+Weight Used: 10
 
-            Exercise: Bicep Curls
-            Completed: Yes
-            Weight Used: 10kg/lbs
+Exercise: Bicep Curls
+Completed: Yes
+Weight Used: 10
 
-            Exercise: Incline Bench Press
-            Completed: Yes
-            Weight Used: 10kg/lbs
+Exercise: Incline Bench Press
+Completed: No
+Weight Used: 10
 
-            Exercise: Tricep Pull Down
-            Completed: No
-            Weight Used: N/A
-
-            `;
+Exercise: Tricep Pull Down
+Completed: Yes
+Weight Used: N/A
+`;
             navigation.navigate('WorkoutDetails', {workout});
         }
 
