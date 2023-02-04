@@ -32,11 +32,11 @@ export const APIClient = {
     loginClient: async (email, password) => {
         console.log("dfsdsdf")
         var myHeaders = new Headers();
-
+        myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "Email": email,
-            "Password": password
+            "Email": email === "" ? "a" : email,
+            "Password": password === "" ? "a" : password
         });
 
         var requestOptions = {
@@ -50,7 +50,8 @@ export const APIClient = {
         console.log(response)
         if (response.status === 200) {
             const responseJson = await response.json();
-            return {value: true, clientId: responseJson.clientId};
+            console.log(responseJson)
+            return {value: true, clientId: responseJson.clientID};
         }
         else {
             return {value: false};

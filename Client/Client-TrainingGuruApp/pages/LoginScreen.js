@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
-import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert, AsyncStorage} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
 import APIClient from "../services/client-api";
 import {LoadingDialog} from "../components/LoadingDialog";
+import  AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const LoginScreen = ({  }) => {
     const navigation = useNavigation();
@@ -28,7 +29,8 @@ export const LoginScreen = ({  }) => {
 
         if (r.value) {
             console.log("twest")
-            await AsyncStorage.setItem('clientId', r.clientId);
+            console.log(r)
+            await AsyncStorage.setItem('clientId', r.clientId.toString());
             Alert.alert("Success", "successfully logged in", [
                 {text: "OK", onPress: () => navigation.navigate("ClientHome")}
             ], {cancelable: false});
