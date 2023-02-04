@@ -49,7 +49,6 @@ export const APIClient = {
     WorkoutWeeks: async  (clientId) => {
         var myHeaders = new Headers();
 
-
         const requestOptions = {
             method: 'GET',
             headers: myHeaders,
@@ -70,15 +69,33 @@ export const APIClient = {
                 if(value.value && value.workouts && value.workouts.length > 0){
                     arr.push({date: value.workouts[0].Date, weekId: week, workouts: value.workouts})
                 }
-
-
             }
-
             console.log(arr)
             return {value: true, weeksDate: arr};
         }
+    },
+
+    GetWorkoutDetails: async (workoutId) => {
+        var myHeaders = new Headers();
+        console.log("here")
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(`${API_URL}/Workout/${workoutId}`, requestOptions);
+
+        if (response.status === 200) {
+            const responseJson = await response.json();
+            return {value: true, workout: responseJson};
+        }
+        else {
+            return {value: false}
+        }
 
     },
+
 
     GetWorkoutsForWeeks : async  (clientId, workoutWeekId) => {
         var myHeaders = new Headers();
@@ -99,6 +116,7 @@ export const APIClient = {
             return {value: false}
         }
     }
+
 };
 
 export default APIClient;

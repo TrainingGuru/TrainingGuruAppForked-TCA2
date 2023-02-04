@@ -134,9 +134,75 @@ let r = {
     // console.log("week")
     // console.log(weekMap)
 
-    const handleWorkoutPress = (workout) => {
+    const handleWorkoutPress = async (workout) => {
+        console.log(workout)
+        let name = workout.TrainerWorkout.WorkoutName
+        setLoading(true);
+       // const response = await APIClient.GetWorkoutDetails(workout.ClientWorkoutID);
+        const response = {
+            "value": true,
+            "workout": [
+                {
+                    "TrainerWorkoutID": 2,
+                    "Exercises": [
+                        {
+                            "Name": "Bench Press",
+                            "Type": "Weights",
+                            "Sets": 4,
+                            "Reps": 8,
+                            "Instructions": "Barbell Bench press"
+                        }
+                    ]
+                },
+                {
+                    "TrainerWorkoutID": 2,
+                    "Exercises": [
+                        {
+                            "Name": "Bicep Curls",
+                            "Type": "Weights",
+                            "Sets": 4,
+                            "Reps": 10,
+                            "Instructions": "Dumbbells "
+                        }
+                    ]
+                },
+                {
+                    "TrainerWorkoutID": 2,
+                    "Exercises": [
+                        {
+                            "Name": "Incline Bench Press",
+                            "Type": "Weights",
+                            "Sets": 4,
+                            "Reps": 8,
+                            "Instructions": "Dumbbell or BarBell"
+                        }
+                    ]
+                },
+                {
+                    "TrainerWorkoutID": 2,
+                    "Exercises": [
+                        {
+                            "Name": "Tricep Pull Down",
+                            "Type": "Weights - Machine",
+                            "Sets": 4,
+                            "Reps": 10,
+                            "Instructions": ""
+                        }
+                    ]
+                }
+            ]
+        }
+       console.log(response)
+        setLoading(false)
+        if(response.value){
+            workout = response.workout;
+            workout.WorkoutName = name
+            navigation.navigate('WorkoutDetails', {workout});
+        }
+
+
         if (workout && workout.exercises && workout.exercises.length > 0) {
-            navigation.navigate('WorkoutDetails', { workout });
+            navigation.navigate('WorkoutDetails', {workout});
         }
     };
 
