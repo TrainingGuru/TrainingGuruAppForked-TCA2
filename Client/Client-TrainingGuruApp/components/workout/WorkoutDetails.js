@@ -87,15 +87,15 @@ const WorkoutDetails = ({route}) => {
             workoutString += "Weight Used: " + (exercise.weight ? exercise.weight + "" : "N/A") + "\n\n";
         });
 alert("workoutId " + workout.Id)
-        // const data = await APIClient.CompleteWorkout(workout.Id, workoutString);
+        const data = await APIClient.CompleteWorkout(workout.Id, workoutString);
 
-        // if(data.value){
-        //     alert("Workout Updated Successfully")
-        //     navigation.navigate('Workouts')
-        // }
-        // else {
-        //     alert("Error Could Not Get Workout Completed")
-        // }
+        if(data.value){
+            alert("Workout Updated Successfully")
+            navigation.navigate('Workouts')
+        }
+        else {
+            alert("Error Could Not Get Workout Completed")
+        }
         console.log({i : workoutString, pass: true})
         console.log(workoutString)
     }
@@ -145,12 +145,6 @@ alert("workoutId " + workout.Id)
     };
 
     useEffect(() => {
-
-
-
-
-
-
         if (workout.notes.length >= 1) {
             const notesArray1 = workout.notes.split("\n");
             for (let i = 0; i < notesArray1.length; i++) {

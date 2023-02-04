@@ -131,14 +131,14 @@ export const APIClient = {
             redirect: 'follow'
         };
 
-        // const response = await fetch(`https://traininggurubackend.onrender.com/Client/CompleteWorkout/${Id}`, requestOptions);
-        // console.log(response)
-        // if (response.status === 200) {
-        //     return {value: true};
-        // }
-        // else {
-        //     return {value: false}
-        // }
+        const response = await fetch(`https://traininggurubackend.onrender.com/Client/CompleteWorkout/${Id}`, requestOptions);
+        console.log(response)
+        if (response.status === 200) {
+            return {value: true};
+        }
+        else {
+            return {value: false}
+        }
     }
 
 };
