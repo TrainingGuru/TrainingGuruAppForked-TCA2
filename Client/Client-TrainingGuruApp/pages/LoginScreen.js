@@ -20,25 +20,25 @@ export const LoginScreen = ({  }) => {
     const [clientId, setClientId] = useState(null);
 
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // navigation.navigate("ClientHome")
-         setLoading(true) // Add this line
-        APIClient.loginClient(email, password).then(async r => {
-            if (r.value) {
-                await AsyncStorage.setItem('clientId', r.clientId);
-                Alert.alert("Success", "successfully logged in", [
-                    {text: "OK", onPress: () => navigation.navigate("ClientHome")}
-                ], {cancelable: false});
-            } else {
-                Alert.alert("Not Success", "We Were unable to login those details", [
-                    {text: "ok", onPress: () => console.log("closed")}
-                ], {cancelable: false});
-            }
-            setLoading(false) // Add this line
-        }).catch((error) => {
-            console.error(error);
-            setLoading(false) // Add this line
-        });
+        setLoading(true) // Add this line
+        const r = await APIClient.loginClient(email, password);
+
+
+        if (r.value) {
+            console.log("twest")
+            await AsyncStorage.setItem('clientId', r.clientId);
+            Alert.alert("Success", "successfully logged in", [
+                {text: "OK", onPress: () => navigation.navigate("ClientHome")}
+            ], {cancelable: false});
+        } else {
+            Alert.alert("Not Success", "We Were unable to login those details", [
+                {text: "ok", onPress: () => console.log("closed")}
+            ], {cancelable: false});
+        }
+        setLoading(false) // Add this line
+
 
 
 

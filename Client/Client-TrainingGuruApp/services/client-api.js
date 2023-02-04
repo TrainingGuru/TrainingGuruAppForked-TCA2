@@ -30,6 +30,7 @@ export const APIClient = {
     },
 
     loginClient: async (email, password) => {
+        console.log("dfsdsdf")
         var myHeaders = new Headers();
 
 
@@ -46,6 +47,7 @@ export const APIClient = {
         };
 
         const response = await fetch(`https://traininggurubackend.onrender.com/Client/Login`, requestOptions)
+        console.log(response)
         if (response.status === 200) {
             const responseJson = await response.json();
             return {value: true, clientId: responseJson.clientId};
