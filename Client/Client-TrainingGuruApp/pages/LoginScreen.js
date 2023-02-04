@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
-import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert, AsyncStorage} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
 import APIClient from "../services/client-api";
 import {LoadingDialog} from "../components/LoadingDialog";
@@ -17,27 +17,28 @@ export const LoginScreen = ({  }) => {
     const [coachCode, setCoachCode] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setLoading] = useState(false);
+    const [clientId, setClientId] = useState(null);
 
 
     const handleLogin = () => {
-        navigation.navigate("ClientHome")
-        // setLoading(true) // Add this line
-        // APIClient.loginClient(email, password).then(r => {
-        //     console.log(r)
-        //     if(r.value){
-        //         Alert.alert("Success",   "successfully logged in", [
-        //             { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
-        //         ], { cancelable: false });
-        //     }else{
-        //         Alert.alert("Not Success", "Not logged in", [
-        //             { text:  "ok", onPress: () =>  console.log("closed")}
-        //         ], { cancelable: false });
-        //     }
-        //     setLoading(false) // Add this line
-        // }).catch((error) => {
-        //     console.error(error);
-        //     setLoading(false) // Add this line
-        // });
+        // navigation.navigate("ClientHome")
+         setLoading(true) // Add this line
+        APIClient.loginClient(email, password).then(async r => {
+            if (r.value) {
+                await AsyncStorage.setItem('clientId', r.clientId);
+                Alert.alert("Success", "successfully logged in", [
+                    {text: "OK", onPress: () => navigation.navigate("ClientHome")}
+                ], {cancelable: false});
+            } else {
+                Alert.alert("Not Success", "We Were unable to login those details", [
+                    {text: "ok", onPress: () => console.log("closed")}
+                ], {cancelable: false});
+            }
+            setLoading(false) // Add this line
+        }).catch((error) => {
+            console.error(error);
+            setLoading(false) // Add this line
+        });
 
 
 

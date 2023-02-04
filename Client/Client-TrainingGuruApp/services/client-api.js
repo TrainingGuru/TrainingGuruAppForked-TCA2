@@ -33,16 +33,26 @@ export const APIClient = {
         var myHeaders = new Headers();
 
 
-        const requestOptions = {
-            method: 'GET',
+        var raw = JSON.stringify({
+            "Email": email,
+            "Password": password
+        });
+
+        var requestOptions = {
+            method: 'POST',
             headers: myHeaders,
+            body: raw,
             redirect: 'follow'
         };
 
-        fetch(`https://traininggurubackend.onrender.com/Client/Login?Email=seanmc@hotmail.com&Password=1236`, requestOptions)
-            .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+        const response = await fetch(`https://traininggurubackend.onrender.com/Client/Login`, requestOptions)
+        if (response.status === 200) {
+            const responseJson = await response.json();
+            return {value: true, clientId: responseJson.clientId};
+        }
+        else {
+            return {value: false};
+        }
     },
 
 
