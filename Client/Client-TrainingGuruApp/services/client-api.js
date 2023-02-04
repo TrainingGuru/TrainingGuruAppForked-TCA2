@@ -96,7 +96,6 @@ export const APIClient = {
 
     },
 
-
     GetWorkoutsForWeeks : async  (clientId, workoutWeekId) => {
         var myHeaders = new Headers();
     console.log("here")
@@ -111,6 +110,31 @@ export const APIClient = {
         if (response.status === 200) {
             const responseJson = await response.json();
             return {value: true, workouts: responseJson};
+        }
+        else {
+            return {value: false}
+        }
+    },
+
+    CompleteWorkout: async (Id, notes) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "Notes": notes
+        });
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(`https://traininggurubackend.onrender.com/Client/CompleteWorkout/${Id}`, requestOptions);
+        console.log(response)
+        if (response.status === 200) {
+            return {value: true};
         }
         else {
             return {value: false}

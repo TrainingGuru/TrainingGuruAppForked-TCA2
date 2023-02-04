@@ -3,6 +3,7 @@ import {Checkbox} from "react-native-paper";
 import {useNavigation} from '@react-navigation/native';
 
 import {useEffect, useState} from "react";
+import APIClient from "../../services/client-api";
 
 const WorkoutDetails = ({route}) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,6 +12,10 @@ const WorkoutDetails = ({route}) => {
     if (!workout) return <Text>Loading</Text>
     // console.log(workout)
     // // rest of your component code
+
+    const [workoutCompletedData, setworkoutCompletedData] = useState(null)
+    const [w, WSet] = useState(undefined);
+
 
 
     const [exercises, setExercises] = useState(workout.map((workout, index) => ({
@@ -21,6 +26,8 @@ const WorkoutDetails = ({route}) => {
         previousDate: null,
         completed: false,
     })).map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
+
+
     useEffect(() => {
         Animated.timing(animationValue, {
             toValue: 1,
@@ -68,10 +75,29 @@ const WorkoutDetails = ({route}) => {
     const [notes, setNotes] = useState("");
 
 
-    const submitNotes = () => {
+    const submitNotes = async () => {
         // Send notes to coach
         // navigate to workout overview page
-        navigation.navigate('Workouts')
+
+        let workoutString = "User Notes: " + notes + "\n\nWorkout: " + workout.WorkoutName + "\n\n";
+
+        exercises.forEach((exercise) => {
+            workoutString += "Exercise: " + exercise.name + "\n";
+            workoutString += "Completed: " + (exercise.completed ? "Yes" : "No") + "\n";
+            workoutString += "Weight Used: " + (exercise.weight ? exercise.weight + "" : "N/A") + "\n\n";
+        });
+alert("workoutId " + workout.Id)
+        const data = await APIClient.CompleteWorkout(workout.Id, workoutString);
+
+        if(data.value){
+            alert("Workout Updated Successfully")
+            navigation.navigate('ClientHome')
+        }
+        else {
+            alert("Error Could Not Get Workout Completed")
+        }
+        console.log({i : workoutString, pass: true})
+        console.log(workoutString)
     }
 
 
@@ -118,6 +144,41 @@ const WorkoutDetails = ({route}) => {
         );
     };
 
+    useEffect(() => {
+        if (workout.notes.length >= 1) {
+            const notesArray1 = workout.notes.split("\n");
+            for (let i = 0; i < notesArray1.length; i++) {
+                if (notesArray1[i].startsWith("User Notes:")) {
+                    WSet(notesArray1[i].split(":")[1].trim());
+                    break;
+                }
+            }
+
+
+            let updatedExercises = [...exercises];
+            const notesArray = workout.notes.split("\n");
+
+            for (let i = 0; i < notesArray.length; i++) {
+                if (notesArray[i].includes("Exercise")) {
+                    const exerciseName = notesArray[i].split(":")[1].trim();
+                    const completed = notesArray[i + 1].includes("Yes");
+                    const weight = notesArray[i + 2].split(":")[1].trim();
+
+                    const exerciseIndex = exercises.findIndex(
+                        exercise => exercise.name === exerciseName
+                    );
+
+                    if (exerciseIndex >= 0) {
+                        updatedExercises[exerciseIndex].workoutAlreadyCompleted = completed;
+                        updatedExercises[exerciseIndex].WeightForWorkoutUsed = weight;
+                        alert(weight)
+                    }
+                }
+            }
+            setExercises(updatedExercises);
+        }
+    }, [])
+
     return (
         <ScrollView style={styles.container}>
             <Modal
@@ -157,11 +218,30 @@ const WorkoutDetails = ({route}) => {
                 </View>
             </Modal>
 
-            <Animated.View style={{opacity: animationValue, display: "flex", gap: 135, backgroundColor: "red" }}>
+            <Animated.View style={{opacity: animationValue}}>
                 <Text style={styles.name}>{workout.WorkoutName}</Text>
+                {w &&  <View style={styles.container22}>
+                    <Text style={styles.title}>{"Workout Notes"}</Text>
+                    <View style={[styles.notesContainer, {
+                        backgroundColor: 'white',
+                        borderWidth: 1,
+                        borderColor: 'lightgray',
+                        borderRadius: 20,
+                        padding: 20,
+                        elevation: 5,
+                        shadowColor: 'gray',
+                        shadowOpacity: 0.5,
+                        shadowRadius: 10,
+                        shadowOffset: {width: 0, height: 2},
+                        alignItems: 'center'
+                    }]}>
+                        {w && <Text style={[styles.notes, {textAlign: 'center'}]}>{w.toString()}</Text>}
+                    </View>
+                </View>}
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
+
                         {exercise.previousWeight ? (  <View style={styles.weightContainer}>
                             {exercise.previousWeight ? (
                                 <Text style={styles.weight}>
@@ -170,9 +250,8 @@ const WorkoutDetails = ({route}) => {
                                 </Text>
                             ) : null}
                             <View style={{display: "flex", flexDirection: "row", alignItems: "center"}}><TextInput
-                                placeholder="Enter weight"      style={{width: "50%", fontSize: 15}}
-
-                                onChangeText={text => handleWeightChange(exercise.id, text)}
+                                placeholder="Enter weight"  style={{width: "50%", fontSize: 15}} value={exercise.hasOwnProperty("WeightForWorkoutUsed")   && exercise.WeightForWorkoutUsed.toString()}
+                                onChangeText={text => handleWeightChange(exercise.id, text)}   editable={workout.notes.length < 1}
                             />
                                 <Text  style={{ marginTop: 0, marginBottom: 0, fontSize: 15}}>KG</Text>
                             </View>
@@ -180,17 +259,17 @@ const WorkoutDetails = ({route}) => {
                         <View style={styles.reps}>
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
-                                status={exercise.completed ? "checked" : "unchecked"}
-                                disabled={exercise.previousWeight ? !exercise.weightEntered : false}
+                                status={exercise.completed || exercise.workoutAlreadyCompleted ? "checked" : "unchecked"}
+                                disabled={exercise.hasOwnProperty("workoutAlreadyCompleted") ? true : exercise.previousWeight ? !exercise.weightEntered : false}
                                 onPress={() => handleExerciseToggle(exercise.id)}
                             />
                         </View>
                     </View>
                 ))}
 
-                    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                        <Text style={styles.submitButtonText}>Submit</Text>
-                    </TouchableOpacity>
+                {!w && <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                    <Text style={styles.submitButtonText}>Submit</Text>
+                </TouchableOpacity>}
 
             </Animated.View>
         </ScrollView>
@@ -199,6 +278,22 @@ const WorkoutDetails = ({route}) => {
 };
 
 const styles = StyleSheet.create({
+    container22: {
+
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    notesContainer: {
+        backgroundColor: '#f5f5f5',
+        padding: 10,
+        borderRadius: 5,
+    },
+    notes: {
+        fontSize: 16,
+    },
     exerciseNameContainer: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -207,12 +302,13 @@ const styles = StyleSheet.create({
         flexDirection: "row-reverse",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 10
+        marginBottom: 10,
     },
     container: {
-        padding: 20,
+        paddingHorizontal: 20,
         width: "100%",
         height: "100%",
+        marginVertical: 15
     },
     name: {
         fontSize: 24,
@@ -224,10 +320,10 @@ const styles = StyleSheet.create({
     exerciseRow: {
         flexDirection: "column",
         alignItems: "center",
-        marginVertical: 1,
+        marginVertical: 10,
         width: "100%",
         backgroundColor: '#fff',
-        padding: 10,
+        padding: 1,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
