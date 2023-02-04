@@ -157,7 +157,7 @@ const WorkoutDetails = ({route}) => {
                 </View>
             </Modal>
 
-            <Animated.View style={{opacity: animationValue, }}>
+            <Animated.View style={{opacity: animationValue, display: "flex", gap: 135, backgroundColor: "red" }}>
                 <Text style={styles.name}>{workout.WorkoutName}</Text>
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
