@@ -137,6 +137,8 @@ let r = {
     const handleWorkoutPress = async (workout) => {
         console.log(workout)
         let name = workout.TrainerWorkout.WorkoutName
+        let workoutId =workout.ClientWorkoutID;
+        let notes = workout.Notes;
         setLoading(true);
        // const response = await APIClient.GetWorkoutDetails(workout.ClientWorkoutID);
         const response = {
@@ -195,15 +197,36 @@ let r = {
        console.log(response)
         setLoading(false)
         if(response.value){
+            alert(notes)
+            console.log("sdfdfdssdf" + notes)
             workout = response.workout;
             workout.WorkoutName = name
+            workout.Id = workoutId;
+            workout.notes = `User Notes: Hello
+
+            Workout: Legs Work
+
+            Exercise: Bench Press
+            Completed: Yes
+            Weight Used: 10kg/lbs
+
+            Exercise: Bicep Curls
+            Completed: Yes
+            Weight Used: 10kg/lbs
+
+            Exercise: Incline Bench Press
+            Completed: Yes
+            Weight Used: 10kg/lbs
+
+            Exercise: Tricep Pull Down
+            Completed: No
+            Weight Used: N/A
+
+            `;
             navigation.navigate('WorkoutDetails', {workout});
         }
 
 
-        if (workout && workout.exercises && workout.exercises.length > 0) {
-            navigation.navigate('WorkoutDetails', {workout});
-        }
     };
 
 

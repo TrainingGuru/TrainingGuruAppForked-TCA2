@@ -3,6 +3,7 @@ import {Checkbox} from "react-native-paper";
 import {useNavigation} from '@react-navigation/native';
 
 import {useEffect, useState} from "react";
+import APIClient from "../../services/client-api";
 
 const WorkoutDetails = ({route}) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,6 +12,10 @@ const WorkoutDetails = ({route}) => {
     if (!workout) return <Text>Loading</Text>
     // console.log(workout)
     // // rest of your component code
+
+    const [workoutCompletedData, setworkoutCompletedData] = useState(null)
+
+
 
 
     const [exercises, setExercises] = useState(workout.map((workout, index) => ({
@@ -21,6 +26,8 @@ const WorkoutDetails = ({route}) => {
         previousDate: null,
         completed: false,
     })).map(exercise => ({...exercise, weightEntered: false, requiresWeight: exercise.weight ? true : false})));    const [animationValue] = useState(new Animated.Value(0));
+
+
     useEffect(() => {
         Animated.timing(animationValue, {
             toValue: 1,
@@ -68,19 +75,28 @@ const WorkoutDetails = ({route}) => {
     const [notes, setNotes] = useState("");
 
 
-    const submitNotes = () => {
+    const submitNotes = async () => {
         // Send notes to coach
         // navigate to workout overview page
-        alert("hello")
+
         let workoutString = "User Notes: " + notes + "\n\nWorkout: " + workout.WorkoutName + "\n\n";
+
         exercises.forEach((exercise) => {
             workoutString += "Exercise: " + exercise.name + "\n";
             workoutString += "Completed: " + (exercise.completed ? "Yes" : "No") + "\n";
             workoutString += "Weight Used: " + (exercise.previousWeight ? exercise.previousWeight + "kg/lbs" : "N/A") + "\n\n";
         });
-        console.log("yoo")
-        console.log(workoutString);
-        // navigation.navigate('Workouts')
+alert("workoutId " + workout.Id)
+        // const data = await APIClient.CompleteWorkout(workout.Id, workoutString);
+
+        // if(data.value){
+        //     alert("Workout Updated Successfully")
+        //     navigation.navigate('Workouts')
+        // }
+        // else {
+        //     alert("Error Could Not Get Workout Completed")
+        // }
+        console.log({i : workoutString, pass: true})
     }
 
 
@@ -127,6 +143,31 @@ const WorkoutDetails = ({route}) => {
         );
     };
 
+    useEffect(() => {
+        if (workout.notes.length >= 1) {
+            let updatedExercises = [...exercises];
+            const notesArray = workout.notes.split("\n");
+
+            for (let i = 0; i < notesArray.length; i++) {
+                if (notesArray[i].includes("Exercise")) {
+                    const exerciseName = notesArray[i].split(":")[1].trim();
+                    const completed = notesArray[i + 1].includes("Yes");
+                    const weight = notesArray[i + 2].split(":")[1].trim();
+
+                    const exerciseIndex = exercises.findIndex(
+                        exercise => exercise.name === exerciseName
+                    );
+
+                    if (exerciseIndex >= 0) {
+                        updatedExercises[exerciseIndex].workoutAlreadyCompleted = completed;
+                        updatedExercises[exerciseIndex].WeightForWorkoutUsed = weight;
+                    }
+                }
+            }
+            setExercises(updatedExercises);
+        }
+    }, [workout.notes])
+
     return (
         <ScrollView style={styles.container}>
             <Modal
@@ -171,6 +212,7 @@ const WorkoutDetails = ({route}) => {
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
                         <Text style={styles.exerciseName}>{exercise.name}</Text>
+                        {exercise.workoutAlreadyCompleted && <Text> fsdfsdf {exercise.workoutAlreadyCompleted}</Text>}
                         {exercise.previousWeight ? (  <View style={styles.weightContainer}>
                             {exercise.previousWeight ? (
                                 <Text style={styles.weight}>
@@ -179,7 +221,7 @@ const WorkoutDetails = ({route}) => {
                                 </Text>
                             ) : null}
                             <View style={{display: "flex", flexDirection: "row", alignItems: "center"}}><TextInput
-                                placeholder="Enter weight"      style={{width: "50%", fontSize: 15}}
+                                placeholder="Enter weight"  style={{width: "50%", fontSize: 15}} value={exercise.WeightForWorkoutUsed}
 
                                 onChangeText={text => handleWeightChange(exercise.id, text)}
                             />
@@ -189,8 +231,8 @@ const WorkoutDetails = ({route}) => {
                         <View style={styles.reps}>
                             <Text style={styles.reps}>{exercise.reps} reps</Text>
                             <Checkbox
-                                status={exercise.completed ? "checked" : "unchecked"}
-                                disabled={exercise.previousWeight ? !exercise.weightEntered : false}
+                                status={exercise.completed || exercise.weightEntered == true ? "checked" : "unchecked"}
+                                disabled={exercise.hasOwnProperty("workoutAlreadyCompleted") ? true : exercise.previousWeight ? !exercise.weightEntered : false}
                                 onPress={() => handleExerciseToggle(exercise.id)}
                             />
                         </View>
