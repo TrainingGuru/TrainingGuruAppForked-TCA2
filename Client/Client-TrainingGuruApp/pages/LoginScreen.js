@@ -4,6 +4,7 @@ import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert} from 
 import {useNavigation} from "@react-navigation/core";
 import APIClient from "../services/client-api";
 import {LoadingDialog} from "../components/LoadingDialog";
+import  AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const LoginScreen = ({  }) => {
     const navigation = useNavigation();
@@ -17,27 +18,29 @@ export const LoginScreen = ({  }) => {
     const [coachCode, setCoachCode] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setLoading] = useState(false);
+    const [clientId, setClientId] = useState(null);
 
 
-    const handleLogin = () => {
-        navigation.navigate("ClientHome")
-        // setLoading(true) // Add this line
-        // APIClient.loginClient(email, password).then(r => {
-        //     console.log(r)
-        //     if(r.value){
-        //         Alert.alert("Success",   "successfully logged in", [
-        //             { text:  "OK", onPress: () => navigation.navigate("ClientHome") }
-        //         ], { cancelable: false });
-        //     }else{
-        //         Alert.alert("Not Success", "Not logged in", [
-        //             { text:  "ok", onPress: () =>  console.log("closed")}
-        //         ], { cancelable: false });
-        //     }
-        //     setLoading(false) // Add this line
-        // }).catch((error) => {
-        //     console.error(error);
-        //     setLoading(false) // Add this line
-        // });
+    const handleLogin = async () => {
+        // navigation.navigate("ClientHome")
+        setLoading(true) // Add this line
+        const r = await APIClient.loginClient(email, password);
+
+
+        if (r.value) {
+            console.log("twest")
+            console.log(r)
+            await AsyncStorage.setItem('clientId', r.clientId.toString());
+            Alert.alert("Success", "successfully logged in", [
+                {text: "OK", onPress: () => navigation.navigate("ClientHome")}
+            ], {cancelable: false});
+        } else {
+            Alert.alert("Not Success", "We Were unable to login those details", [
+                {text: "ok", onPress: () => console.log("closed")}
+            ], {cancelable: false});
+        }
+        setLoading(false) // Add this line
+
 
 
 

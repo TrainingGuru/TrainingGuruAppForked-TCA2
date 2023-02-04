@@ -30,19 +30,32 @@ export const APIClient = {
     },
 
     loginClient: async (email, password) => {
+        console.log("dfsdsdf")
         var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
+        var raw = JSON.stringify({
+            "Email": email === "" ? "a" : email,
+            "Password": password === "" ? "a" : password
+        });
 
-        const requestOptions = {
-            method: 'GET',
+        var requestOptions = {
+            method: 'POST',
             headers: myHeaders,
+            body: raw,
             redirect: 'follow'
         };
 
-        fetch(`https://traininggurubackend.onrender.com/Client/Login?Email=seanmc@hotmail.com&Password=1236`, requestOptions)
-            .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+        const response = await fetch(`https://traininggurubackend.onrender.com/Client/Login`, requestOptions)
+        console.log(response)
+        if (response.status === 200) {
+            const responseJson = await response.json();
+            console.log(responseJson)
+            return {value: true, clientId: responseJson.clientID};
+        }
+        else {
+            return {value: false};
+        }
     },
 
 
