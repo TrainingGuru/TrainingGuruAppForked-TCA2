@@ -71,7 +71,16 @@ const WorkoutDetails = ({route}) => {
     const submitNotes = () => {
         // Send notes to coach
         // navigate to workout overview page
-        navigation.navigate('Workouts')
+        alert("hello")
+        let workoutString = "User Notes: " + notes + "\n\nWorkout: " + workout.WorkoutName + "\n\n";
+        exercises.forEach((exercise) => {
+            workoutString += "Exercise: " + exercise.name + "\n";
+            workoutString += "Completed: " + (exercise.completed ? "Yes" : "No") + "\n";
+            workoutString += "Weight Used: " + (exercise.previousWeight ? exercise.previousWeight + "kg/lbs" : "N/A") + "\n\n";
+        });
+        console.log("yoo")
+        console.log(workoutString);
+        // navigation.navigate('Workouts')
     }
 
 
@@ -157,7 +166,7 @@ const WorkoutDetails = ({route}) => {
                 </View>
             </Modal>
 
-            <Animated.View style={{opacity: animationValue, display: "flex", gap: 135, backgroundColor: "red" }}>
+            <Animated.View style={{opacity: animationValue}}>
                 <Text style={styles.name}>{workout.WorkoutName}</Text>
                 {exercises.map((exercise) => (
                     <View style={styles.exerciseRow} key={exercise.id}>
@@ -207,12 +216,13 @@ const styles = StyleSheet.create({
         flexDirection: "row-reverse",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 10
+        marginBottom: 10,
     },
     container: {
-        padding: 20,
+        paddingHorizontal: 20,
         width: "100%",
         height: "100%",
+        marginVertical: 15
     },
     name: {
         fontSize: 24,
@@ -224,10 +234,10 @@ const styles = StyleSheet.create({
     exerciseRow: {
         flexDirection: "column",
         alignItems: "center",
-        marginVertical: 1,
+        marginVertical: 10,
         width: "100%",
         backgroundColor: '#fff',
-        padding: 10,
+        padding: 1,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
