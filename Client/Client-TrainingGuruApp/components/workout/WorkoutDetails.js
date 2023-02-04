@@ -91,7 +91,7 @@ alert("workoutId " + workout.Id)
 
         if(data.value){
             alert("Workout Updated Successfully")
-            navigation.navigate('Workouts')
+            navigation.navigate('ClientHome')
         }
         else {
             alert("Error Could Not Get Workout Completed")
