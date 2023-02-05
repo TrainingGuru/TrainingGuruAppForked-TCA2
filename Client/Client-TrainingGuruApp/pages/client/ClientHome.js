@@ -250,13 +250,24 @@ console.log(response)
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
-        setnutritionGoals({
-            ...nutritionGoals,
-            CaloriesIntake: nutritionGoals.CaloriesIntake + nutritionInfo.CaloriesIntake,
-            FatsIntake: nutritionGoals.FatsIntake + nutritionInfo.FatsIntake,
-            ProteinIntake: nutritionGoals.ProteinIntake + nutritionInfo.ProteinIntake,
-            CarbohydratesIntake: nutritionGoals.CarbohydratesIntake + nutritionInfo.CarbohydratesIntake
-        });
+
+        console.log("calories "+ nutritionGoals.CaloriesIntake + nutritionInfo["serving_size_g"])
+        console.log("calories "+ nutritionGoals.FatsIntake + nutritionInfo["calories"])
+
+        console.log(       "CaloriesIntake:" +   parseInt(nutritionGoals.CaloriesIntake) + "" + parseInt(nutritionInfo["calories"]) + "" +
+            "FatsIntake:" + parseInt(nutritionGoals.FatsIntake) + parseInt(nutritionInfo["fat_total_g"])  + "" +
+            "ProteinIntake:" + parseInt(nutritionGoals.ProteinIntake) + parseInt(nutritionInfo["protein_g"])  + "" +
+            "carbohydratesIntake" + parseInt(nutritionGoals.CarbohydratesIntake) + parseInt(nutritionInfo["carbohydrates_total_g"]))
+
+        for(const i of nutritionInfo) {
+            setnutritionGoals({
+                ...nutritionGoals,
+                CaloriesIntake: parseInt(nutritionGoals.CaloriesIntake) + parseInt(i["calories"]),
+                FatsIntake: parseInt(nutritionGoals.FatsIntake) + parseInt(i["fat_total_g"]),
+                ProteinIntake: parseInt(nutritionGoals.ProteinIntake) + parseInt(i["protein_g"]),
+                CarbohydratesIntake: parseInt(nutritionGoals.CarbohydratesIntake) + parseInt(i["carbohydrates_total_g"])
+            });
+        }
         setLoadingModal(false);
     }
 
