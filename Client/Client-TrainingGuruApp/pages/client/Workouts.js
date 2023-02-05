@@ -17,52 +17,45 @@ const Workouts = () => {
     useEffect(() => {
         setLoading(true)
 
-            const retrieveClientID = async () => {
-                const storedClientID = await AsyncStorage.getItem('clientID');
-                console.log(await AsyncStorage.getItem('clientID'))
-                console.log(storedClientID)
-                console.log("sdssaas")
-                console.log(await AsyncStorage.getAllKeys())
-                alert("stored ClientID " + storedClientID)
-               const r = await APIClient.WorkoutWeeks(storedClientID);
-                    if (r.value) {
-                    let map = {}
-                    console.log("sddsdf")
-                    console.log(r.weeksDate)
-                    r.weeksDate.map((date) => {
-                        console.log("date " + date
-                        )
-                        const startWeek = getWeekStartDate(new Date(date.date));
-                        console.log(startWeek)
-                        console.log("!dfds")
-                        console.log(date.date)
-                        console.log(date.workouts)
-                        console.log(JSON.stringify(date.workouts))
-                        console.log(date.weekId)
+        async function getClientID(){
+            console.log("bob2")
+            console.log("client Id" + await AsyncStorage.getItem('clientId'))
+            const storedClientID =  await AsyncStorage.getItem('clientId');
+            alert("stored ClientID " + storedClientID)
+            const r = await APIClient.WorkoutWeeks(storedClientID);
+            if (r.value) {
+                let map = {}
+                console.log("sddsdf")
+                console.log(r.weeksDate)
+                r.weeksDate.map((date) => {
+                    console.log("date " + date
+                    )
+                    const startWeek = getWeekStartDate(new Date(date.date));
+                    console.log(startWeek)
+                    console.log("!dfds")
+                    console.log(date.date)
+                    console.log(date.workouts)
+                    console.log(JSON.stringify(date.workouts))
+                    console.log(date.weekId)
 
-                        weekMap[startWeek] = {weekId: date.weekId, workouts: date.workouts};
-                        console.log("week")
-                        console.log(weekMap[startWeek])
-                        if (!map[startWeek]) {
-                            map[startWeek] = 1
-                            setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
-                        }
+                    weekMap[startWeek] = {weekId: date.weekId, workouts: date.workouts};
+                    console.log("week")
+                    console.log(weekMap[startWeek])
+                    if (!map[startWeek]) {
+                        map[startWeek] = 1
+                        setWeeks((prevWeeks) => [...prevWeeks, startWeek].sort((b, a) => a - b));
+                    }
 
-                        setCurrentWeek(startWeek)
-                    });
+                    setCurrentWeek(startWeek)
+                });
 
-                } else {
+            } else {
 
-                }
-                setLoading(false)
-            };
+            }
+            setLoading(false)
+        };
 
-            retrieveClientID();
-
-
-
-
-
+        getClientID();
     }, [])
 
     console.log("dfsddfsd")

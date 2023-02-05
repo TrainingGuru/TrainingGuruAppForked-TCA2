@@ -8,9 +8,10 @@ import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const ClientHome = () => {
     const [unit, setUnit] = useState('grams');
@@ -208,6 +209,17 @@ export const ClientHome = () => {
             elevation: 5
         }
     }, layout)
+
+    useEffect(() => {
+        async function getClientID(){
+            console.log("bob")
+            console.log("client Id" + await AsyncStorage.getItem('clientId'))
+            alert( await AsyncStorage.getItem('clientId'));
+        }
+
+
+        getClientID();
+    }, [])
 
     const handleUnit = (unit) => {
         setUnit(unit);
