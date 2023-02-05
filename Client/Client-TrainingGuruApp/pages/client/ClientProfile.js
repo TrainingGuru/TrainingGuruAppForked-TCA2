@@ -9,6 +9,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import APIClient from "../../services/client-api";
 
 function ClientProfile() {
+    const [id1, setId1] = useState("");
+    const [text, setText] = useState("");
     const [userName, setUserName] = useState("Josh Mitvh");
     const [userImage, setUserImage] = useState("https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
     const [coachName, setCoachName] = useState("Frsny Pis");
@@ -48,18 +50,21 @@ function ClientProfile() {
         updateGoals()
     }
 
-    const handleEditGoal = (text, index, id) => {
+    const handleEditGoal = (id, text1) => {
+        console.log("textddasd " + text1 + "id sfdsffsd" + id)
+
         setGoals(goals.map((goal, i) => {
             if (goal.GoalID === id) {
-                return text;
+                return { ...goal, Goal: text1 };
             }
             return goal;
         }));
-        updateGoals()
     }
 
-    function handleEditUpdateGoal(Goal, index) {
-       
+    async function handleEditUpdateGoal(id, goal, goalid) {
+        alert("id" + id + "goal" + goal)
+        console.log("id" + id + "goal" + goal)
+        await APIClient.UpdateGoal(goalid,id, goal)
     }
 
     const updateGoals = () => {
@@ -136,16 +141,18 @@ function ClientProfile() {
                             <TextInput
                                 style={styles.goalText}
                                 value={item.Goal}
-                                onChangeText={text => handleEditGoal(text, index, item.GoalID)}
+                                onChangeText={text1 => {
+                                    let a = item.GoalID;
+                                    // setText(text1);
+                                    // setId1(a)
+                                    handleEditGoal(a, text1)
+                                }}
                                 onFocus={() => {
                                 }}
                                 onEndEditing={() => {
-                                    let id = item.GoalID;
-                                    let text = item.Goal;
-                                    // Trigger handleEditGoal only when the user removes focus from the input
-                                    handleEditUpdateGoal(id, text)
-                                }}
-                                onBlur={() => {
+
+                                    alert(item.ClientID + "" + item.Goal + "" + item.GoalID)
+                                    handleEditUpdateGoal(item.ClientID , item.Goal , item.GoalID )
                                 }}
                             />
                             <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(index)}>

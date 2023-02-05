@@ -218,7 +218,26 @@ export const APIClient = {
             return {value: false}
         }
 
+    },
 
+    UpdateGoal: async (goalId,clientId, goal) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "Goal": goal
+        });
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+  const response = await fetch(`https://traininggurubackend.onrender.com/Goals/${clientId}/${goalId}`, requestOptions)
+        console.log(response)
+        return;
     }
 
 
