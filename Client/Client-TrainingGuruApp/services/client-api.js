@@ -220,6 +220,17 @@ export const APIClient = {
 
     },
 
+    DeleteClientGoal : async (clientId, goalId) => {
+        const requestOptions = {
+            method: 'DELETE',
+            redirect: 'follow'
+        };
+
+   await fetch(`https://traininggurubackend.onrender.com/Goals/${clientId}/${goalId}`, requestOptions)
+
+        return
+    },
+
     UpdateGoal: async (goalId,clientId, goal) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");

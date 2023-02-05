@@ -43,11 +43,12 @@ function ClientProfile() {
 
 
 
-    const handleDeleteGoal = (index) => {
+    const handleDeleteGoal = async (goalID) => {
+        const goalIndex = goals.findIndex(goal => goal.id === goalID);
         if (goals.length > 1) {
-            setGoals(goals.filter((goal, i) => i !== index));
+            setGoals(goals.filter((goal, i) => i !== goalIndex));
+            await APIClient.DeleteClientGoal(clientId, goalID)
         }
-        updateGoals()
     }
 
     const handleEditGoal = (id, text1) => {
@@ -155,7 +156,7 @@ function ClientProfile() {
                                     handleEditUpdateGoal(item.ClientID , item.Goal , item.GoalID )
                                 }}
                             />
-                            <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(index)}>
+                            <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(item.GoalID)}>
                                 <Text>Delete</Text>
                             </TouchableOpacity>
                         </View>
