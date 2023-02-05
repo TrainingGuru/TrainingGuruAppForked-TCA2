@@ -90,7 +90,7 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             <View style={styles.cardMiddleRow}>
                 <View style={styles.cardMiddleRowLeft}>
                     <Text style={{ marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>Fat</Text>
-                    <CalorieGauge value={fat} maxValue={maxFat}  startColor={"#f80202"} startColor={"#f80202"} label="Fat"/>
+                    <CalorieGauge value={fat} maxValue={maxFat}  startColor={"#f80202"} endColor={"#f80202"} label="Fat"/>
                 </View>
                 <View style={styles.cardMiddleRowMiddle}  >
                     <Text>Protein</Text>

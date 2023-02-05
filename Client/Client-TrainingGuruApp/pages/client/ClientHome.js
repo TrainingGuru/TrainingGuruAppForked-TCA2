@@ -250,6 +250,13 @@ console.log(response)
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
+        setnutritionGoals({
+            ...nutritionGoals,
+            CaloriesIntake: nutritionGoals.CaloriesIntake + nutritionInfo.CaloriesIntake,
+            FatsIntake: nutritionGoals.FatsIntake + nutritionInfo.FatsIntake,
+            ProteinIntake: nutritionGoals.ProteinIntake + nutritionInfo.ProteinIntake,
+            CarbohydratesIntake: nutritionGoals.CarbohydratesIntake + nutritionInfo.CarbohydratesIntake
+        });
         setLoadingModal(false);
     }
 
@@ -355,10 +362,10 @@ console.log(response)
                                 fat={item["fat_total_g"]}
                                 protein={item["protein_g"]}
                                 carbs={item["carbohydrates_total_g"]}
-                                maxCarbs={50}
-                                maxProtein={100}
-                                maxFat={20}
-                                maxCalories={2000}
+                                maxCarbs={nutritionGoals.TotalCarbohydrates}
+                                maxProtein={nutritionGoals.TotalProtein}
+                                maxFat={nutritionGoals.TotalFats}
+                                maxCalories={nutritionGoals.TotalCalories}
                             />
                         </View>
                     })}

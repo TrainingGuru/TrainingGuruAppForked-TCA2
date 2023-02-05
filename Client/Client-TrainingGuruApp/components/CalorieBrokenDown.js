@@ -24,7 +24,7 @@ function calorieBrokenDown({nutrition}) {
     }, layout)
     return <View style={styles.calorieBrokenDown}>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
-            <CalorieGauge  startColor={"#f80202"} startColor={"#f80202"} maxValue={nutrition.TotalFats} value={nutrition.FatsIntake}/>
+            <CalorieGauge  startColor={"#f80202"} endColor={"#f80202"} maxValue={nutrition.TotalFats} value={nutrition.FatsIntake}/>
         </View>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Protein</Text>
             <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}  maxValue={nutrition.TotalProtein} value={nutrition.ProteinIntake} />
