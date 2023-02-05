@@ -22,6 +22,8 @@ function ClientProfile() {
     const [clientId, SetClientId] = useState("");
     useEffect(() => {
         async function getClientID(){
+
+
             alert("here2")
             const storedClientID =  await AsyncStorage.getItem('clientId');
             SetClientId(storedClientID);
@@ -33,6 +35,11 @@ function ClientProfile() {
                 setGoals(response.goals)
             }
             setLoadingModal(false)
+
+            let bit = new Fitbit();
+            const response2 = await  bit.getUserProfile();
+            console.log("bbbbbbsfdsfd")
+            console.log(response2)
 
         }
 

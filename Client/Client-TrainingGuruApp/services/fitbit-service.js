@@ -43,4 +43,46 @@ export class Fitbit {
             .then(response => response.text())
             .catch(error => console.log("error", error));
     }
+
+
+    async getAccessToken() {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Basic MjM5OTRMOjhjNGJiZjE1M2M4OTRiMjIyM2ZmODBmMGRiZmI3YmEy");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Cookie", "JSESSIONID=977F3A2BE5AC6C4221E9C80CFE290AB1.fitbit1; fct=a5cce73b8d0746e6b12390aef05927d5");
+
+        var urlencoded = "grant_type=client_credentials";
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        const response = await fetch("https://api.fitbit.com/oauth2/token", requestOptions);
+        const json = await response.json();
+        console.log(json);
+    }
+
+     async getUserProfile() {
+        const accessToken = await this.getAccessToken();
+        const endpoint = 'https://api.fitbit.com/1/user/-/profile.json';
+        const headers = new Headers({
+            Authorization: `Bearer ${accessToken}`,
+        });
+        const options = {
+            method: 'GET',
+            headers,
+        };
+
+        try {
+            const response = await fetch(endpoint, options);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }

@@ -287,7 +287,6 @@ console.log(response)
     }
 
     return <Layout loading={loadingModel}>
-        {loadingModel && <Text>fewef</Text>}
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
             </View>
