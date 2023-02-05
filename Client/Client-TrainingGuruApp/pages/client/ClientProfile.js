@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableOpacity, TextInput, ScrollView, FlatList} from 'react-native';
 import CardLayout from "../../components/reusable/CardLayout";
 import Layout from "../../components/structure/Layout";
 import {ConnectFitbitModel} from "../../components/ConnectFitbitModel";
 import {Fitbit} from "../../services/fitbit-service";
 import {NinjaAPI} from "../../services/nutrition-service";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import APIClient from "../../services/client-api";
 
 function ClientProfile() {
     const [userName, setUserName] = useState("Josh Mitvh");
@@ -14,26 +16,54 @@ function ClientProfile() {
     const [goals, setGoals] = useState([]);
     const [fitbitModelOpen, setFitbitModelOpen] = useState(false)
     const [fitbitConnected, setFitbitConnected] = useState(false);
+    const [loadingModel, setLoadingModal] = useState(false);
+    const [clientId, SetClientId] = useState("");
+    useEffect(() => {
+        async function getClientID(){
+            alert("here2")
+            const storedClientID =  await AsyncStorage.getItem('clientId');
+            SetClientId(storedClientID);
+            alert(storedClientID)
+            setLoadingModal(true);
+            const response = await APIClient.GetAllGoalsForClient(storedClientID)
+            console.log(response)
+            if(response.value){
+                setGoals(response.goals)
+            }
+            setLoadingModal(false)
 
-    const handleAddGoal = () => {
-        if (goals.length < 4) {
-            setGoals([...goals, ""]);
         }
-    }
+
+
+        getClientID();
+    }, [])
+
+
+
 
     const handleDeleteGoal = (index) => {
         if (goals.length > 1) {
             setGoals(goals.filter((goal, i) => i !== index));
         }
+        updateGoals()
     }
 
-    const handleEditGoal = (text, index) => {
+    const handleEditGoal = (text, index, id) => {
         setGoals(goals.map((goal, i) => {
-            if (i === index) {
+            if (goal.GoalID === id) {
                 return text;
             }
             return goal;
         }));
+        updateGoals()
+    }
+
+    function handleEditUpdateGoal(Goal, index) {
+       
+    }
+
+    const updateGoals = () => {
+        console.log(goals)
     }
 
     const handleConnectFitbit = () => {
@@ -42,7 +72,20 @@ function ClientProfile() {
         // setFitbitConnected(!fitbitConnected);
     }
 
-    const [loading, setLoading] = useState();
+    const handleAddGoal = async () => {
+        if (goals.length < 4) {
+
+            setLoadingModal(true)
+            const response = await APIClient.CreateNewGoalForClient(clientId);
+
+            if(response.value){
+                setGoals(prev => [...prev, goals])
+            }
+            setLoadingModal(false);
+        }
+
+    }
+
 
     const connectFunction = async () => {
         // setLoading(true);
@@ -51,8 +94,11 @@ function ClientProfile() {
 
     }
 
+
+
+
     return (
-        <Layout loading={loading}>
+        <Layout loading={loadingModel}>
             <View>
             <ConnectFitbitModel open={fitbitModelOpen} setOpen={setFitbitModelOpen} connectFunction={connectFunction}/>
             <View style={styles.topRowContainer}>
@@ -89,9 +135,15 @@ function ClientProfile() {
                         <View style={styles.goalContainer}>
                             <TextInput
                                 style={styles.goalText}
-                                value={item}
-                                onChangeText={text => handleEditGoal(text, index)}
+                                value={item.Goal}
+                                onChangeText={text => handleEditGoal(text, index, item.GoalID)}
                                 onFocus={() => {
+                                }}
+                                onEndEditing={() => {
+                                    let id = item.GoalID;
+                                    let text = item.Goal;
+                                    // Trigger handleEditGoal only when the user removes focus from the input
+                                    handleEditUpdateGoal(id, text)
                                 }}
                                 onBlur={() => {
                                 }}

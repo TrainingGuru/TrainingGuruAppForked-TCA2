@@ -170,7 +170,60 @@ export const APIClient = {
         else {
             return {value: false}
         }
+    },
+
+    GetAllGoalsForClient: async(Id) => {
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        const response = await fetch(`https://traininggurubackend.onrender.com/Goals/${Id}`, requestOptions);
+    console.log("fssdf" + response)
+        if(response.status === 200) {
+            const responseJson = await response.json();
+            return {value: true, goals: responseJson}
+        }
+        else if (response.status === 404){
+            return {value: false, goalValue: "NoGoals"}
+        }
+        else {
+            return {value: false, goalValue: "Error"}
+        }
+    },
+
+    CreateNewGoalForClient: async (id) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "Goal": "."
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(`https://traininggurubackend.onrender.com/Goals/${id}`, requestOptions)
+
+        if(response.status == 201){
+            const responseJson = await response.json();
+
+            return {value: true, goal: responseJson }
+        }
+        else {
+            return {value: false}
+        }
+
+
     }
+
+
+
+
 
 };
 
