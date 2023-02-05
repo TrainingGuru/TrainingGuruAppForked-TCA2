@@ -40,12 +40,10 @@ function ClientProfile() {
         getClientID();
     }, [])
 
-
-
-
     const handleDeleteGoal = async (goalID) => {
-        const goalIndex = goals.findIndex(goal => goal.id === goalID);
-        if (goals.length > 1) {
+        alert(goalID)
+        const goalIndex = goals.findIndex(goal => goal.GoalID === goalID);
+        if (goalIndex !== -1) {
             setGoals(goals.filter((goal, i) => i !== goalIndex));
             await APIClient.DeleteClientGoal(clientId, goalID)
         }
@@ -85,7 +83,7 @@ function ClientProfile() {
             const response = await APIClient.CreateNewGoalForClient(clientId);
 
             if(response.value){
-                setGoals(prev => [...prev, goals])
+                setGoals(prev => [...prev, response.goal])
             }
             setLoadingModal(false);
         }
