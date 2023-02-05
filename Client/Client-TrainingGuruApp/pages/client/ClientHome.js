@@ -271,6 +271,21 @@ console.log(response)
         setLoadingModal(false);
     }
 
+
+    const handleDelete = (index) => {
+        const deletedItem = shoppingList[index];
+
+        setShoppingList(shoppingList.filter((item, i) => i !== index));
+
+        setnutritionGoals({
+            ...nutritionGoals,
+            CaloriesIntake: parseInt(nutritionGoals.CaloriesIntake) - parseInt(deletedItem["calories"]),
+            FatsIntake: parseInt(nutritionGoals.FatsIntake) - parseInt(deletedItem["fat_total_g"]),
+            ProteinIntake: parseInt(nutritionGoals.ProteinIntake) - parseInt(deletedItem["protein_g"]),
+            CarbohydratesIntake: parseInt(nutritionGoals.CarbohydratesIntake) - parseInt(deletedItem["carbohydrates_total_g"])
+        });
+    }
+
     return <Layout loading={loadingModel}>
         {loadingModel && <Text>fewef</Text>}
         <View style={styles.clientHome}>
@@ -377,6 +392,9 @@ console.log(response)
                                 maxProtein={nutritionGoals.TotalProtein}
                                 maxFat={nutritionGoals.TotalFats}
                                 maxCalories={nutritionGoals.TotalCalories}
+                                index={index}
+                                 remove={handleDelete}
+                                index={index}
                             />
                         </View>
                     })}

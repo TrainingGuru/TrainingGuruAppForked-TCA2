@@ -4,7 +4,7 @@ import CalorieGauge from "../reusable/CalorieGauge";
 import {Center} from "native-base";
 
 
-export const MealWidget = ({ name, weight, time, unit, value, calories, fat, protein, carbs, maxCarbs, maxProtein, maxFat, maxCalories }) => {
+export const MealWidget = ({ name, weight, time, unit, value, calories, fat, protein, carbs, maxCarbs, maxProtein, maxFat, maxCalories, index, remove }) => {
     const styles = StyleSheet.create({
         cardContainer: {
 
@@ -111,7 +111,7 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             <View style={styles.cardBottomRow}>
 
                 <View style={styles.cardBottomRowRight}>
-                    <TouchableOpacity style={styles.cardBottomRowRightButton}>
+                    <TouchableOpacity style={styles.cardBottomRowRightButton} onPress={() => remove(index)}>
                         <Text style={styles.cardBottomRowRightButtonText}>Delete</Text>
                     </TouchableOpacity>
                 </View>
