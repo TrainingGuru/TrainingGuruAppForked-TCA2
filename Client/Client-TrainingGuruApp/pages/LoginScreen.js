@@ -32,7 +32,6 @@ export const LoginScreen = ({  }) => {
             console.log(r)
             await AsyncStorage.setItem('clientId', r.clientId.toString());
             console.log("client Id" + await AsyncStorage.getItem('clientId'))
-            alert( await AsyncStorage.getItem('clientId'));
             Alert.alert("Success", "successfully logged in", [
                 {text: "OK", onPress: () => navigation.navigate("ClientHome")}
             ], {cancelable: false});

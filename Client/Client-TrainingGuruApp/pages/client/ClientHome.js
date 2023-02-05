@@ -12,6 +12,7 @@ import {useEffect, useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import APIClient from "../../services/client-api";
 
 export const ClientHome = () => {
     const [unit, setUnit] = useState('grams');
@@ -19,10 +20,11 @@ export const ClientHome = () => {
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
     const [loadingModel, setLoadingModal] = useState(false);
-    const [calorieGoals, setCalorieGoals] = useState();
+    const [nutritionGoals, setnutritionGoals] = useState();
     const [stepGoals, setStepGoals] = useState();
     const [sleepGoal, setSleepGoals] = useState()
     const [rateGoals, setRateGoal] = useState();
+
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -212,9 +214,19 @@ export const ClientHome = () => {
 
     useEffect(() => {
         async function getClientID(){
-            console.log("bob")
-            console.log("client Id" + await AsyncStorage.getItem('clientId'))
-            alert( await AsyncStorage.getItem('clientId'));
+            alert("here")
+            const storedClientID =  await AsyncStorage.getItem('clientId');
+            alert(storedClientID)
+            console.log("fsdsdf" + storedClientID)
+            setLoadingModal(true);
+            const response = await APIClient.GetNutritionForClient(storedClientID);
+console.log(response)
+            if(response.value){
+                console.log(response.nutrition)
+                setnutritionGoals(response.nutrition)
+            }
+            setLoadingModal(false)
+
         }
 
 
@@ -247,7 +259,7 @@ export const ClientHome = () => {
             <View style={styles.clientHome.title}>
             </View>
             <CardLayout>
-                {calorieGoals ?  <CalorieBrokenDown/> :
+                {nutritionGoals ?  <CalorieBrokenDown/> :
                     <View stye={{paddingHorizontal: 140, fontWeight: "bolder"}}><Text>Coach has not added calorie goals for you yet</Text></View>}
             </CardLayout>
 

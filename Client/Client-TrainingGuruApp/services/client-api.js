@@ -147,8 +147,7 @@ export const APIClient = {
         const response = await fetch(`https://traininggurubackend.onrender.com/Client/CompleteWorkout/${Id}`, requestOptions);
         console.log(response)
         if (response.status === 200) {
-            const responseJson = await response.json();
-            return {value: true, nutritionValues : responseJson};
+            return {value: true};
         }
         else {
             return {value: false}
@@ -163,8 +162,10 @@ export const APIClient = {
 
        const response = await fetch(`https://traininggurubackend.onrender.com/Client/${Id}/NutritionValue`, requestOptions);
         console.log(response)
+
         if (response.status === 200) {
-            return {value: true};
+            const responseJson = await response.json();
+            return {value: true, nutrition: responseJson };
         }
         else {
             return {value: false}
