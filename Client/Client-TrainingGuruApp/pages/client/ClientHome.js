@@ -259,7 +259,7 @@ console.log(response)
             <View style={styles.clientHome.title}>
             </View>
             <CardLayout>
-                {nutritionGoals ?  <CalorieBrokenDown/> :
+                {nutritionGoals ?  <CalorieBrokenDown nutrition={nutritionGoals}/> :
                     <View stye={{paddingHorizontal: 140, fontWeight: "bolder"}}><Text>Coach has not added calorie goals for you yet</Text></View>}
             </CardLayout>
 

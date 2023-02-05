@@ -90,21 +90,21 @@ export const MealWidget = ({ name, weight, time, unit, value, calories, fat, pro
             <View style={styles.cardMiddleRow}>
                 <View style={styles.cardMiddleRowLeft}>
                     <Text style={{ marginRight: "auto", marginLeft: "auto", textAlign: "center"}}>Fat</Text>
-                    <CalorieGauge value={fat} maxValue={maxFat} startColor="#9C27B0" endColor="#0e6cfa" label="Fat"/>
+                    <CalorieGauge value={fat} maxValue={maxFat}  startColor={"#f80202"} startColor={"#f80202"} label="Fat"/>
                 </View>
                 <View style={styles.cardMiddleRowMiddle}  >
                     <Text>Protein</Text>
-                    <CalorieGauge value={protein} maxValue={maxProtein} startColor="#2196F3" endColor="#ff7500"
+                    <CalorieGauge value={protein} maxValue={maxProtein} startColor={"#ee25ee"} endColor={"#ee25ee"}
                                   label="Protein"/>
                 </View>
                 <View style={styles.cardMiddleRowRight}>
                     <Text>Carbs</Text>
-                    <CalorieGauge value={carbs} maxValue={maxCarbs} startColor="#4CAF50" endColor="#ee25ee"
+                    <CalorieGauge value={carbs} maxValue={maxCarbs} startColor={"#ff7500"} endColor={"#ff7500"}
                                   label="Carbs"/>
                 </View>
                 <View style={styles.cardBottomRowLeft}>
-                    <Text>Carlories</Text>
-                    <CalorieGauge value={calories} maxValue={maxCalories} startColor="#F44336" endColor="#0e6cfa"
+                    <Text>Calories</Text>
+                    <CalorieGauge value={calories} maxValue={maxCalories}  startColor={"#eac60c"} endColor={"#eac60c"}
                                   label="Calories"/>
                 </View>
             </View>
