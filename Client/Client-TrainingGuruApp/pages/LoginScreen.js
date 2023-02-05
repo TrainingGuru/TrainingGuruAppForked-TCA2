@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ImagePicker from 'react-native-image-picker';
 import {View, Text, Image, TouchableOpacity, TextInput, StyleSheet, Alert} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
@@ -31,6 +31,8 @@ export const LoginScreen = ({  }) => {
             console.log("twest")
             console.log(r)
             await AsyncStorage.setItem('clientId', r.clientId.toString());
+            console.log("client Id" + await AsyncStorage.getItem('clientId'))
+            alert( await AsyncStorage.getItem('clientId'));
             Alert.alert("Success", "successfully logged in", [
                 {text: "OK", onPress: () => navigation.navigate("ClientHome")}
             ], {cancelable: false});
@@ -45,6 +47,20 @@ export const LoginScreen = ({  }) => {
 
 
     };
+
+
+    useEffect(() => {
+
+        async function checkUserLoggedIn() {
+            if (await AsyncStorage.getItem('clientId') !== null) {
+                navigation.navigate("ClientHome")
+            }
+        }
+
+
+        checkUserLoggedIn();
+
+    }, [])
 
     const styles = StyleSheet.create({
         container: {
