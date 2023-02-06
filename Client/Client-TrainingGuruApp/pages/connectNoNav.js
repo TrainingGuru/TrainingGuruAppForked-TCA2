@@ -5,10 +5,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
 import {getActivityData} from "../services/fitbit-service";
 
-const AFitBitPage = () => {
+const AFitBitPageNoNav = ({setDone}) => {
     const [authorizationCode, setAuthorizationCode] = useState(null);
     const [showWebView, setShowWebView] = useState(true);
-
     const clientId = '2395P3';
     const redirectUri = 'http://localhost:3000/fitbit-callback';
     const scope = 'activity heartrate location nutrition profile settings sleep social weight';
@@ -30,7 +29,7 @@ const AFitBitPage = () => {
                 console.log("Code: ", code);
                 setAuthorizationCode(code);
                 await AsyncStorage.setItem('Auth', code);
-                navigation.navigate("ClientProfile");
+                setDone(false)
             } else {
                 console.log("Code not found in URL: ", url);
             }
@@ -61,4 +60,4 @@ const AFitBitPage = () => {
     );
 };
 
-export default AFitBitPage;
+export default AFitBitPageNoNav;

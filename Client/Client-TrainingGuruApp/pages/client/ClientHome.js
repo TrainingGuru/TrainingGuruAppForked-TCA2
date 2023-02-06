@@ -8,11 +8,14 @@ import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import APIClient from "../../services/client-api";
+import {getActivityData, getAuthUser} from "../../services/fitbit-service";
+import AFitBitPage from "../connect";
+import AFitBitPageNoNav from "../connectNoNav";
 
 export const ClientHome = () => {
     const [unit, setUnit] = useState('grams');
@@ -24,6 +27,7 @@ export const ClientHome = () => {
     const [stepGoals, setStepGoals] = useState();
     const [sleepGoal, setSleepGoals] = useState()
     const [rateGoals, setRateGoal] = useState();
+    const [isLoadedFitBit, setisLoadedFitBit] = useState(false);
 
     let layout = {
         width: Dimensions.get('window').width
@@ -212,16 +216,37 @@ export const ClientHome = () => {
         }
     }, layout)
 
+    const handleAuth = useCallback(async () => {
+        if(storedAuthToken){
+            setisLoadedFitBit(true);
+        }
+
+    }, []);
+
+
+    useEffect(() => {
+        const getData = async () => {
+            const storedAuthToken = await AsyncStorage.getItem("Auth");
+            await getActivityData(storedAuthToken);
+        };
+        if (isLoadedFitBit) {
+            getData();
+        }
+    }, [isLoadedFitBit]);
+
+    useEffect(() => {
+        handleAuth();
+    }, [handleAuth]);
+
+
     useEffect(() => {
         async function getClientID(){
-            alert("here")
+            // alert("here")
             const storedClientID =  await AsyncStorage.getItem('clientId');
-            const storedAuthToken = await AsyncStorage.getItem('Auth');
-            alert(storedAuthToken)
-            if(storedAuthToken){
-
-            }
-            alert(storedClientID)
+            console.log(await  AsyncStorage.getAllKeys())
+            // alert(storedAuthToken)
+            //
+            // alert(storedClientID)
             console.log("fsdsdf" + storedClientID)
             setLoadingModal(true);
             const response = await APIClient.GetNutritionForClient(storedClientID);
@@ -231,7 +256,6 @@ console.log(response)
                 setnutritionGoals(response.nutrition)
             }
             setLoadingModal(false)
-
         }
 
 
@@ -289,6 +313,10 @@ console.log(response)
             ProteinIntake: parseInt(nutritionGoals.ProteinIntake) - parseInt(deletedItem["protein_g"]),
             CarbohydratesIntake: parseInt(nutritionGoals.CarbohydratesIntake) - parseInt(deletedItem["carbohydrates_total_g"])
         });
+    }
+
+    if(isLoadedFitBit){
+        return <AFitBitPageNoNav  setDone={setisLoadedFitBit} />
     }
 
     return <Layout loading={loadingModel}>

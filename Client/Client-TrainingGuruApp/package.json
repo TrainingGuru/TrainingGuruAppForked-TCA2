@@ -20,6 +20,8 @@
     "babel-plugin-react-native-classname-to-style": "^1.2.2",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
     "babel-plugin-transform-scss": "^1.1.0",
+    "Base64": "^1.1.0",
+    "btoa": "^1.2.1",
     "d3-interpolate": "^3.0.1",
     "deprecated-react-native-prop-types": "^4.0.0",
     "expo": "^47.0.0",
