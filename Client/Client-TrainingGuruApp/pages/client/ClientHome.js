@@ -8,7 +8,7 @@ import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,6 +16,7 @@ import APIClient from "../../services/client-api";
 import {getActivityData, getAuthUser} from "../../services/fitbit-service";
 import AFitBitPage from "../connect";
 import AFitBitPageNoNav from "../connectNoNav";
+import {useFocusEffect, useNavigation} from "@react-navigation/native";
 
 export const ClientHome = () => {
     const [unit, setUnit] = useState('grams');
@@ -216,13 +217,7 @@ export const ClientHome = () => {
         }
     }, layout)
 
-    const handleAuth = useCallback(async () => {
-        if(storedAuthToken){
-            setisLoadedFitBit(true);
-        }
-
-    }, []);
-
+    const navigation = useNavigation();
 
     useEffect(() => {
         const getData = async () => {
@@ -234,9 +229,22 @@ export const ClientHome = () => {
         }
     }, [isLoadedFitBit]);
 
-    useEffect(() => {
-        handleAuth();
-    }, [handleAuth]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const handleAuth = async () => {
+                alert('here');
+                setisLoadedFitBit(true);
+            };
+
+            handleAuth();
+
+            return () => {
+                // Clean up the effect.
+            };
+        }, [])
+    );
+
 
 
     useEffect(() => {
