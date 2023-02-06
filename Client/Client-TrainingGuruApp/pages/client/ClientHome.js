@@ -213,24 +213,29 @@ export const ClientHome = () => {
     }, layout)
 
     useEffect(() => {
-//         async function getClientID(){
-//             alert("here")
-//             const storedClientID =  await AsyncStorage.getItem('clientId');
-//             alert(storedClientID)
-//             console.log("fsdsdf" + storedClientID)
-//             setLoadingModal(true);
-//             const response = await APIClient.GetNutritionForClient(storedClientID);
-// console.log(response)
-//             if(response.value){
-//                 console.log(response.nutrition)
-//                 setnutritionGoals(response.nutrition)
-//             }
-//             setLoadingModal(false)
-//
-//         }
-//
-//
-//         getClientID();
+        async function getClientID(){
+            alert("here")
+            const storedClientID =  await AsyncStorage.getItem('clientId');
+            const storedAuthToken = await AsyncStorage.getItem('Auth');
+            alert(storedAuthToken)
+            if(storedAuthToken){
+
+            }
+            alert(storedClientID)
+            console.log("fsdsdf" + storedClientID)
+            setLoadingModal(true);
+            const response = await APIClient.GetNutritionForClient(storedClientID);
+console.log(response)
+            if(response.value){
+                console.log(response.nutrition)
+                setnutritionGoals(response.nutrition)
+            }
+            setLoadingModal(false)
+
+        }
+
+
+        getClientID();
     }, [])
 
     const handleUnit = (unit) => {
