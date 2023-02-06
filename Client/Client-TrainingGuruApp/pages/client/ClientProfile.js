@@ -7,6 +7,8 @@ import {Fitbit} from "../../services/fitbit-service";
 import {NinjaAPI} from "../../services/nutrition-service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import APIClient from "../../services/client-api";
+import {useNavigation} from "@react-navigation/native";
+
 
 function ClientProfile() {
     const [id1, setId1] = useState("");
@@ -20,31 +22,33 @@ function ClientProfile() {
     const [fitbitConnected, setFitbitConnected] = useState(false);
     const [loadingModel, setLoadingModal] = useState(false);
     const [clientId, SetClientId] = useState("");
+    const navigation = useNavigation();
+
     useEffect(() => {
-        async function getClientID(){
+        // async function getClientID(){
 
 
-            alert("here2")
-            const storedClientID =  await AsyncStorage.getItem('clientId');
-            SetClientId(storedClientID);
-            alert(storedClientID)
-            setLoadingModal(true);
-            const response = await APIClient.GetAllGoalsForClient(storedClientID)
-            console.log(response)
-            if(response.value){
-                setGoals(response.goals)
-            }
-            setLoadingModal(false)
-
-            let bit = new Fitbit();
-            const response2 = await  bit.getUserProfile();
-            console.log("bbbbbbsfdsfd")
-            console.log(response2)
-
-        }
-
-
-        getClientID();
+        //     alert("here2")
+        //     const storedClientID =  await AsyncStorage.getItem('clientId');
+        //     SetClientId(storedClientID);
+        //     alert(storedClientID)
+        //     setLoadingModal(true);
+        //     const response = await APIClient.GetAllGoalsForClient(storedClientID)
+        //     console.log(response)
+        //     if(response.value){
+        //         setGoals(response.goals)
+        //     }
+        //     setLoadingModal(false)
+        //
+        //     let bit = new Fitbit();
+        //     const response2 = await  bit.getUserProfile();
+        //     console.log("bbbbbbsfdsfd")
+        //     console.log(response2)
+        //
+        // }
+        //
+        //
+        // getClientID();
     }, [])
 
     const handleDeleteGoal = async (goalID) => {
@@ -78,8 +82,8 @@ function ClientProfile() {
     }
 
     const handleConnectFitbit = () => {
-        setFitbitModelOpen(true)
 
+        navigation.navigate("ABitPage")
         // setFitbitConnected(!fitbitConnected);
     }
 
