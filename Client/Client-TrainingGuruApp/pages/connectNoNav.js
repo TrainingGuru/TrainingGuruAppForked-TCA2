@@ -3,7 +3,7 @@ import { WebView } from 'react-native-webview';
 import {Button, Text, View} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
-import {getActivityData} from "../services/fitbit-service";
+import {getActivityData, getFitbitData} from "../services/fitbit-service";
 
 const AFitBitPageNoNav = ({setDone}) => {
     const [authorizationCode, setAuthorizationCode] = useState(null);
@@ -29,6 +29,16 @@ const AFitBitPageNoNav = ({setDone}) => {
                 console.log("Code: ", code);
                 setAuthorizationCode(code);
                 await AsyncStorage.setItem('Auth', code);
+                alert("!")
+                const response = await getFitbitData(code);
+                console.log("dsfddfdf")
+                console.log(response)
+                if(response.value && response.steps && response.sleepScore && response.avgHeartRate){
+                    alert("set")
+                    await AsyncStorage.setItem('steps', response.steps);
+                    await AsyncStorage.setItem('sleep', response.sleepScore);
+                    await AsyncStorage.setItem('avgHeartRate', response.avgHeartRate);
+                }
                 setDone(false)
             } else {
                 console.log("Code not found in URL: ", url);

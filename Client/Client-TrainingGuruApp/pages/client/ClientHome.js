@@ -217,27 +217,40 @@ export const ClientHome = () => {
         }
     }, layout)
 
-    const navigation = useNavigation();
 
-    useEffect(() => {
-        const getData = async () => {
-            const storedAuthToken = await AsyncStorage.getItem("Auth");
-            await getActivityData(storedAuthToken);
-        };
-        if (isLoadedFitBit) {
-            getData();
-        }
-    }, [isLoadedFitBit]);
 
 
     useFocusEffect(
         React.useCallback(() => {
             const handleAuth = async () => {
-                alert('here');
+                let authToken = await AsyncStorage.getItem("Auth");
+              if(authToken){
+                  let steps;
+                  let sleep;
+                  let avgHeartRate;
+                  if(avgHeartRate = await AsyncStorage.getItem("avgHeartRate")){
+                      setRateGoal(avgHeartRate)
+                  }
+
+                  if(sleep = await  AsyncStorage.getItem("sleep")){
+                      setSleepGoals(sleep)
+                  }
+                  if(steps = await AsyncStorage.getItem("steps")){
+                      setStepGoals(steps)
+                  }
+
+
+
+
+              }
+
+
                 setisLoadedFitBit(true);
+
+
             };
 
-            handleAuth();
+             handleAuth();
 
             return () => {
                 // Clean up the effect.
@@ -341,7 +354,7 @@ console.log(response)
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faShoePrints}/>
-                    <Text style={styles.clientHome.first.steps.title}>13400/16000</Text>
+                    <Text style={styles.clientHome.first.steps.title}>{stepGoals}/16000</Text>
                 </CardLayout> : <CardLayout style={styles.clientHome.first.steps}>
                     <Text>Need to connect Fitbit</Text>
                 </CardLayout>}
@@ -357,7 +370,7 @@ console.log(response)
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faHeartPulse} color={"red"}/>
-                    <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
+                    <Text style={styles.clientHome.first.steps.title}>{rateGoals} BPM</Text>
                 </CardLayout>: <CardLayout style={styles.clientHome.first.steps}>
                     <Text>Need to connect Fitbit</Text>
                     </CardLayout>}
