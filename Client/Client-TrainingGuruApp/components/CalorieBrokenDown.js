@@ -3,7 +3,7 @@ import {Dimensions, Text, View} from "react-native";
 import CreateResponsiveStyle from "../utils/responsiveStyle";
 
 
-function calorieBrokenDown() {
+function calorieBrokenDown({nutrition}) {
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -24,16 +24,16 @@ function calorieBrokenDown() {
     }, layout)
     return <View style={styles.calorieBrokenDown}>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Fat</Text>
-            <CalorieGauge  startColor={"#f80202"} endColor={"#0e6cfa"} maxValue={500} value={50}/>
+            <CalorieGauge  startColor={"#f80202"} endColor={"#f80202"} maxValue={nutrition.TotalFats} value={nutrition.FatsIntake}/>
         </View>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Protein</Text>
-            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"}  maxValue={500} value={50}/>
+            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}  maxValue={nutrition.TotalProtein} value={nutrition.ProteinIntake} />
         </View>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Carbs</Text>
-            <CalorieGauge startColor={"#ee25ee"} endColor={"#ee25ee"}  maxValue={500} value={50}/>
+            <CalorieGauge startColor={"#ff7500"} endColor={"#ff7500"} maxValue={nutrition.TotalCarbohydrates} value={nutrition.CarbohydratesIntake} />
         </View>
         <View ><Text style={{ marginTop: "auto", marginBottom: "auto", textAlign: "center"}} >Calories</Text>
-            <CalorieGauge startColor={"#0e6cfa"} endColor={"#0e6cfa"}  maxValue={500} value={50}/>
+            <CalorieGauge startColor={"#eac60c"} endColor={"#eac60c"} maxValue={nutrition.TotalCalories} value={nutrition.CaloriesIntake} />
         </View>
     </View>
 }

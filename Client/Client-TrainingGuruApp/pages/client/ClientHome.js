@@ -8,9 +8,15 @@ import {faShoePrints} from "@fortawesome/free-solid-svg-icons/faShoePrints";
 import {faHeartPulse} from "@fortawesome/free-solid-svg-icons/faHeartPulse";
 import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {NinjaAPI} from "../../services/nutrition-service";
 import {MealWidget} from "../../components/client/MealWidget";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import APIClient from "../../services/client-api";
+import {getActivityData, getAuthUser} from "../../services/fitbit-service";
+import AFitBitPage from "../connect";
+import AFitBitPageNoNav from "../connectNoNav";
+import {useFocusEffect, useNavigation} from "@react-navigation/native";
 
 export const ClientHome = () => {
     const [unit, setUnit] = useState('grams');
@@ -18,10 +24,12 @@ export const ClientHome = () => {
     const [foodName, setFoodName] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
     const [loadingModel, setLoadingModal] = useState(false);
-    const [calorieGoals, setCalorieGoals] = useState();
+    const [nutritionGoals, setnutritionGoals] = useState();
     const [stepGoals, setStepGoals] = useState();
     const [sleepGoal, setSleepGoals] = useState()
     const [rateGoals, setRateGoal] = useState();
+    const [isLoadedFitBit, setisLoadedFitBit] = useState(false);
+
     let layout = {
         width: Dimensions.get('window').width
     }
@@ -209,6 +217,72 @@ export const ClientHome = () => {
         }
     }, layout)
 
+
+
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const handleAuth = async () => {
+                let authToken = await AsyncStorage.getItem("Auth");
+              if(authToken){
+                  let steps;
+                  let sleep;
+                  let avgHeartRate;
+                  if(avgHeartRate = await AsyncStorage.getItem("avgHeartRate")){
+                      setRateGoal(avgHeartRate)
+                  }
+
+                  if(sleep = await  AsyncStorage.getItem("sleep")){
+                      setSleepGoals(sleep)
+                  }
+                  if(steps = await AsyncStorage.getItem("steps")){
+                      setStepGoals(steps)
+                  }
+
+
+
+
+              }
+
+
+                setisLoadedFitBit(true);
+
+
+            };
+
+             handleAuth();
+
+            return () => {
+                // Clean up the effect.
+            };
+        }, [])
+    );
+
+
+
+    useEffect(() => {
+        async function getClientID(){
+            // alert("here")
+            const storedClientID =  await AsyncStorage.getItem('clientId');
+            console.log(await  AsyncStorage.getAllKeys())
+            // alert(storedAuthToken)
+            //
+            // alert(storedClientID)
+            console.log("fsdsdf" + storedClientID)
+            setLoadingModal(true);
+            const response = await APIClient.GetNutritionForClient(storedClientID);
+console.log(response)
+            if(response.value){
+                console.log(response.nutrition)
+                setnutritionGoals(response.nutrition)
+            }
+            setLoadingModal(false)
+        }
+
+
+        getClientID();
+    }, [])
+
     const handleUnit = (unit) => {
         setUnit(unit);
     }
@@ -226,16 +300,52 @@ export const ClientHome = () => {
         let temp = shoppingList.concat(nutritionInfo)
 
         setShoppingList(temp);
+
+        console.log("calories "+ nutritionGoals.CaloriesIntake + nutritionInfo["serving_size_g"])
+        console.log("calories "+ nutritionGoals.FatsIntake + nutritionInfo["calories"])
+
+        console.log(       "CaloriesIntake:" +   parseInt(nutritionGoals.CaloriesIntake) + "" + parseInt(nutritionInfo["calories"]) + "" +
+            "FatsIntake:" + parseInt(nutritionGoals.FatsIntake) + parseInt(nutritionInfo["fat_total_g"])  + "" +
+            "ProteinIntake:" + parseInt(nutritionGoals.ProteinIntake) + parseInt(nutritionInfo["protein_g"])  + "" +
+            "carbohydratesIntake" + parseInt(nutritionGoals.CarbohydratesIntake) + parseInt(nutritionInfo["carbohydrates_total_g"]))
+
+        for(const i of nutritionInfo) {
+            setnutritionGoals({
+                ...nutritionGoals,
+                CaloriesIntake: parseInt(nutritionGoals.CaloriesIntake) + parseInt(i["calories"]),
+                FatsIntake: parseInt(nutritionGoals.FatsIntake) + parseInt(i["fat_total_g"]),
+                ProteinIntake: parseInt(nutritionGoals.ProteinIntake) + parseInt(i["protein_g"]),
+                CarbohydratesIntake: parseInt(nutritionGoals.CarbohydratesIntake) + parseInt(i["carbohydrates_total_g"])
+            });
+        }
         setLoadingModal(false);
     }
 
+
+    const handleDelete = (index) => {
+        const deletedItem = shoppingList[index];
+
+        setShoppingList(shoppingList.filter((item, i) => i !== index));
+
+        setnutritionGoals({
+            ...nutritionGoals,
+            CaloriesIntake: parseInt(nutritionGoals.CaloriesIntake) - parseInt(deletedItem["calories"]),
+            FatsIntake: parseInt(nutritionGoals.FatsIntake) - parseInt(deletedItem["fat_total_g"]),
+            ProteinIntake: parseInt(nutritionGoals.ProteinIntake) - parseInt(deletedItem["protein_g"]),
+            CarbohydratesIntake: parseInt(nutritionGoals.CarbohydratesIntake) - parseInt(deletedItem["carbohydrates_total_g"])
+        });
+    }
+
+    if(isLoadedFitBit){
+        return <AFitBitPageNoNav  setDone={setisLoadedFitBit} />
+    }
+
     return <Layout loading={loadingModel}>
-        {loadingModel && <Text>fewef</Text>}
         <View style={styles.clientHome}>
             <View style={styles.clientHome.title}>
             </View>
             <CardLayout>
-                {calorieGoals ?  <CalorieBrokenDown/> :
+                {nutritionGoals ?  <CalorieBrokenDown nutrition={nutritionGoals}/> :
                     <View stye={{paddingHorizontal: 140, fontWeight: "bolder"}}><Text>Coach has not added calorie goals for you yet</Text></View>}
             </CardLayout>
 
@@ -244,7 +354,7 @@ export const ClientHome = () => {
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faShoePrints}/>
-                    <Text style={styles.clientHome.first.steps.title}>13400/16000</Text>
+                    <Text style={styles.clientHome.first.steps.title}>{stepGoals}/16000</Text>
                 </CardLayout> : <CardLayout style={styles.clientHome.first.steps}>
                     <Text>Need to connect Fitbit</Text>
                 </CardLayout>}
@@ -260,7 +370,7 @@ export const ClientHome = () => {
                     <FontAwesomeIcon size={50}
                                      style={{...styles.clientHome.first.steps.icon, ...styles.clientHome.first.steps.icon1}}
                                      icon={faHeartPulse} color={"red"}/>
-                    <Text style={styles.clientHome.first.steps.title}>50 BPM</Text>
+                    <Text style={styles.clientHome.first.steps.title}>{rateGoals} BPM</Text>
                 </CardLayout>: <CardLayout style={styles.clientHome.first.steps}>
                     <Text>Need to connect Fitbit</Text>
                     </CardLayout>}
@@ -331,10 +441,13 @@ export const ClientHome = () => {
                                 fat={item["fat_total_g"]}
                                 protein={item["protein_g"]}
                                 carbs={item["carbohydrates_total_g"]}
-                                maxCarbs={50}
-                                maxProtein={100}
-                                maxFat={20}
-                                maxCalories={2000}
+                                maxCarbs={nutritionGoals.TotalCarbohydrates}
+                                maxProtein={nutritionGoals.TotalProtein}
+                                maxFat={nutritionGoals.TotalFats}
+                                maxCalories={nutritionGoals.TotalCalories}
+                                index={index}
+                                 remove={handleDelete}
+                                index={index}
                             />
                         </View>
                     })}

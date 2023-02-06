@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableOpacity, TextInput, ScrollView, FlatList} from 'react-native';
 import CardLayout from "../../components/reusable/CardLayout";
 import Layout from "../../components/structure/Layout";
 import {ConnectFitbitModel} from "../../components/ConnectFitbitModel";
 import {Fitbit} from "../../services/fitbit-service";
 import {NinjaAPI} from "../../services/nutrition-service";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import APIClient from "../../services/client-api";
+import {useNavigation} from "@react-navigation/native";
+
 
 function ClientProfile() {
+    const [id1, setId1] = useState("");
+    const [text, setText] = useState("");
     const [userName, setUserName] = useState("Josh Mitvh");
     const [userImage, setUserImage] = useState("https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
     const [coachName, setCoachName] = useState("Frsny Pis");
@@ -14,35 +20,87 @@ function ClientProfile() {
     const [goals, setGoals] = useState([]);
     const [fitbitModelOpen, setFitbitModelOpen] = useState(false)
     const [fitbitConnected, setFitbitConnected] = useState(false);
+    const [loadingModel, setLoadingModal] = useState(false);
+    const [clientId, SetClientId] = useState("");
+    const navigation = useNavigation();
 
-    const handleAddGoal = () => {
-        if (goals.length < 4) {
-            setGoals([...goals, ""]);
+    useEffect(() => {
+        // async function getClientID(){
+
+
+        //     alert("here2")
+        //     const storedClientID =  await AsyncStorage.getItem('clientId');
+        //     SetClientId(storedClientID);
+        //     alert(storedClientID)
+        //     setLoadingModal(true);
+        //     const response = await APIClient.GetAllGoalsForClient(storedClientID)
+        //     console.log(response)
+        //     if(response.value){
+        //         setGoals(response.goals)
+        //     }
+        //     setLoadingModal(false)
+        //
+        //     let bit = new Fitbit();
+        //     const response2 = await  bit.getUserProfile();
+        //     console.log("bbbbbbsfdsfd")
+        //     console.log(response2)
+        //
+        // }
+        //
+        //
+        // getClientID();
+    }, [])
+
+    const handleDeleteGoal = async (goalID) => {
+        alert(goalID)
+        const goalIndex = goals.findIndex(goal => goal.GoalID === goalID);
+        if (goalIndex !== -1) {
+            setGoals(goals.filter((goal, i) => i !== goalIndex));
+            await APIClient.DeleteClientGoal(clientId, goalID)
         }
     }
 
-    const handleDeleteGoal = (index) => {
-        if (goals.length > 1) {
-            setGoals(goals.filter((goal, i) => i !== index));
-        }
-    }
+    const handleEditGoal = (id, text1) => {
+        console.log("textddasd " + text1 + "id sfdsffsd" + id)
 
-    const handleEditGoal = (text, index) => {
         setGoals(goals.map((goal, i) => {
-            if (i === index) {
-                return text;
+            if (goal.GoalID === id) {
+                return { ...goal, Goal: text1 };
             }
             return goal;
         }));
     }
 
-    const handleConnectFitbit = () => {
-        setFitbitModelOpen(true)
+    async function handleEditUpdateGoal(id, goal, goalid) {
+        alert("id" + id + "goal" + goal)
+        console.log("id" + id + "goal" + goal)
+        await APIClient.UpdateGoal(goalid,id, goal)
+    }
 
+    const updateGoals = () => {
+        console.log(goals)
+    }
+
+    const handleConnectFitbit = () => {
+
+        navigation.navigate("ABitPage")
         // setFitbitConnected(!fitbitConnected);
     }
 
-    const [loading, setLoading] = useState();
+    const handleAddGoal = async () => {
+        if (goals.length < 4) {
+
+            setLoadingModal(true)
+            const response = await APIClient.CreateNewGoalForClient(clientId);
+
+            if(response.value){
+                setGoals(prev => [...prev, response.goal])
+            }
+            setLoadingModal(false);
+        }
+
+    }
+
 
     const connectFunction = async () => {
         // setLoading(true);
@@ -51,8 +109,11 @@ function ClientProfile() {
 
     }
 
+
+
+
     return (
-        <Layout loading={loading}>
+        <Layout loading={loadingModel}>
             <View>
             <ConnectFitbitModel open={fitbitModelOpen} setOpen={setFitbitModelOpen} connectFunction={connectFunction}/>
             <View style={styles.topRowContainer}>
@@ -89,14 +150,22 @@ function ClientProfile() {
                         <View style={styles.goalContainer}>
                             <TextInput
                                 style={styles.goalText}
-                                value={item}
-                                onChangeText={text => handleEditGoal(text, index)}
+                                value={item.Goal}
+                                onChangeText={text1 => {
+                                    let a = item.GoalID;
+                                    // setText(text1);
+                                    // setId1(a)
+                                    handleEditGoal(a, text1)
+                                }}
                                 onFocus={() => {
                                 }}
-                                onBlur={() => {
+                                onEndEditing={() => {
+
+                                    alert(item.ClientID + "" + item.Goal + "" + item.GoalID)
+                                    handleEditUpdateGoal(item.ClientID , item.Goal , item.GoalID )
                                 }}
                             />
-                            <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(index)}>
+                            <TouchableOpacity style={styles.deleteGoalButton} onPress={() => handleDeleteGoal(item.GoalID)}>
                                 <Text>Delete</Text>
                             </TouchableOpacity>
                         </View>

@@ -92,6 +92,9 @@ function Layout({loading = false, children}) {
             },
         }
     }, layout)
+
+
+
 // console.log(styles)
 
     return <View style={styles.layout}>
